@@ -4,14 +4,14 @@ import java.util.concurrent.locks.ReentrantLock;
 //import java.lang.*;
 
 public class Account {
-ReentrantLock lock0 = new ReentrantLock(true);lock0.lock();    double amount;
+    double amount;
     String  name;
-lock0.unlock();
+
     //constructor
   public Account(String nm,double amnt ) {
-ReentrantLock lock1 = new ReentrantLock(true);lock1.lock();        amount=amnt;
+ReentrantLock lock0 = new ReentrantLock(true);lock0.lock();        amount=amnt;
         name=nm;
-lock1.unlock();  }
+lock0.unlock();  }
   //functions
   synchronized  void depsite(double money){
       amount+=money;
@@ -22,7 +22,7 @@ lock1.unlock();  }
       }
 
   synchronized  void transfer(Account ac,double mn){
-ReentrantLock lock2 = new ReentrantLock(true);lock2.lock();      amount-=mn;
+ReentrantLock lock1 = new ReentrantLock(true);lock1.lock();      amount-=mn;
       //System.out.println("ac.amount is $"+ac.amount);
       if (name.equals("D")) {
 	System.out.println("unprotected");
@@ -32,7 +32,7 @@ ReentrantLock lock2 = new ReentrantLock(true);lock2.lock();      amount-=mn;
 	//System.out.println("protected");
 	synchronized (ac) { ac.amount+=mn; }
       }
-lock2.unlock();  }
+lock1.unlock();  }
 
  synchronized void print(){
   }

@@ -113,15 +113,17 @@ public class AddLock {
                             }
                         }
                         if(matchVariable.equalTarget(variableVector)){
-/*                            System.out.println("匹配成功");
-                            System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
-                            System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));*/
-
-                            //加锁
-                            InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);
-                            InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filePath);
-                            matchVariable.update();
-
+//                           System.out.println("匹配成功");
+//                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
+//                             System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
+                            if(!matchVariable.getNode().getParent().toString().contains(" class ")){
+                                //加锁
+                                InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);
+                                InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filePath);
+                                //更新锁
+                                matchVariable.update();
+                            }
+                            //清空
                             matchVariable.clear();
                         }
                     }

@@ -1,5 +1,6 @@
 package fix.entity;
 
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 
 import java.util.HashSet;
@@ -70,20 +71,21 @@ public class MatchVariable {
         if(this.node.equals(node))
             return ;
         else{
-            ASTNode startNode = this.node;
+            ASTNode saveNode = this.node;//用来操作的node
+            ASTNode startNode = saveNode;
             ASTNode endNode = node;
-            for(ASTNode iNode = this.node; iNode != null; iNode = iNode.getParent()){
+            for(ASTNode iNode = saveNode; iNode != null; iNode = iNode.getParent()){
                 for(ASTNode jNode = node;jNode != null;jNode = jNode.getParent()){
                     if(iNode.equals(jNode)){
                         this.startLine = startNode.getStartPosition();
                         this.endLine = endNode.getStartPosition() + endNode.getLength();
+                        this.node = startNode;
                         return;
                     }
                     endNode = jNode;
                 }
                 startNode = iNode;
             }
-
         }
 
     }
