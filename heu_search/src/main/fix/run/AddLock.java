@@ -1,5 +1,10 @@
 package fix.run;
 
+import fix.entity.MatchVariable;
+import fix.io.CopyExamples;
+import fix.io.InsertCode;
+import org.eclipse.jdt.core.dom.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,27 +12,12 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import fix.entity.MatchVariable;
-import fix.io.InsertCode;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.IfStatement;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
-import org.eclipse.jdt.core.dom.WhileStatement;
-
-import javax.swing.filechooser.FileSystemView;
-
 public class AddLock {
     static String filePath = "";
+    static String projectName = "account";
     static {
         //定位到项目目录下
-        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples" + "\\account";
+        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples\\" + projectName;
     }
 
     //chanage file content to buffer array
@@ -57,9 +47,15 @@ public class AddLock {
     public static void main(String[] args){
         File file = new File(filePath);
         File[] fileArr = file.listFiles();
+        //先创建一个copy目录
+        String copyDir = filePath.replaceAll("examples","exportExamples");
+        CopyExamples.createDirectory(copyDir);
+
         for(File f : fileArr){
-            lock(f.getPath());
-            System.out.println(f.getPath());
+            //每个文件，先拷贝到另一个目录下，然后加锁操作
+            String copyFile = f.getPath().replaceAll("examples","exportExamples");
+            CopyExamples.CopyFile(f.getPath(),copyFile);
+            lock(copyFile);
         }
     }
 
@@ -93,7 +89,7 @@ public class AddLock {
             //变量
             public boolean visit(SimpleName node) {
                 if (this.names.contains(node.getIdentifier())) {
-                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
+//                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
 
                     boolean flag = false;
                     for(String s : variableVector){
@@ -112,14 +108,14 @@ public class AddLock {
                                 matchVariable.setNode(node.getParent());
                             }else{
                                 matchVariable.addMatchVector(node.getIdentifier());
-                                System.out.println("test" + node.getParent());
+//                                System.out.println("test" + node.getParent());
                                 matchVariable.searchSame(node.getParent());
                             }
                         }
                         if(matchVariable.equalTarget(variableVector)){
-                            System.out.println("匹配成功");
+/*                            System.out.println("匹配成功");
                             System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
-                            System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
+                            System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));*/
 
                             //加锁
                             InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);

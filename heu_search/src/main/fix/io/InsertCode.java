@@ -53,10 +53,11 @@ public class InsertCode {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //删除
+/*        //删除
         File f = new File(filepath);
         f.delete();
-        //重写入
+        //重写入*/
+
         writeToFile(readBeforeLine + code  + readAfterLine, filepath);
     }
 

@@ -1,10 +1,9 @@
 package fix.entity;
 
+import org.eclipse.jdt.core.dom.ASTNode;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
-
-import org.eclipse.jdt.core.dom.ASTNode;
 
 public class MatchVariable {
     private Set<String> matchVector = new HashSet<String>();//存放访问的变量用来匹配

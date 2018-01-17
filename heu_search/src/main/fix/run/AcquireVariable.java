@@ -1,9 +1,9 @@
 
 package fix.run;
 
+import fix.listener.LockListener;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
-import fix.listener.LockListener;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
