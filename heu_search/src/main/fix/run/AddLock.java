@@ -26,10 +26,8 @@ import javax.swing.filechooser.FileSystemView;
 public class AddLock {
     static String filePath = "";
     static {
-        //读取桌面路径
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        File com=fsv.getHomeDirectory();
-        filePath = com.getPath() + "/Account.java";
+        //定位到项目目录下
+        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples" + "\\account";
     }
 
     //chanage file content to buffer array
@@ -56,8 +54,16 @@ public class AddLock {
         return contents;
     }
 
+    public static void main(String[] args){
+        File file = new File(filePath);
+        File[] fileArr = file.listFiles();
+        for(File f : fileArr){
+            lock(f.getPath());
+            System.out.println(f.getPath());
+        }
+    }
 
-    public static void main(String[] args) {
+    public static void lock(String filePath) {
         MatchVariable matchVariable = new MatchVariable();
         Set<String> variableVector = new HashSet<String>();
         variableVector.add("amount");
