@@ -21,9 +21,16 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-public class AddLock {
-    static String filepath = "C:\\Users\\lhr\\Desktop\\Account.java";
+import javax.swing.filechooser.FileSystemView;
 
+public class AddLock {
+    static String filePath = "";
+    static {
+        //读取桌面路径
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        File com=fsv.getHomeDirectory();
+        filePath = com.getPath() + "/Account.java";
+    }
 
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
@@ -55,9 +62,9 @@ public class AddLock {
         Set<String> variableVector = new HashSet<String>();
         variableVector.add("amount");
         variableVector.add("name");
-        InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filepath);
+        InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
         ASTParser parser = ASTParser.newParser(AST.JLS3);
-        parser.setSource(getFileContents(new File(filepath)));
+        parser.setSource(getFileContents(new File(filePath)));
         parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
 
@@ -109,8 +116,8 @@ public class AddLock {
                             System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
 
                             //加锁
-                            InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filepath);
-                            InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filepath);
+                            InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);
+                            InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filePath);
                             matchVariable.update();
 
                             matchVariable.clear();

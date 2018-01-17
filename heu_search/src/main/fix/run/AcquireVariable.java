@@ -5,11 +5,20 @@ import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
 import fix.listener.LockListener;
 
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 import java.util.Vector;
 
 public class AcquireVariable {
-    private static String filePath = "C:\\Users\\lhr\\Desktop\\lock.txt";
-    private static String fieldName = "amount";//要寻找的参数名
+    static String filePath = "";
+    static String fieldName = "amount";//要寻找的参数名
+    static {
+        //读取桌面路径
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        File com=fsv.getHomeDirectory();
+        filePath = com.getPath() + "/lock.txt";
+    }
+
     public static void main(String[] args) {
         String[] str = new String[]{
                 "+classpath=out/production/heu_search",
