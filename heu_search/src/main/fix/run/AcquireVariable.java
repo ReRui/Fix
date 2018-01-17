@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public class AcquireVariable {
     static String filePath = "";
-    static String fieldName = "amount";//要寻找的参数名
+    static String fieldName = "customerCost";//要寻找的参数名
     static {
         //读取桌面路径
         FileSystemView fsv = FileSystemView.getFileSystemView();
@@ -23,7 +23,7 @@ public class AcquireVariable {
         String[] str = new String[]{
                 "+classpath=out/production/heu_search",
                 "+search.class=fix.search.SingleExecutionSearch",
-                "account.Main"
+                "store.StoreTest"
         };
         Config config = new Config(str);
         JPF jpf = new JPF(config);

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class AddLock {
     static String filePath = "";
-    static String projectName = "account";
+    static String projectName = "alarmclock";
     static {
         //定位到项目目录下
         filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples\\" + projectName;
@@ -62,8 +62,8 @@ public class AddLock {
     public static void lock(String filePath) {
         MatchVariable matchVariable = new MatchVariable();
         Set<String> variableVector = new HashSet<String>();
-        variableVector.add("amount");
-        variableVector.add("name");
+        variableVector.add("now");
+        variableVector.add("waitList");
         InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));
@@ -115,8 +115,9 @@ public class AddLock {
                         if(matchVariable.equalTarget(variableVector)){
 //                           System.out.println("匹配成功");
 //                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
-//                             System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
-                            if(!matchVariable.getNode().getParent().toString().contains(" class ")){
+//                           System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
+
+                            if(!matchVariable.getNode().getParent().toString().contains("class ")){
                                 //加锁
                                 InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);
                                 InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filePath);
