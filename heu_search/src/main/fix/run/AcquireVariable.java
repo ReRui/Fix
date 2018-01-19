@@ -13,10 +13,7 @@ public class AcquireVariable {
     static String filePath = "";
     static String fieldName = "waitList";//要寻找的参数名
     static {
-        //读取桌面路径
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        File com=fsv.getHomeDirectory();
-        filePath = com.getPath() + "/lock.txt";
+        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples\\" + "/lock.txt";
     }
 
     public static void main(String[] args) {

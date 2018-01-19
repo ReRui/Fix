@@ -1,0 +1,471 @@
+java.lang.Class@4d,main
+-----------------
+java.lang.Class@50,main
+-----------------
+java.lang.Class@56,main
+-----------------
+java.lang.Class@59,main
+-----------------
+java.lang.Class@5c,main
+-----------------
+java.lang.Class@5f,main
+-----------------
+java.lang.Class@62,main
+-----------------
+java.lang.Class@65,main
+-----------------
+java.lang.Class@6e,main
+-----------------
+java.lang.Class@80,main
+-----------------
+java.lang.Class@102,main
+-----------------
+java.lang.Class@10b,main
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:390
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:391
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:403
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:403
+instance: java.util.Properties@106	field: loadFactor	thread: main	location: java/util/Hashtable.java:404
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:404
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:405
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:427
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.util.Properties@106,main
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:463
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: modCount	thread: main	location: java/util/Hashtable.java:420
+instance: java.util.Properties@106	field: table	thread: main	location: java/util/Hashtable.java:422
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: threshold	thread: main	location: java/util/Hashtable.java:423
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+instance: java.util.Properties@106	field: count	thread: main	location: java/util/Hashtable.java:436
+-----------------
+java.lang.Class@157,main
+-----------------
+java.lang.Class@154,main
+-----------------
+java.lang.Class@9e,main
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+alarmclock.Monitor@15e,Thread-1
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+alarmclock.Monitor@15e,Thread-1
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+instance: java.lang.ThreadGroup@b0	field: destroyed	thread: main	location: java/lang/ThreadGroup.java:151
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:155
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:158
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:159
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:160
+instance: java.lang.ThreadGroup@b0	field: threads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nthreads	thread: main	location: java/lang/ThreadGroup.java:163
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+instance: java.lang.ThreadGroup@b0	field: nUnstartedThreads	thread: main	location: java/lang/ThreadGroup.java:164
+-----------------
+java.lang.ThreadGroup@b0,main
+-----------------
+java.lang.Thread@ad,main
+-----------------
+alarmclock.Monitor@15e,Thread-2
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-2	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-2	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-2	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-2	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-2	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-2	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.Monitor@15e,Thread-1
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:141
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:141
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:143
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:143
+-----------------
+alarmclock.MyObject@1b7,Thread-2
+instance: alarmclock.MyObject@1b7	field: time	thread: Thread-2	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b7	field: time	thread: Thread-2	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.Monitor@15e,Thread-7
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-7	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-7	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-7	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-7	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-7	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-7	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.Monitor@15e,Thread-5
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-5	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-5	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-5	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-5	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-5	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-5	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.MyObject@1b8,Thread-7
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-7	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-7	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.Monitor@15e,Thread-4
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-4	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-4	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-4	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-4	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-4	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-4	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.Monitor@15e,Thread-3
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-3	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-3	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-3	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-3	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-3	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-3	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.MyObject@1b8,Thread-5
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-5	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-5	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.Monitor@15e,Thread-9
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-9	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-9	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-9	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-9	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-9	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-9	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.MyObject@1b8,Thread-4
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-4	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-4	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.Monitor@15e,Thread-6
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-6	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-6	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-6	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-6	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-6	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-6	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.MyObject@1b8,Thread-3
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-3	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-3	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.Monitor@15e,Thread-8
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-8	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-8	location: alarmclock/AlarmClock.java:164
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-8	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: max	thread: Thread-8	location: alarmclock/AlarmClock.java:166
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-8	location: alarmclock/AlarmClock.java:170
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-8	location: alarmclock/AlarmClock.java:170
+-----------------
+alarmclock.MyObject@1b8,Thread-9
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-9	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-9	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.MyObject@1b8,Thread-6
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-6	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-6	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.MyObject@1b8,Thread-8
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-8	location: alarmclock/AlarmClock.java:340
+instance: alarmclock.MyObject@1b8	field: time	thread: Thread-8	location: alarmclock/AlarmClock.java:340
+-----------------
+alarmclock.MyObject@1b7,Thread-1
+-----------------
+alarmclock.Monitor@15e,Thread-1
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:141
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:141
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:143
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:143
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:145
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:145
+-----------------
+alarmclock.MyObject@1b7,Thread-2
+-----------------
+java.lang.ThreadGroup@b0,Thread-2
+-----------------
+alarmclock.Client@17c,Thread-2
+-----------------
+alarmclock.MyObject@1b8,Thread-1
+-----------------
+alarmclock.MyObject@1b8,Thread-4
+-----------------
+java.lang.ThreadGroup@b0,Thread-4
+-----------------
+alarmclock.Client@18a,Thread-4
+-----------------
+alarmclock.MyObject@1b8,Thread-7
+-----------------
+alarmclock.MyObject@1b8,Thread-9
+-----------------
+alarmclock.MyObject@1b8,Thread-6
+-----------------
+java.lang.ThreadGroup@b0,Thread-7
+-----------------
+alarmclock.Client@19f,Thread-7
+-----------------
+alarmclock.MyObject@1b8,Thread-8
+-----------------
+alarmclock.MyObject@1b8,Thread-3
+-----------------
+java.lang.ThreadGroup@b0,Thread-8
+-----------------
+alarmclock.Client@1a6,Thread-8
+-----------------
+java.lang.ThreadGroup@b0,Thread-3
+-----------------
+alarmclock.Client@183,Thread-3
+-----------------
+java.lang.ThreadGroup@b0,Thread-9
+-----------------
+alarmclock.Client@1ad,Thread-9
+-----------------
+alarmclock.Monitor@15e,Thread-1
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:138
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:140
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:141
+instance: alarmclock.Monitor@15e	field: now	thread: Thread-1	location: alarmclock/AlarmClock.java:143
+instance: alarmclock.Monitor@15e	field: waitList	thread: Thread-1	location: alarmclock/AlarmClock.java:145
+-----------------
+alarmclock.MyObject@1b8,Thread-5
+-----------------
+java.lang.ThreadGroup@b0,Thread-5
+-----------------
+alarmclock.Client@191,Thread-5
+-----------------
+java.lang.ThreadGroup@b0,Thread-1
+-----------------
+alarmclock.Clock@16a,Thread-1
+-----------------
+java.lang.ThreadGroup@b0,Thread-6
+-----------------
+alarmclock.Client@198,Thread-6
+-----------------
