@@ -1,5 +1,7 @@
 package fix.listener;
 
+import fix.entity.lock.LocKSequence;
+import fix.entity.lock.LockElement;
 import gov.nasa.jpf.PropertyListenerAdapter;
 import gov.nasa.jpf.search.Search;
 import gov.nasa.jpf.vm.*;
@@ -26,12 +28,11 @@ public class LockListener extends PropertyListenerAdapter{
     }
 
 
-    public LockListener(String filePath, String fieldName) {
+    public LockListener(String filePath, String fieldName) {//给定一个变量
         super();
         this.filePath = filePath;
         this.fieldName = fieldName;
     }
-
 
     @Override
     public void objectLocked(VM vm, ThreadInfo currentThread, ElementInfo lockedObject) {
@@ -65,7 +66,7 @@ public class LockListener extends PropertyListenerAdapter{
                 //对应当前释放的锁
                 if(ls.lockName.equals(unlockedObject.toString())&& currentThread.getName().equals(ls.threadName)){
                     //写入文件
-                    bw.write(ls.lockName + "," + ls.threadName + "\n");
+                    bw.write(ls.lockName + "\t" + ls.threadName + "\n");
                     for(LockElement le : ls.sequence){
                         bw.write(le.toString() + "\n");
                     }
@@ -102,7 +103,6 @@ public class LockListener extends PropertyListenerAdapter{
 
     }
 
-
     @Override
     public void instructionExecuted(VM vm, ThreadInfo currentThread, Instruction nextInstruction,
                                     Instruction executedInstruction) {
@@ -118,61 +118,6 @@ public class LockListener extends PropertyListenerAdapter{
                 }
             }
         }
-    }
-
-    //定义LockPath类，用来存放获取锁之后的执行序列
-    public static class LocKSequence{
-        public String lockName;
-        public String threadName;
-        public Vector<LockElement> sequence = new Vector<LockElement>();
-
-        public LocKSequence(String lockName, String threadName) {
-            this.lockName = lockName;
-            this.threadName = threadName;
-        }
-
-        //根据输入的name，检查当前的LockSequence是否是需要找的
-        public boolean matchField(String fieldName){
-            for(LockElement le : this.sequence){
-                if(le.field.equals(fieldName))
-                    return true;
-            }
-            return false;
-        }
-
-        //返回sequence里面所有的变量,去重
-        public Vector<String> fieldOnSameLock(){
-            Vector<String> resultVector = new Vector<String>();
-            for(LockElement le : this.sequence){
-                if(!resultVector.contains(le.field)){
-                    resultVector.add(le.field);//去重
-                }
-
-            }
-            return resultVector;
-        }
-    }
-
-    //存放锁序列中的每一个变量
-    public static class LockElement{
-        public String instance;
-        public String field;
-        public String thread;
-        public String location;
-
-        public LockElement(String instance, String field, String thread, String location) {
-            super();
-            this.instance = instance;
-            this.field = field;
-            this.thread = thread;
-            this.location = location;
-        }
-
-        public String toString(){
-            return "instance: " + this.instance + "\tfield: " + this.field
-                    + "\tthread: " + this.thread + "\tlocation: " + this.location;
-        }
-
     }
 
 }
