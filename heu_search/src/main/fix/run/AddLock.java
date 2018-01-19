@@ -14,10 +14,11 @@ import java.util.Set;
 
 public class AddLock {
     static String filePath = "";
-    static String projectName = "alarmclock";
+    static String examplesPath = "D:\\FixExamples";
+    static String projectName = "account";//要加锁的项目名称
     static {
         //定位到项目目录下
-        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples\\" + projectName;
+        filePath = examplesPath + "\\examples\\" + projectName;
     }
 
     //chanage file content to buffer array
@@ -62,8 +63,8 @@ public class AddLock {
     public static void lock(String filePath) {
         MatchVariable matchVariable = new MatchVariable();
         Set<String> variableVector = new HashSet<String>();
-        variableVector.add("now");
-        variableVector.add("waitList");
+        variableVector.add("amount");
+        variableVector.add("name");
         InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));

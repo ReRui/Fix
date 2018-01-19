@@ -11,16 +11,18 @@ import java.util.Vector;
 
 public class AcquireVariable {
     static String filePath = "";
-    static String fieldName = "waitList";//要寻找的参数名
+    static String fieldName = "amount";//要寻找的参数名
+    static String examplesPath = "D:\\FixExamples";
     static {
-        filePath = System.getProperty("user.dir") + "\\heu_search\\src\\examples\\" + "/lock.txt";
+        filePath = examplesPath + "\\examples\\lock.txt";
     }
 
     public static void main(String[] args) {
         String[] str = new String[]{
-                "+classpath=out/production/heu_search",
+//                "+classpath=D:\\FixExamples\\out\\production\\FixExamples",
+                "+classpath=" + examplesPath + "\\out\\production\\FixExamples",
                 "+search.class=fix.search.SingleExecutionSearch",
-                "alarmclock.AlarmClock"
+                "account.Main"
         };
         Config config = new Config(str);
         JPF jpf = new JPF(config);
