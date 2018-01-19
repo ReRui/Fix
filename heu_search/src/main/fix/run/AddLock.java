@@ -1,5 +1,6 @@
 package fix.run;
 
+import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
 import fix.io.CopyExamples;
 import fix.io.InsertCode;
@@ -11,16 +12,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 public class AddLock {
-    static String filePath = "";
-    static String examplesPath = "D:\\FixExamples";
-    static String projectName = "account";//要加锁的项目名称
-    static {
-        //定位到项目目录下
-        filePath = examplesPath + "\\examples\\" + projectName;
-    }
-
+    static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+    static Set<String> variableVector = new HashSet<String>();
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
         // char array to store the file contents in
@@ -52,19 +48,24 @@ public class AddLock {
         String copyDir = filePath.replaceAll("examples","exportExamples");
         CopyExamples.createDirectory(copyDir);
 
+        //获取相关变量
+        AcquireVariable acquireVariable = new AcquireVariable();
+        Vector<String> v = acquireVariable.getOneLockfieldVector();
+        for (String s : v)
+            variableVector.add(s);
+
         for(File f : fileArr){
             //每个文件，先拷贝到另一个目录下，然后加锁操作
             String copyFile = f.getPath().replaceAll("examples","exportExamples");
             CopyExamples.CopyFile(f.getPath(),copyFile);
             lock(copyFile);
         }
+
     }
 
     public static void lock(String filePath) {
         MatchVariable matchVariable = new MatchVariable();
-        Set<String> variableVector = new HashSet<String>();
-        variableVector.add("amount");
-        variableVector.add("name");
+
         InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));
@@ -99,13 +100,13 @@ public class AddLock {
                     }
                     if(flag){
 
-                        if(matchVariable.matchVectorIsEmpty()){
+                        if(matchVariable.matchSetIsEmpty()){
                             matchVariable.addMatchVector(node.getIdentifier());
                             matchVariable.setNode(node.getParent());
                         }
                         else{
                             //如果有数据则需要往里面添加数据，对于相同的变量，后面的一个变量应该覆盖前面的，在次使用改变父节点的方法
-                            if(matchVariable.getMatchVector().contains(node.getIdentifier())){
+                            if(matchVariable.getMatchSet().contains(node.getIdentifier())){
                                 matchVariable.setNode(node.getParent());
                             }else{
                                 matchVariable.addMatchVector(node.getIdentifier());
