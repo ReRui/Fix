@@ -12,16 +12,19 @@ public class CheckWhetherLocked {
     //"account/Account.java:32"
 
     public void check(String variableLoc){
-        variableLoc = "account/Account.java:12";
+        variableLoc = "test/Test.java:11";
         String[] str = new String[]{
                 "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
                 "+search.class=fix.search.SingleExecutionSearch",
-                ImportPath.projectName + "." + ImportPath.mainClassName
+//                ImportPath.projectName + "." + ImportPath.mainClassName
+                "test.Test"
         };
         Config config = new Config(str);
         JPF jpf = new JPF(config);
-        CheckWhetherLockedListener checkWhetherLockedListener = new CheckWhetherLockedListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","name",variableLoc);
+        CheckWhetherLockedListener checkWhetherLockedListener = new CheckWhetherLockedListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","s",variableLoc);
         jpf.addListener(checkWhetherLockedListener);
+//        LockListener lockListener = new LockListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","test");
+//        jpf.addListener(lockListener);
         jpf.run();
         System.out.print(checkWhetherLockedListener.isCheckFlag());
     }

@@ -9,8 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Test {
 
-
-
     public static void main(String[] args){
         CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
         checkWhetherLocked.check("1");

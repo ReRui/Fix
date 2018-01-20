@@ -113,6 +113,7 @@ public class LockListener extends PropertyListenerAdapter{
             for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
                 LocKSequence ls = LockVector.get(i);
                 if(ls.lockName.equals(ei.toString()) && currentThread.getName().equals(ls.threadName)){
+//                    System.out.println("里面的是" + ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());
                     ls.sequence.add(new LockElement(ei.toString(), fi.getName(), currentThread.getName(), fins.getFileLocation()));
                     break;
                 }
