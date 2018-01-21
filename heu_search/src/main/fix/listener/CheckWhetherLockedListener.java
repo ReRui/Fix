@@ -15,8 +15,10 @@ import java.util.Vector;
 public class CheckWhetherLockedListener extends PropertyListenerAdapter {
     public Vector<LocKSequence> LockVector = new Vector<LocKSequence>();//存放遇到的所有锁。
     private String filePath;//要输出的文件的地址
-    private String fieldName;//要寻找的参数名
-    private String fieldLoc;// 变量的具体位置
+    private String fieldName;//要寻找的参数名一
+    private String fieldLoc;// 变量的具体位置一
+    private String fieldNameTwo;//要寻找的参数名二
+    private String fieldLocTwo;// 变量的具体位置二
     private boolean checkFlag = false;
 
     public boolean isCheckFlag() {
@@ -30,6 +32,14 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
         this.filePath = filePath;
         this.fieldName = fieldName;
         this.fieldLoc = fieldLoc;
+    }
+
+    public CheckWhetherLockedListener(String filePath, String fieldName, String fieldLoc, String fieldNameTwo, String fieldLocTwo) {
+        this.filePath = filePath;
+        this.fieldName = fieldName;
+        this.fieldLoc = fieldLoc;
+        this.fieldNameTwo = fieldNameTwo;
+        this.fieldLocTwo = fieldLocTwo;
     }
 
     @Override
@@ -67,16 +77,28 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectUnlocked(VM vm, ThreadInfo currentThread, ElementInfo unlockedObject) {
+        boolean checkOne = false;
+        boolean checkTwo = false;
         for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
             LocKSequence ls = LockVector.get(i);
             //找到当前对应当前释放的锁
             if(ls.lockName.equals(unlockedObject.toString())&& currentThread.getName().equals(ls.threadName)){
                 //寻找当前锁中有没有需要寻找的变量
                 for(LockElement le : ls.sequence){
-                    System.out.println("锁里面的内容:" +le.toString());
+//                    System.out.println("锁里面的内容:" +le.toString());
+                    //线检查有没变量1
                     if(le.field.equals(fieldName) && le.location.equals(fieldLoc)){
-                        System.out.println("*************" + le.toString());
-                        this.checkFlag = true;
+//                        System.out.println("*************" + le.toString());
+                        checkOne = true;
+                        System.out.println("1有");
+                    }
+                    if(le.field.equals(fieldNameTwo) && le.location.equals(fieldLocTwo)){
+//                        System.out.println("*************" + le.toString());
+                        checkTwo = true;
+                        System.out.println("2有");
+                    }
+                    if(checkOne == true && checkTwo == true){
+                        checkFlag = true;
                         break;
                     }
                 }

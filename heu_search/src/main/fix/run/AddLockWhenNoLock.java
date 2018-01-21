@@ -9,7 +9,7 @@ public class AddLockWhenNoLock {
     public static void main(String[] args){
         CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
         //variableLoc   包名/java文件:行数    必须类似   account/Account.java:32
-        boolean whetherLocked = checkWhetherLocked.check("test/Test.java:12","x");
+        boolean whetherLocked = checkWhetherLocked.check("test/Test.java:12","x","test/Test.java:13","s");
         /*if(!whetherLocked){
             InsertCode.insert(22, "ReentrantLock lock" + 11 +" = new ReentrantLock(true);lock" + 11 + ".lock();", filePath);
             InsertCode.insert(23, "lock" + 11 + ".unlock();", filePath);
