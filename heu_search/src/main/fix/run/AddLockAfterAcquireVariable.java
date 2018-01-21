@@ -1,5 +1,6 @@
 package fix.run;
 
+import fix.analyzefile.AcquireVariableInSameLock;
 import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
 import fix.io.CopyExamples;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-public class AddLock {
+public class AddLockAfterAcquireVariable {
     static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
     static Set<String> variableVector = new HashSet<String>();
     //chanage file content to buffer array
@@ -49,8 +50,8 @@ public class AddLock {
         CopyExamples.createDirectory(copyDir);
 
         //获取相关变量
-        AcquireVariable acquireVariable = new AcquireVariable();
-        Vector<String> v = acquireVariable.getOneLockfieldVector();
+        AcquireVariableInSameLock acquireVariableInSameLock = new AcquireVariableInSameLock();
+        Vector<String> v = acquireVariableInSameLock.getOneLockfieldVector();
         for (String s : v)
             variableVector.add(s);
 

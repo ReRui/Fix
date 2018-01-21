@@ -1,12 +1,6 @@
 package fix;
 
-import fix.io.CopyExamples;
-import fix.run.CheckWhetherLocked;
-
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.util.Vector;
-import java.util.concurrent.locks.ReentrantLock;
+import fix.analyzefile.CheckWhetherLocked;
 
 public class Test {
 

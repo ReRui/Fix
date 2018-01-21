@@ -1,5 +1,5 @@
 
-package fix.run;
+package fix.analyzefile;
 
 import fix.entity.ImportPath;
 import fix.listener.LockListener;
@@ -8,7 +8,7 @@ import gov.nasa.jpf.JPF;
 
 import java.util.Vector;
 
-public class AcquireVariable {
+public class AcquireVariableInSameLock {
 
     private static Vector<String> oneLockfieldVector = new Vector<String>();
 

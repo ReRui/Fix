@@ -1,8 +1,7 @@
-package fix.run;
+package fix.analyzefile;
 
 import fix.entity.ImportPath;
 import fix.listener.CheckWhetherLockedListener;
-import fix.listener.LockListener;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
 
@@ -12,7 +11,6 @@ public class CheckWhetherLocked {
     //"account/Account.java:32"
 
     public void check(String variableLoc){
-        variableLoc = "test/Test.java:12";
         String[] str = new String[]{
                 "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
                 "+search.class=fix.search.SingleExecutionSearch",
@@ -27,5 +25,11 @@ public class CheckWhetherLocked {
 //        jpf.addListener(lockListener);
         jpf.run();
         System.out.print(checkWhetherLockedListener.isCheckFlag());
+    }
+
+    public static void main(String[] args){
+        CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
+        checkWhetherLocked.check("test/Test.java:12");
+
     }
 }
