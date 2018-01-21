@@ -57,16 +57,8 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
             for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
                 LocKSequence ls = LockVector.get(i);
                 if(ls.lockName.equals(ei.toString()) && currentThread.getName().equals(ls.threadName)){
-//                    System.out.println("里面的是" +  "," + ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());
-                    //找到对应的锁之后，找锁中有没有需要找的变量
-                    if(fi.getName().equals(fieldName) && fins.getFileLocation().equals(fieldLoc)){
-                        checkFlag = true;
-                        System.out.println(ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());
-                        break;
-                    }
-
-//                    ls.sequence.add(new LockElement(ei.toString(), fi.getName(), currentThread.getName(), fins.getFileLocation()));
-
+                    ls.sequence.add(new LockElement(ei.toString(), fi.getName(), currentThread.getName(), fins.getFileLocation()));
+                    break;
                 }
             }
         }
@@ -75,6 +67,25 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectUnlocked(VM vm, ThreadInfo currentThread, ElementInfo unlockedObject) {
+        for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
+            LocKSequence ls = LockVector.get(i);
+            //找到当前对应当前释放的锁
+            if(ls.lockName.equals(unlockedObject.toString())&& currentThread.getName().equals(ls.threadName)){
+                //寻找当前锁中有没有需要寻找的变量
+                for(LockElement le : ls.sequence){
+                    System.out.println("锁里面的内容:" +le.toString());
+                    if(le.field.equals(fieldName) && le.location.equals(fieldLoc)){
+                        System.out.println("*************" + le.toString());
+                        this.checkFlag = true;
+                        break;
+                    }
+                }
+                //清空当前释放锁里面的内容
+                LockVector.get(i).clearAll();
+                LockVector.remove(i);
+            }
+        }
+//        System.out.println("输出释放锁:" + unlockedObject.toString() + "," + currentThread.getName() );
 /*        LocKSequence unlock = new LocKSequence(unlockedObject.toString(),currentThread.getName());
         LockVector.remove(unlock);
         for(int i = LockVector.size() - 1; i >= 0;i--){

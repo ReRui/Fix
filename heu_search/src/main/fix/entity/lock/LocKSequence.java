@@ -46,4 +46,8 @@ public class LocKSequence {
         }
         return resultVector;
     }
+
+    public void clearAll() {
+        this.sequence.clear();
+    }
 }
