@@ -12,7 +12,7 @@ public class CheckWhetherLocked {
     //"account/Account.java:32"
 
     public void check(String variableLoc){
-        variableLoc = "test/Test.java:11";
+        variableLoc = "test/Test.java:12";
         String[] str = new String[]{
                 "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
                 "+search.class=fix.search.SingleExecutionSearch",
@@ -21,7 +21,7 @@ public class CheckWhetherLocked {
         };
         Config config = new Config(str);
         JPF jpf = new JPF(config);
-        CheckWhetherLockedListener checkWhetherLockedListener = new CheckWhetherLockedListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","s",variableLoc);
+        CheckWhetherLockedListener checkWhetherLockedListener = new CheckWhetherLockedListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","x",variableLoc);
         jpf.addListener(checkWhetherLockedListener);
 //        LockListener lockListener = new LockListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","test");
 //        jpf.addListener(lockListener);

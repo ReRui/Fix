@@ -34,45 +34,11 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectLocked(VM vm, ThreadInfo currentThread, ElementInfo lockedObject) {
-        System.out.println("输出加锁:" + lockedObject.toString() + "," + currentThread.getName());
+//        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
         LocKSequence locKSequence = new LocKSequence(lockedObject.toString(),currentThread.getName());
         LockVector.add(locKSequence);
     }
 
-    @Override
-    public void objectUnlocked(VM vm, ThreadInfo currentThread, ElementInfo unlockedObject) {
-        BufferedWriter bw = null;
-        try {
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath,true)));//往file里面增加内容
-            for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
-                LocKSequence ls = LockVector.get(i);
-                //对应当前释放的锁
-                if(ls.lockName.equals(unlockedObject.toString())&& currentThread.getName().equals(ls.threadName)){
-                    //写入文件
-                    bw.write(ls.lockName + "\t" + ls.threadName + "\n");
-                    for(LockElement le : ls.sequence){
-                        bw.write(le.toString() + "\n");
-                    }
-                    bw.write("-----------------\n");
-
-                    //清空对应的sequence
-//					ls.sequence.clear();
-                    break;
-                }
-            }
-            bw.flush();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }finally {
-            try {
-                bw.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
 
     @Override
     public void instructionExecuted(VM vm, ThreadInfo currentThread, Instruction nextInstruction, Instruction executedInstruction) {
@@ -81,13 +47,14 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
             FieldInfo fi = fins.getFieldInfo();
             ElementInfo ei = fins.getElementInfo(currentThread);
             String res = fins.getFileLocation();
-            String[] className = res.split("/");
-//            System.out.println("hah"+className[className.length -  1]);
-            if(className[className.length -  1].contains("Test")){
+           /* String[] className = res.split("/");
+            System.out.println("hah"+className[className.length -  1]);
+            if(className[className.length -  1].contains("Test") *//*&& LockVector.size() > 0*//*){
                 System.out.println("里面的是" +ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());//输出锁中的所有信息
                 System.out.println(LockVector.get(LockVector.size() - 1).lockName + "结果v");
-            }
-/*            for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
+                System.out.println(LockVector.size());
+            }*/
+            for(int i = LockVector.size() - 1; i >= 0; i--){//从后往前找
                 LocKSequence ls = LockVector.get(i);
                 if(ls.lockName.equals(ei.toString()) && currentThread.getName().equals(ls.threadName)){
 //                    System.out.println("里面的是" +  "," + ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());
@@ -101,7 +68,21 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 //                    ls.sequence.add(new LockElement(ei.toString(), fi.getName(), currentThread.getName(), fins.getFileLocation()));
 
                 }
-            }*/
+            }
         }
+    }
+
+
+    @Override
+    public void objectUnlocked(VM vm, ThreadInfo currentThread, ElementInfo unlockedObject) {
+/*        LocKSequence unlock = new LocKSequence(unlockedObject.toString(),currentThread.getName());
+        LockVector.remove(unlock);
+        for(int i = LockVector.size() - 1; i >= 0;i--){
+            if(LockVector.get(i).lockName.equals(unlockedObject.toString()) && LockVector.get(i).threadName.equals(currentThread.getName()))
+                LockVector.remove(i);
+        }
+        System.out.println("输出释放锁:" + unlockedObject.toString() + "," + currentThread.getName() );
+        System.out.println("释放锁后的长度:" + LockVector.size());
+*/
     }
 }

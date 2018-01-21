@@ -23,6 +23,18 @@ public class LocKSequence {
         return false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    public boolean equals(LocKSequence ls) {
+        if(ls.lockName.equals(this.lockName) && ls.threadName.equals(this.threadName))
+            return true;
+        else
+            return false;
+    }
+
     //返回sequence里面所有的变量,去重
     public Vector<String> fieldOnSameLock(){
         Vector<String> resultVector = new Vector<String>();
