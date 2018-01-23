@@ -14,8 +14,8 @@ public class CheckWhetherLocked {
         String[] str = new String[]{
                 "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
                 "+search.class=fix.search.SingleExecutionSearch",
-//                ImportPath.projectName + "." + ImportPath.mainClassName
-                "test.Test"
+                ImportPath.projectName + "." + ImportPath.mainClassName
+//                "test.Test"
         };
         Config config = new Config(str);
         JPF jpf = new JPF(config);

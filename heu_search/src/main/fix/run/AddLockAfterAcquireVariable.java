@@ -122,8 +122,9 @@ public class AddLockAfterAcquireVariable {
 
                             if(!matchVariable.getNode().getParent().toString().contains("class ")){
                                 //加锁
-                                InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() +" = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();", filePath);
-                                InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), "lock" + matchVariable.getLockNum() + ".unlock();", filePath);
+                                InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() + " = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();"
+                                        + " synchronized (lock" + matchVariable.getLockNum() +"){ ", filePath);
+                                InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), " }", filePath);
                                 //更新锁
                                 matchVariable.update();
                             }
