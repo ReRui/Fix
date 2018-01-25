@@ -3,7 +3,7 @@ package fix.run;
 import fix.analyzefile.AcquireVariableInSameLock;
 import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
-import fix.io.CopyExamples;
+import fix.io.ExamplesIO;
 import fix.io.InsertCode;
 import org.eclipse.jdt.core.dom.*;
 
@@ -43,11 +43,6 @@ public class AddLockAfterAcquireVariable {
     }
 
     public static void main(String[] args){
-        File file = new File(filePath);
-        File[] fileArr = file.listFiles();
-        //先创建一个copy目录
-        String copyDir = filePath.replaceAll("examples","exportExamples");
-        CopyExamples.createDirectory(copyDir);
 
         //获取相关变量
         AcquireVariableInSameLock acquireVariableInSameLock = new AcquireVariableInSameLock();
@@ -55,12 +50,18 @@ public class AddLockAfterAcquireVariable {
         for (String s : v)
             variableVector.add(s);
 
+        //单例
+        ExamplesIO examplesIO = ExamplesIO.getInstance();
+        //将项目从examples复制到exportExamples，并且修改当前filePath路径
+        filePath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",filePath);
+        //对目录下的每个文件，都执行一次lock
+        File file = new File(filePath);
+        File[] fileArr = file.listFiles();
         for(File f : fileArr){
-            //每个文件，先拷贝到另一个目录下，然后加锁操作
-            String copyFile = f.getPath().replaceAll("examples","exportExamples");
-            CopyExamples.CopyFile(f.getPath(),copyFile);
-            lock(copyFile);
+            String listFile = f.getPath();
+            lock(listFile);
         }
+
 
     }
 

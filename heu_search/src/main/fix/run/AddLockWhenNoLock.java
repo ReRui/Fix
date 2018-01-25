@@ -2,8 +2,7 @@ package fix.run;
 
 import fix.analyzefile.CheckWhetherLocked;
 import fix.analyzefile.WhichVarToBeLocked;
-import fix.io.AddLock;
-import fix.io.InsertCode;
+import fix.io.ExamplesIO;
 
 import java.util.List;
 
@@ -28,7 +27,8 @@ public class AddLockWhenNoLock {
             String lockName = (String) result.get(0);
             int endLine = (int) result.get(1);
             //加锁
-            AddLock.addLock(varLine,endLine + 1,lockName,filePath);
+            ExamplesIO examplesIO = ExamplesIO.getInstance();
+            examplesIO.addLockToOneVar(varLine,endLine + 1,lockName,filePath);
         }
 
     }
