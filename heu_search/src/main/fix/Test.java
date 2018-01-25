@@ -1,8 +1,8 @@
 package fix;
 
-import fix.analyzefile.CheckWhetherLocked;
 import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
+import fix.io.CopyExamples;
 import fix.io.InsertCode;
 import org.eclipse.jdt.core.dom.*;
 
@@ -12,12 +12,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Pattern;
 
 public class Test {
-    static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+//    static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+    public static String filePath = "";
     static Set<String> variableVector = new HashSet<String>();
+
+    public static String var = "";
+    public static String lockName = "";
+    public static int location = 0;
+
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
         // char array to store the file contents in
@@ -43,14 +47,21 @@ public class Test {
     }
 
     public static void main(String[] args){
-        lock("D:\\FixExamples\\examples\\account\\Account.java");
-        /*String content = "I am noob " +
-                "from runoob.com.";
 
-        String pattern = ".*runoob.*";
-
-        boolean isMatch = Pattern.matches(pattern, content);
-        System.out.println("字符串中是否包含了 'runoob' 子字符串? " + isMatch);*/
+        Test t = new Test();
+        t.filePath = "D:\\FixExamples\\exportExamples\\account\\Account.java";
+        t.var = "amount";
+        t.location = 28;
+        t.lock("D:\\FixExamples\\exportExamples\\account\\Account.java");
+        System.out.println(t.lockName);
+        String lockNameNow = "this";
+        if(t.lockName.equals("amount")){
+            lockNameNow = "";
+        }else{
+            lockNameNow = t.lockName;
+        }
+        InsertCode.insert(28, " synchronized (" + lockNameNow +"){ ", filePath);
+        InsertCode.insert(29, " }", filePath);
     }
 
     public static void lock(String filePath) {
@@ -68,30 +79,50 @@ public class Test {
 
             Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
 
-
             //定义变量
             public boolean visit(VariableDeclarationFragment node) {
+//                System.out.println(node.getName() + "," +cu.getLineNumber(node.getStartPosition()));
                 SimpleName name = node.getName();
                 this.names.add(name.getIdentifier());
-
                 return true; // do not continue to avoid usage info
             }
 
             //变量
             public boolean visit(SimpleName node) {
+//                System.out.println("SimpleName:" + node.getIdentifier() + "," + cu.getLineNumber(node.getStartPosition()));
                 if (this.names.contains(node.getIdentifier())) {
-                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
+                    if(node.toString().equals(var) && cu.getLineNumber(node.getStartPosition()) == location){
+//                        System.out.println("SimpleName:" + node.getIdentifier() + "," + cu.getLineNumber(node.getStartPosition()));
+                        lockName = node.getIdentifier();
+                    }
+                    /*System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
                    //判断是此变量的类型，形式是 a.b  还是 b
                     String content = String.valueOf(node.getParent());
                     System.out.println(content);
                     String pattern = "^.+\\.amount$";
                     boolean isMatch = Pattern.matches(pattern, content);
-                    System.out.println(isMatch);
+                    System.out.println(isMatch);*/
                 }
 
                 return true;
             }
 
+            //QualifiedName由两部分构成:name.SimpleName
+            //QualifiedName先于SimpleName执行
+            public boolean visit(QualifiedName  node){
+                if(node.getName().toString().equals(var) && cu.getLineNumber(node.getStartPosition()) == location){
+//                    System.out.println("QualifiedName:" + node.getQualifier() + "," + cu.getLineNumber(node.getStartPosition()));
+                    lockName = node.getQualifier().toString();
+                    return false;
+                }
+//                System.out.println("QualifiedName:" + node.getQualifier() + "," + cu.getLineNumber(node.getStartPosition()));
+                return true;
+            }
+
+            public boolean visit(Name  node){
+                System.out.println("Name:" + String.valueOf(node) + "," + cu.getLineNumber(node.getStartPosition()));
+                return true;
+            }
 
         });
     }

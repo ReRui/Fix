@@ -14,6 +14,7 @@ public class LockElement {
         this.location = location;
     }
 
+
     public String toString(){
         return "instance: " + this.instance + "\tfield: " + this.field
                 + "\tthread: " + this.thread + "\tlocation: " + this.location;

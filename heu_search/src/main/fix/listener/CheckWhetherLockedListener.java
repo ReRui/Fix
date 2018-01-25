@@ -5,15 +5,18 @@ import fix.entity.lock.LockElement;
 import gov.nasa.jpf.PropertyListenerAdapter;
 import gov.nasa.jpf.vm.*;
 import gov.nasa.jpf.vm.bytecode.FieldInstruction;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.Vector;
+import java.util.*;
 
 public class CheckWhetherLockedListener extends PropertyListenerAdapter {
     public Vector<LocKSequence> LockVector = new Vector<LocKSequence>();//存放遇到的所有锁。
+    Set<LockElement> allVarSet = new HashSet<LockElement>();//存放所有的变量的instance
+    Set<Map<String,String>> allVar = new HashSet<Map<String,String>>();//存放所有的变量的instance和对应的field
     private String filePath;//要输出的文件的地址
     private String fieldName;//要寻找的参数名一
     private String fieldLoc;// 变量的具体位置一
@@ -57,6 +60,24 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
             FieldInfo fi = fins.getFieldInfo();
             ElementInfo ei = fins.getElementInfo(currentThread);
             String res = fins.getFileLocation();
+            //将每次变量都添加进去
+            //判断里面有没有
+            boolean flag = true;
+            for(LockElement le : allVarSet){
+                if(le.instance.equals(ei.toString())){
+                    flag = false;
+                }
+            }
+            if(flag){
+                allVarSet.add(new LockElement(ei.toString(),fi.getName(),currentThread.getName(),fins.getFileLocation()));
+            }
+
+            if(fi.getName().equals(fieldName) && fins.getFileLocation().equals(fieldLoc)){
+                for(LockElement le : allVarSet){
+                    if(le.field.equals(fieldName) && le.instance.equals(ei.toString()))
+                        System.out.println("找到" + le.instance + '\t' + le.field + '\t' + le.location);
+                }
+            }
            /* String[] className = res.split("/");
             System.out.println("hah"+className[className.length -  1]);
             if(className[className.length -  1].contains("Test") *//*&& LockVector.size() > 0*//*){
@@ -86,8 +107,8 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
             if(ls.lockName.equals(unlockedObject.toString())&& currentThread.getName().equals(ls.threadName)){
                 //寻找当前锁中有没有需要寻找的变量
                 for(LockElement le : ls.sequence){
-//                    System.out.println("锁里面的内容:" +le.toString());
-                    //线检查有没变量1
+//                    System.out.println("锁里面的实例:" +le.instance);
+                    //线检查有没变量
                     if(le.field.equals(fieldName) && le.location.equals(fieldLoc)){
 //                        System.out.println("*************" + le.toString());
                         checkOne = true;
