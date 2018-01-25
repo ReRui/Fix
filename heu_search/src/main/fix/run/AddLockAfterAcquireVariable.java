@@ -108,15 +108,15 @@ public class AddLockAfterAcquireVariable {
                     if(flag){
 
                         if(matchVariable.matchSetIsEmpty()){
-                            matchVariable.addMatchVector(node.getIdentifier());
-                            matchVariable.setNode(node.getParent());
+                            matchVariable.addMatchSet(node);
+                            matchVariable.setSameFatherNode(node.getParent());
                         }
                         else{
-                            //如果有数据则需要往里面添加数据，对于相同的变量，后面的一个变量应该覆盖前面的，在次使用改变父节点的方法
-                            if(matchVariable.getMatchSet().contains(node.getIdentifier())){
-                                matchVariable.setNode(node.getParent());
+                            //如果有数据则需要往里面添加数据，对于相同的变量，后面的一个变量应该覆盖前面的，在此处使用改变父节点的方法
+                            if(matchVariable.getMatchSet().contains(node)){
+                                matchVariable.setSameFatherNode(node.getParent());
                             }else{
-                                matchVariable.addMatchVector(node.getIdentifier());
+                                matchVariable.addMatchSet(node);
 //                                System.out.println("test" + node.getParent());
                                 matchVariable.searchSame(node.getParent());
                             }
@@ -126,8 +126,8 @@ public class AddLockAfterAcquireVariable {
 //                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
 //                           System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
 
-                            //不是成员变量且不是在构造函数里
-                            if(!(matchVariable.getNode().getParent() instanceof TypeDeclaration) && !(isConstruct(matchVariable.getNode().getParent()))){
+                            //不能整个类加锁，变量不是在构造函数里
+                            if(!(isMemberVariable(matchVariable)) && !(isConstruct(matchVariable.getSameFatherNode().getParent()))){
                                 //加锁
                                 InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() + " = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();"
                                         + " synchronized (lock" + matchVariable.getLockNum() +"){ ", filePath);
@@ -149,6 +149,19 @@ public class AddLockAfterAcquireVariable {
         });
     }
 
+    //检测是不是成员变量
+    private static boolean isMemberVariable(MatchVariable matchVariable) {
+
+        //是类的类型
+        if(matchVariable.getSameFatherNode().getParent() instanceof TypeDeclaration)
+            return true;
+
+        return false;
+    }
+
+
+
+    //检测是不是构造函数里的变量
     private static boolean isConstruct(ASTNode parent) {
 
         /**
