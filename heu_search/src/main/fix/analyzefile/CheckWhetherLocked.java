@@ -24,7 +24,7 @@ public class CheckWhetherLocked {
 //        LockListener lockListener = new LockListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","test");
 //        jpf.addListener(lockListener);
         jpf.run();
-        System.out.print(checkWhetherLockedListener.isCheckFlag());
+        System.out.println(checkWhetherLockedListener.isCheckFlag());
         return checkWhetherLockedListener.isCheckFlag();
     }
 
