@@ -1,9 +1,6 @@
 package fix.io;
 
-import fix.analyzefile.AcquireVariableInSameLock;
-
 import java.io.*;
-import java.util.Vector;
 
 public class ExamplesIO {
 
@@ -19,12 +16,12 @@ public class ExamplesIO {
         InsertCode.insert(endLine, "}", filePath);
     }
 
-    public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String filePath){
+    public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath){
         String changeFilePath = "";
-        File file = new File(filePath);
+        File file = new File(dirPath);
         File[] fileArr = file.listFiles();
         //先创建一个copy目录
-        changeFilePath = filePath.replaceAll(dir,targetDir);
+        changeFilePath = dirPath.replaceAll(dir,targetDir);
         createDirectory(changeFilePath);
 
 

@@ -2,15 +2,17 @@ package fix.run;
 
 import fix.analyzefile.CheckWhetherLocked;
 import fix.analyzefile.WhichVarToBeLocked;
+import fix.entity.ImportPath;
 import fix.io.ExamplesIO;
 
 import java.util.List;
 
 public class AddLockWhenNoLock {
 
-    static String filePath = "D:\\FixExamples\\exportExamples\\account\\Account.java";
     static String packageName = "account";
     static String className = "Account";
+    static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\" + className + ".java";
+    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
     static String vatName = "amount";
     static int varLine = 28;
     public static void main(String[] args){
@@ -28,7 +30,8 @@ public class AddLockWhenNoLock {
             int endLine = (int) result.get(1);
             //加锁
             ExamplesIO examplesIO = ExamplesIO.getInstance();
-            examplesIO.addLockToOneVar(varLine,endLine + 1,lockName,filePath);
+            dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
+            examplesIO.addLockToOneVar(varLine,endLine + 1,lockName,dirPath + "\\" + className + ".java");
         }
 
     }

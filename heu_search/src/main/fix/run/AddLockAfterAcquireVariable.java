@@ -16,8 +16,9 @@ import java.util.Set;
 import java.util.Vector;
 
 public class AddLockAfterAcquireVariable {
-    static String filePath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
     static Set<String> variableVector = new HashSet<String>();
+    static String className = "";//类的名字，以后用来比较用
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
         // char array to store the file contents in
@@ -52,10 +53,10 @@ public class AddLockAfterAcquireVariable {
 
         //单例
         ExamplesIO examplesIO = ExamplesIO.getInstance();
-        //将项目从examples复制到exportExamples，并且修改当前filePath路径
-        filePath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",filePath);
+        //将项目从examples复制到exportExamples，并且修改当前dirPath路径
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples", dirPath);
         //对目录下的每个文件，都执行一次lock
-        File file = new File(filePath);
+        File file = new File(dirPath);
         File[] fileArr = file.listFiles();
         for(File f : fileArr){
             String listFile = f.getPath();
@@ -81,6 +82,10 @@ public class AddLockAfterAcquireVariable {
 
             Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
 
+            public boolean visit(TypeDeclaration  node){
+                className = node.getName().toString();
+                return true;
+            }
 
             //定义变量
             public boolean visit(VariableDeclarationFragment node) {
@@ -121,7 +126,8 @@ public class AddLockAfterAcquireVariable {
 //                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
 //                           System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
 
-                            if(!matchVariable.getNode().getParent().toString().contains("class ")){
+                            //不是成员变量且不是在构造函数里
+                            if(!(matchVariable.getNode().getParent() instanceof TypeDeclaration) && !(isConstruct(matchVariable.getNode().getParent()))){
                                 //加锁
                                 InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() + " = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();"
                                         + " synchronized (lock" + matchVariable.getLockNum() +"){ ", filePath);
@@ -142,4 +148,20 @@ public class AddLockAfterAcquireVariable {
 
         });
     }
+
+    private static boolean isConstruct(ASTNode parent) {
+
+        /**
+         * 检查结点的所有父节点，看看有没有一个是构造函数
+         * 判断节点类型是函数，节点名字与类名相同，则是构造函数
+         */
+        while(!(parent instanceof TypeDeclaration)){
+            if((parent instanceof MethodDeclaration) && (((MethodDeclaration) parent).getName().toString().equals(className))) {
+                return true;
+            }
+            parent = parent.getParent();
+        }
+        return false;
+    }
+
 }
