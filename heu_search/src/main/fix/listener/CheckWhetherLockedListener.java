@@ -13,8 +13,8 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
     private String filePath;//要输出的文件的地址
     private String fieldName;//要寻找的参数名一
     private String fieldLoc;// 变量的具体位置一
-    private String fieldNameTwo;//要寻找的参数名二
-    private String fieldLocTwo;// 变量的具体位置二
+//    private String fieldNameTwo;//要寻找的参数名二
+//    private String fieldLocTwo;// 变量的具体位置二
     private boolean checkFlag = false;
 
     public boolean isCheckFlag() {
@@ -28,14 +28,6 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
         this.filePath = filePath;
         this.fieldName = fieldName;
         this.fieldLoc = fieldLoc;
-    }
-
-    public CheckWhetherLockedListener(String filePath, String fieldName, String fieldLoc, String fieldNameTwo, String fieldLocTwo) {
-        this.filePath = filePath;
-        this.fieldName = fieldName;
-        this.fieldLoc = fieldLoc;
-        this.fieldNameTwo = fieldNameTwo;
-        this.fieldLocTwo = fieldLocTwo;
     }
 
     @Override
@@ -78,8 +70,6 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectUnlocked(VM vm, ThreadInfo currentThread, ElementInfo unlockedObject) {
-        boolean checkOne = false;
-        boolean checkTwo = false;
         for(int i = lockVector.size() - 1; i >= 0; i--){//从后往前找
             LocKSequence ls = lockVector.get(i);
             //找到当前对应当前释放的锁
@@ -90,18 +80,11 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
                     //线检查有没变量
                     if(le.field.equals(fieldName) && le.location.equals(fieldLoc)){
 //                        System.out.println("*************" + le.toString());
-                        checkOne = true;
-//                        System.out.println("1有");
-                    }
-                    if(le.field.equals(fieldNameTwo) && le.location.equals(fieldLocTwo)){
-//                        System.out.println("*************" + le.toString());
-                        checkTwo = true;
-//                        System.out.println("2有");
-                    }
-                    if(checkOne == true && checkTwo == true){
                         checkFlag = true;
                         break;
+//                        System.out.println("1有");
                     }
+
                 }
                 //清空当前释放锁里面的内容
                 lockVector.get(i).clearAll();

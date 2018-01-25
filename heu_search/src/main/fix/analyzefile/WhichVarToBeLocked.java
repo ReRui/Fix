@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class WhichVarToBeLocked {
@@ -17,6 +19,7 @@ public class WhichVarToBeLocked {
     public String var = "";
     public String lockName = "";
     public int location = 0;
+    public int endLine = 0;
 
     public WhichVarToBeLocked() {
     }
@@ -50,7 +53,9 @@ public class WhichVarToBeLocked {
         return contents;
     }
 
-    public String searchWhich(String filePath) {
+    public List searchWhich(String filePath) {
+
+        List result = new ArrayList();
 
         MatchVariable matchVariable = new MatchVariable();
 
@@ -81,6 +86,9 @@ public class WhichVarToBeLocked {
                     if(node.toString().equals(var) && cu.getLineNumber(node.getStartPosition()) == location){
 //                        System.out.println("SimpleName:" + node.getIdentifier() + "," + cu.getLineNumber(node.getStartPosition()));
                         lockName = node.getIdentifier();
+                        endLine = cu.getLineNumber(node.getStartPosition() + node.getLength());
+                        result.add(lockName);
+                        result.add(endLine);
                     }
                     /*System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
                    //判断是此变量的类型，形式是 a.b  还是 b
@@ -100,6 +108,9 @@ public class WhichVarToBeLocked {
                 if(node.getName().toString().equals(var) && cu.getLineNumber(node.getStartPosition()) == location){
 //                    System.out.println("QualifiedName:" + node.getQualifier() + "," + cu.getLineNumber(node.getStartPosition()));
                     lockName = node.getQualifier().toString();
+                    endLine = cu.getLineNumber(node.getStartPosition() + node.getLength());
+                    result.add(lockName);
+                    result.add(endLine);
                     return false;
                 }
 //                System.out.println("QualifiedName:" + node.getQualifier() + "," + cu.getLineNumber(node.getStartPosition()));
@@ -108,6 +119,11 @@ public class WhichVarToBeLocked {
 
 
         });
-        return lockName.equals(var) ? "this" : lockName;
+        if(result.get(0).equals(var)){
+            result.set(0,"this");
+            return result;
+        }
+        else
+            return result;
     }
 }
