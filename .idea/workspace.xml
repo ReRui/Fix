@@ -12,39 +12,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Unicorn.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
+      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="53" column="11" lean-forward="true" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
+            <state relative-caret-position="380">
+              <caret line="60" column="15" lean-forward="false" selection-start-line="60" selection-start-column="15" selection-end-line="60" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2438#2439#0" expanded="true" />
-                <element signature="e#2476#2477#0" expanded="true" />
-                <element signature="e#2516#2517#0" expanded="true" />
-                <element signature="e#2559#2560#0" expanded="true" />
-                <element signature="e#2596#2597#0" expanded="true" />
-                <element signature="e#2636#2637#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AcquireVariableInSameLock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/AcquireVariableInSameLock.java">
+      <file leaf-file-name="AddLockWhenNoLock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="16" column="93" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="93" />
+            <state relative-caret-position="644">
+              <caret line="33" column="104" lean-forward="false" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="104" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImportPath.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java">
+      <file leaf-file-name="ExamplesIO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="391">
+              <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckWhetherLocked.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -77,6 +81,8 @@
       <find>ccount/Account.java:28</find>
       <find>------------</find>
       <find>----------</find>
+      <find>123213</find>
+      <find>eadWriteNode[731,account.Account@1bf,amount,WRITE,Thread-4,account/Account.java</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -114,13 +120,11 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/WhichVarToBeLocked.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/MatchVariable.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockAfterAcquireVariable.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/listener/CheckWhetherLockedListener.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/Test.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/listener/TestListener.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/listener/SequenceProduceListener.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/pattern/Pattern.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/SearchState.java" />
@@ -130,6 +134,8 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/PatternTypeNode.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/filter/Filter.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
       </list>
     </option>
   </component>
@@ -140,8 +146,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2391" />
-    <option name="y" value="-9" />
+    <option name="x" value="2357" />
+    <option name="y" value="119" />
     <option name="width" value="2418" />
     <option name="height" value="1318" />
   </component>
@@ -160,6 +166,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,108 +182,10 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
-              <item name="analyzefile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
-              <item name="run" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="filter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="pattern" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="sequence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="listener" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="run" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -320,7 +232,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Unicorn">
+  <component name="RunManager" selected="Application.Fix">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -365,14 +277,14 @@
       <module name="heu_search" />
       <envs />
     </configuration>
-    <configuration name="CheckWhetherLocked" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Fix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="fix.analyzefile.*" />
+          <option name="PATTERN" value="fix.run.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="fix.analyzefile.CheckWhetherLocked" />
+      <option name="MAIN_CLASS_NAME" value="fix.run.Fix" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -499,17 +411,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.AddLockAfterAcquireVariable" />
       <item index="1" class="java.lang.String" itemvalue="Application.Test" />
-      <item index="2" class="java.lang.String" itemvalue="Application.CheckWhetherLocked" />
-      <item index="3" class="java.lang.String" itemvalue="Application.AddLockWhenNoLock" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Unicorn" />
+      <item index="2" class="java.lang.String" itemvalue="Application.AddLockWhenNoLock" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Unicorn" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Fix" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Unicorn" />
-        <item index="1" class="java.lang.String" itemvalue="Application.AddLockWhenNoLock" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="3" class="java.lang.String" itemvalue="Application.AddLockAfterAcquireVariable" />
-        <item index="4" class="java.lang.String" itemvalue="Application.CheckWhetherLocked" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Fix" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Unicorn" />
+        <item index="2" class="java.lang.String" itemvalue="Application.AddLockWhenNoLock" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="4" class="java.lang.String" itemvalue="Application.AddLockAfterAcquireVariable" />
       </list>
     </recent_temporary>
   </component>
@@ -553,7 +465,18 @@
       <workItem from="1516876925591" duration="6860000" />
       <workItem from="1516888653331" duration="2714000" />
       <workItem from="1516946890515" duration="8819000" />
-      <workItem from="1517819042242" duration="4307000" />
+      <workItem from="1517819042242" duration="8460000" />
+      <workItem from="1517973796628" duration="1733000" />
+      <workItem from="1519727772567" duration="304000" />
+      <workItem from="1519740136776" duration="189000" />
+      <workItem from="1519787663703" duration="1866000" />
+      <workItem from="1519825796329" duration="997000" />
+      <workItem from="1519869858650" duration="301000" />
+      <workItem from="1519871163065" duration="6086000" />
+      <workItem from="1519962181511" duration="757000" />
+      <workItem from="1520387288658" duration="364000" />
+      <workItem from="1520387850995" duration="8000" />
+      <workItem from="1520387915912" duration="446000" />
     </task>
     <servers />
   </component>
@@ -590,7 +513,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123214000" />
+    <option name="totallyTimeSpent" value="140418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1318" extended-state="6" />
@@ -604,19 +527,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3816132" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33069083" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37987858" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33044234" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17278157" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18088737" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6444059" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6444059" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -645,10 +568,10 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3816132" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33069083" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17278157" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37987858" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33044234" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18088737" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -696,7 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -719,20 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="63" lean-forward="false" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="18" column="102" lean-forward="false" selection-start-line="18" selection-start-column="102" selection-end-line="18" selection-end-column="102" />
         </state>
       </provider>
     </entry>
@@ -768,21 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockAfterAcquireVariable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1772">
-          <caret line="117" column="34" lean-forward="false" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#593#601#0" expanded="false" />
-            <element signature="e#2755#2763#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -790,79 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
           <caret line="45" column="25" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="25" />
-          <folding>
-            <marker date="1516107620115" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1516107620115" expanded="false" signature="139:352" ph="..." />
-            <marker date="1516107620115" expanded="true" signature="572:579" ph="{}" />
-            <marker date="1516107620115" expanded="false" signature="619:630" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="642:648" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="742:749" ph="{}" />
-            <marker date="1516107620115" expanded="false" signature="790:801" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="828:834" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="867:878" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="891:897" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="942:953" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="966:972" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1016:1027" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1040:1046" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1085:1096" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1111:1117" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1163:1174" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1187:1193" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1227:1238" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1288:1294" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1332:1343" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1365:1371" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1401:1412" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1433:1439" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="1491:1561" ph="{...}" />
-            <marker date="1516107620115" expanded="false" signature="1589:1600" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1609:1615" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="1649:1660" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="1738:1744" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="1792:2020" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="2058:2065" ph="{}" />
-            <marker date="1516107620115" expanded="false" signature="2153:2164" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="2177:2183" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="2272:2283" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="2309:2315" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="2353:2364" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="2387:2393" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="2427:2518" ph="{...}" />
-            <marker date="1516107620115" expanded="false" signature="2550:2561" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="2596:2602" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="2638:3099" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="3141:3695" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="3733:4037" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="4070:4648" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="4688:4937" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="5001:5097" ph="{...}" />
-            <marker date="1516107620115" expanded="false" signature="5170:5181" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5211:5217" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5264:5275" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5303:5309" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5339:5350" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5375:5381" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5428:5439" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5491:5497" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5526:5537" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5554:5560" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5595:5606" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5647:5653" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5688:5699" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5740:5746" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="5784:5795" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="5839:5845" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="5907:5983" ph="{...}" />
-            <marker date="1516107620115" expanded="false" signature="6028:6039" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="6087:6093" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="6155:6166" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="6219:6225" ph=" }" />
-            <marker date="1516107620115" expanded="false" signature="6261:6272" ph=" { " />
-            <marker date="1516107620115" expanded="false" signature="6310:6316" ph=" }" />
-            <marker date="1516107620115" expanded="true" signature="6382:6451" ph="{...}" />
-            <marker date="1516107620115" expanded="true" signature="6505:6757" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -870,7 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="72" column="52" lean-forward="true" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -885,7 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -893,10 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <marker date="1516107620115" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1516107620115" expanded="false" signature="148:285" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -904,7 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -912,9 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="74" lean-forward="true" selection-start-line="12" selection-start-column="74" selection-end-line="12" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,49 +732,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
           <caret line="25" column="82" lean-forward="false" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/testasd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/asdas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/pattern/Pattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/testasd.java" />
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/asdas.java" />
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/PatternType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/ReadWriteNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -972,34 +748,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/DistanceBasedSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search.fxml" />
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/DistanceBasedSearch.java" />
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/sequence/Sequence.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-142">
           <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,23 +764,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="96" column="88" lean-forward="false" selection-start-line="96" selection-start-column="88" selection-end-line="96" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/BFSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/BFSearch.java" />
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/Node.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1031,7 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1039,71 +786,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/PatternDistanceBasedSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/ProduceSequenceRandomly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/search/PatternDistanceBasedSearch.java" />
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/ProduceSequenceRandomly.java" />
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/PatternTypeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/CaculateRunNum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="36" lean-forward="false" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/search/asd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/CaculateRunNum.java" />
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/search/asd.java" />
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/pattern/MemoryAccessPair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,7 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1119,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="16" column="93" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,7 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="274" column="11" lean-forward="false" selection-start-line="274" selection-start-column="11" selection-end-line="274" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1135,22 +832,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockAfterAcquireVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-772">
+          <caret line="117" column="34" lean-forward="false" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="53" column="11" lean-forward="true" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
+        <state relative-caret-position="391">
+          <caret line="17" column="39" lean-forward="false" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/pattern/Pattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-529">
+          <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/entity/ReadWriteNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1610">
+          <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="61" selection-end-line="80" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="33" column="104" lean-forward="false" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="60" column="15" lean-forward="false" selection-start-line="60" selection-start-column="15" selection-end-line="60" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2438#2439#0" expanded="true" />
-            <element signature="e#2476#2477#0" expanded="true" />
-            <element signature="e#2516#2517#0" expanded="true" />
-            <element signature="e#2559#2560#0" expanded="true" />
-            <element signature="e#2596#2597#0" expanded="true" />
-            <element signature="e#2636#2637#0" expanded="true" />
           </folding>
         </state>
       </provider>

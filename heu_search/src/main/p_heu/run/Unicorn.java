@@ -14,7 +14,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Unicorn {
-    public static void main(String[] args) {
+    //原来是main函数
+    public static List<PatternCounter> m() {
         List<PatternCounter> patternCounters = new ArrayList<>();
         for (int i = 0; i < 5; ++i) {
             String[] str = new String[]{
@@ -52,7 +53,11 @@ public class Unicorn {
                 return Double.compare(r1, r2);
             }
         });
-        System.out.println(patternCounters);
+//        System.out.println(patternCounters);
+        for(PatternCounter p : patternCounters){
+            System.out.println(p);
+        }
+        return patternCounters;
     }
 
     public static class PatternCounter {

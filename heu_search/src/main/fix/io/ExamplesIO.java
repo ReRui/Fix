@@ -16,6 +16,10 @@ public class ExamplesIO {
         InsertCode.insert(endLine, "}", filePath);
     }
 
+    public void addVolatileDefine(int line, String volatileName,String filePath){
+        InsertCode.insert(line,volatileName,filePath);
+    }
+
     public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath){
         String changeFilePath = "";
         File file = new File(dirPath);
