@@ -16,8 +16,19 @@ public class ExamplesIO {
         InsertCode.insert(endLine, "}", filePath);
     }
 
+    //添加信号量的定义
     public void addVolatileDefine(int line, String volatileName,String filePath){
         InsertCode.insert(line,volatileName,filePath);
+    }
+
+    //添加信号量为true
+    public void addVolatileToTrue(int line, String filePath){
+        InsertCode.insert(line,"flag = true;",filePath);
+    }
+
+    //添加信号量判断
+    public void addVolatileIf(int line, String filePath){
+        InsertCode.insert(line,"if(flag)",filePath);
     }
 
     public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath){

@@ -21,5 +21,7 @@ public class Test {
         StringBuffer stringBuffer = new StringBuffer(src);
         String result = stringBuffer.insert(0,"lhr").toString();
         System.out.println(result);
+        System.out.println("-----------");
+        System.out.println(stringBuffer);
     }
 }

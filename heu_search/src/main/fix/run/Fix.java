@@ -55,17 +55,37 @@ public class Fix {
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
-        System.out.println("-------------");
-        //得到变量位置
-        String position = patternCounter.getNodes()[0].getPosition();
-        System.out.println(position);
-        String[] positionArg = position.split(":");
-        int flagDefineLocation = Integer.parseInt(positionArg[1]);
-        System.out.println(flagDefineLocation);
-        //添加信号量的定义
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
-//        examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");
+        orderViolation(patternCounter);
 
+    }
+
+    //修复顺序违背
+    private static void orderViolation(Pattern patternCounter) {
+        System.out.println("-------------");
+        //得到pattern中较小的行数
+        int flagDefineLocation = Integer.MAX_VALUE;//flag应该在哪行定义
+        int flagAssertLocation = Integer.MIN_VALUE;//flag应该在那行判断
+        for(int i = 0; i < 2;i++){
+            String position = patternCounter.getNodes()[i].getPosition();
+            System.out.println(position);
+            String[] positionArg = position.split(":");
+            flagDefineLocation = Integer.parseInt(positionArg[1]) < flagDefineLocation ? Integer.parseInt(positionArg[1]):flagDefineLocation;
+            flagAssertLocation = Integer.parseInt(positionArg[1]) > flagAssertLocation ? Integer.parseInt(positionArg[1]):flagAssertLocation;
+
+        }
+
+        System.out.println(flagDefineLocation);
+        System.out.println(flagAssertLocation);
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
+
+        //添加信号为true的那条语句
+        examplesIO.addVolatileToTrue(flagDefineLocation,dirPath + "\\Account.java");//待修订
+
+        //添加信号量的定义
+        examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");//待修订
+
+        //添加信号量判断
+        examplesIO.addVolatileIf(flagAssertLocation,dirPath + "\\Account.java");//待修订
     }
 
 }
