@@ -57,10 +57,15 @@ public class Fix {
     private static void fixPatternOneToThree(Pattern patternCounter) {
         System.out.println("-------------");
         //得到变量位置
-        System.out.println(patternCounter.getNodes()[0].getPosition());
-        //添加信号量
+        String position = patternCounter.getNodes()[0].getPosition();
+        System.out.println(position);
+        String[] positionArg = position.split(":");
+        int flagDefineLocation = Integer.parseInt(positionArg[1]);
+        System.out.println(flagDefineLocation);
+        //添加信号量的定义
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
-        examplesIO.addVolatileDefine(16,"flag",dirPath + "\\Account.java");
+//        examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");
+
     }
 
 }
