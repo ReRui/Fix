@@ -28,7 +28,8 @@ public class ExamplesIO {
 
     //添加信号量判断
     public void addVolatileIf(int line, String filePath){
-        InsertCode.insert(line,"if(flag)",filePath);
+        InsertCode.insert(line,"if(flag){",filePath);
+        InsertCode.insert(line + 1,"}",filePath);
     }
 
     public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath){

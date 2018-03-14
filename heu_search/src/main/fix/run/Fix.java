@@ -206,13 +206,14 @@ public class Fix {
         System.out.println(flagAssertLocation);
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
 
-        //添加信号为true的那条语句
-        examplesIO.addVolatileToTrue(flagDefineLocation,dirPath + "\\Account.java");//待修订
+        //添加信号为true的那条语句，那条语句应该在定义的后一行
+        examplesIO.addVolatileToTrue(flagDefineLocation + 1,dirPath + "\\Account.java");//待修订
 
         //添加信号量的定义
         examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");//待修订
 
-        //添加信号量判断
+        //添加信号量判断,
+        //待定，只执行一句我就加了分号，这样是否可行？
         examplesIO.addVolatileIf(flagAssertLocation,dirPath + "\\Account.java");//待修订
     }
 
