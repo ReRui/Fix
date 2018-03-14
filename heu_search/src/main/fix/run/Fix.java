@@ -19,6 +19,7 @@ public class Fix {
         System.out.println("**********");
         System.out.println(p.get(1).getPattern().getNodes()[0]);
         System.out.println(p.get(1).getPattern().getNodes()[1]);
+        System.out.println(p.get(1).getPattern().getNodes().length);
         divideByLength(p.get(1));
     }
 
@@ -84,13 +85,24 @@ public class Fix {
             System.out.println(position);
             String[] positionArg = position.split(":");
             arr[i] = Integer.parseInt(positionArg[1]);
+
+            System.out.println("testLHR" + position);
+
+            //判断此处有没有锁
+            CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
+            if(checkWhetherLocked.check(patternCounter.getNodes()[i].getField(),position)){
+                System.out.println("getField :" + patternCounter.getNodes()[i].getField() + "position : " + position);
+                arr[i] = 1000;
+            }
         }
         Arrays.sort(arr);
         System.out.println("first :" + arr[0] + "lastLoc : " + arr[2]);
 
         //待定，此处只是将前两处加一个锁
-        examplesIO.addLockToOneVar(arr[0],arr[1] + 1,"obj",dirPath + "\\Account.java");
-        examplesIO.addLockToOneVar(arr[2],arr[2] + 1,"obj",dirPath + "\\Account.java");
+        if(arr[0] < 1000 && arr[1] < 1000)
+            examplesIO.addLockToOneVar(arr[0],arr[1] + 1,"obj",dirPath + "\\Account.java");
+        if(arr[2] < 1000)
+            examplesIO.addLockToOneVar(arr[2],arr[2] + 1,"obj",dirPath + "\\Account.java");
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {

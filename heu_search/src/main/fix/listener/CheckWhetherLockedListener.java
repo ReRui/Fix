@@ -17,6 +17,13 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 //    private String fieldLocTwo;// 变量的具体位置二
     private boolean checkFlag = false;
 
+    //此时正在保护共享变量的锁名
+    private String protectLockName;
+
+    public String getProtectLockName() {
+        return protectLockName;
+    }
+
     public boolean isCheckFlag() {
         return checkFlag;
     }
@@ -34,6 +41,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
     public void objectLocked(VM vm, ThreadInfo currentThread, ElementInfo lockedObject) {
 //        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
         LocKSequence locKSequence = new LocKSequence(lockedObject.toString(),currentThread.getName());
+//        System.out.println("输出加锁:" + lockedObject.);
         lockVector.add(locKSequence);
     }
 
@@ -53,7 +61,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
             System.out.println("hah"+className[className.length -  1]);
             if(className[className.length -  1].contains("Test") *//*&& lockVector.size() > 0*//*){
                 System.out.println("里面的是" +ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());//输出锁中的所有信息
-                System.out.println(lockVector.get(lockVector.size() - 1).lockName + "结果v");
+                System.out.println(lockVector.get(lockVector.size() - 1).protectLockName + "结果v");
                 System.out.println(lockVector.size());
             }*/
 //            System.out.println("里面的是" +ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());//输出锁中的所有信息
@@ -77,10 +85,11 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
                 //寻找当前锁中有没有需要寻找的变量
                 for(LockElement le : ls.sequence){
 //                    System.out.println("锁里面的实例:" +le.instance);
-                    //线检查有没变量
+                    //先检查有没变量
                     if(le.field.equals(fieldName) && le.location.equals(fieldLoc)){
 //                        System.out.println("*************" + le.toString());
                         checkFlag = true;
+                        protectLockName = ls.lockName;
                         break;
 //                        System.out.println("1有");
                     }
@@ -95,7 +104,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 /*        LocKSequence unlock = new LocKSequence(unlockedObject.toString(),currentThread.getName());
         lockVector.remove(unlock);
         for(int i = lockVector.size() - 1; i >= 0;i--){
-            if(lockVector.get(i).lockName.equals(unlockedObject.toString()) && lockVector.get(i).threadName.equals(currentThread.getName()))
+            if(lockVector.get(i).protectLockName.equals(unlockedObject.toString()) && lockVector.get(i).threadName.equals(currentThread.getName()))
                 lockVector.remove(i);
         }
         System.out.println("输出释放锁:" + unlockedObject.toString() + "," + currentThread.getName() );

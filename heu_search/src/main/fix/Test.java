@@ -5,6 +5,9 @@ import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
 import fix.io.ExamplesIO;
 import fix.io.InsertCode;
+import fix.listener.CheckWhetherLockedListener;
+import gov.nasa.jpf.Config;
+import gov.nasa.jpf.JPF;
 import org.eclipse.jdt.core.dom.*;
 
 import java.io.BufferedReader;
@@ -17,6 +20,24 @@ import java.util.Vector;
 
 public class Test {
     public static void main(String[] args){
-       String s = "";
+        String[] str = new String[]{
+                "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
+                "+search.class=fix.search.SingleExecutionSearch",
+                ImportPath.projectName + "." + ImportPath.mainClassName
+//                "test.Test"
+        };
+        String variableName = "amount";
+        String variableLoc = "account/Account.java:24";
+
+        Config config = new Config(str);
+        JPF jpf = new JPF(config);
+        CheckWhetherLockedListener checkWhetherLockedListener = new CheckWhetherLockedListener(ImportPath.examplesRootPath + "\\examples\\lock.txt",variableName,variableLoc);
+        jpf.addListener(checkWhetherLockedListener);
+//        LockListener lockListener = new LockListener(ImportPath.examplesRootPath + "\\examples\\lock.txt","test");
+//        jpf.addListener(lockListener);
+        jpf.run();
+        System.out.println(checkWhetherLockedListener.isCheckFlag());
+        System.out.println(checkWhetherLockedListener.getProtectLockName());
+
     }
 }
