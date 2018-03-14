@@ -62,8 +62,6 @@ public class AddLockAfterAcquireVariable {
             String listFile = f.getPath();
             lock(listFile);
         }
-
-
     }
 
     public static void lock(String filePath) {

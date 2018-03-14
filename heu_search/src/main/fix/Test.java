@@ -17,11 +17,6 @@ import java.util.Vector;
 
 public class Test {
     public static void main(String[] args){
-        String src = "int a = 0;";
-        StringBuffer stringBuffer = new StringBuffer(src);
-        String result = stringBuffer.insert(0,"lhr").toString();
-        System.out.println(result);
-        System.out.println("-----------");
-        System.out.println(stringBuffer);
+       String s = "";
     }
 }

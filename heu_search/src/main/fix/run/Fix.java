@@ -7,6 +7,7 @@ import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Fix {
@@ -25,7 +26,7 @@ public class Fix {
     private static void divideByLength(Unicorn.PatternCounter patternCounter) {
         int length = patternCounter.getPattern().getNodes().length;
         if(length == 2){
-            fixPatternOneToThree(patternCounter.getPattern());
+//            fixPatternOneToThree(patternCounter.getPattern());
         }
         else if(length == 3){
             fixPatternFourToEight(patternCounter);
@@ -36,7 +37,23 @@ public class Fix {
     }
 
     private static void fixPatterNineToSeventeen(Unicorn.PatternCounter patternCounter) {
+        addSyncPatternNineToSeventeen(patternCounter.getPattern());
+    }
 
+    private static void addSyncPatternNineToSeventeen(Pattern patternCounter) {
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
+        System.out.println("第四步");
+        int[] arrLoc = new int[4];
+        for(int i = 0;i < 4;i++){
+            String position = patternCounter.getNodes()[i].getPosition();
+            System.out.println(position);
+            String[] positionArg = position.split(":");
+            arrLoc[i] = Integer.parseInt(positionArg[1]);
+        }
+
+        //待定，此处只是排序后将前两个加锁，后两个加锁
+        examplesIO.addLockToOneVar(arrLoc[0],arrLoc[1] + 1,"obj",dirPath + "\\Account.java");
+        examplesIO.addLockToOneVar(arrLoc[2],arrLoc[3] + 1,"obj",dirPath + "\\Account.java");
     }
 
     private static void fixPatternFourToEight(Unicorn.PatternCounter patternCounter) {
@@ -44,23 +61,68 @@ public class Fix {
         //获取读写节点
         ReadWriteNode[] nodesArr = patternCounter.getPattern().getNodes();
 
-        //如果该变量没有加锁则引入一个新锁,并且添加同步
-        if(checkWhetherLocked.check(nodesArr[1].getPosition(),nodesArr[1].getElement())){//j没被加锁
+        System.out.println("第三步");
+        addSyncPatternFourToEight(patternCounter.getPattern());
 
+        /*//如果该变量没有加锁则引入一个新锁,并且添加同步
+        if(checkWhetherLocked.check(nodesArr[1].getPosition(),nodesArr[1].getElement())){//j没被加锁
+            addSyncPatternFourToEight(patternCounter.getPattern());
         }
         //直接添加同步
         else{
 
+        }*/
+
+    }
+
+    //长度为3添加同步
+    private static void addSyncPatternFourToEight(Pattern patternCounter) {
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
+        int[] arr = new int[3];
+        for(int i = 0;i < 3;i++){
+            String position = patternCounter.getNodes()[i].getPosition();
+            System.out.println(position);
+            String[] positionArg = position.split(":");
+            arr[i] = Integer.parseInt(positionArg[1]);
         }
+        Arrays.sort(arr);
+        System.out.println("first :" + arr[0] + "lastLoc : " + arr[2]);
+
+        //待定，此处只是将前两处加一个锁
+        examplesIO.addLockToOneVar(arr[0],arr[1] + 1,"obj",dirPath + "\\Account.java");
+        examplesIO.addLockToOneVar(arr[2],arr[2] + 1,"obj",dirPath + "\\Account.java");
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
-        orderViolation(patternCounter);
+//        addSignal(patternCounter);
+
+        //为长度为2的pattern添加同步
+        addSyncPatternOneToThree(patternCounter);
+    }
+
+
+    //对长度为2的pattern添加同步
+    private static void addSyncPatternOneToThree(Pattern patternCounter) {
+
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
+
+        for(int i = 0; i < 2;i++){
+            String position = patternCounter.getNodes()[i].getPosition();
+            System.out.println(position);
+            String[] positionArg = position.split(":");
+
+            //加锁
+            examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]),Integer.parseInt(positionArg[1]) + 1,"obj",dirPath + "\\Account.java");//待定
+
+        }
+
+        System.out.println(dirPath + "=============");
+
 
     }
 
-    //修复顺序违背
-    private static void orderViolation(Pattern patternCounter) {
+    //添加信号量修复顺序违背
+    private static void addSignal(Pattern patternCounter) {
         System.out.println("-------------");
         //得到pattern中较小的行数
         int flagDefineLocation = Integer.MAX_VALUE;//flag应该在哪行定义
