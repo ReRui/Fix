@@ -1,6 +1,7 @@
 package fix;
 
 import fix.analyzefile.AcquireVariableInSameLock;
+import fix.analyzefile.CheckWhetherLocked;
 import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
 import fix.io.ExamplesIO;
@@ -27,7 +28,7 @@ public class Test {
 //                "test.Test"
         };
         String variableName = "amount";
-        String variableLoc = "account/Account.java:24";
+        String variableLoc = "account/Account.java:32";
 
         Config config = new Config(str);
         JPF jpf = new JPF(config);
@@ -39,5 +40,7 @@ public class Test {
         System.out.println(checkWhetherLockedListener.isCheckFlag());
         System.out.println(checkWhetherLockedListener.getProtectLockName());
 
+
+//        System.out.println("true?" + CheckWhetherLocked.check("amount","account/Account.java:32"));
     }
 }

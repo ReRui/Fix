@@ -86,17 +86,17 @@ public class Fix {
             String[] positionArg = position.split(":");
             arr[i] = Integer.parseInt(positionArg[1]);
 
-            System.out.println("testLHR" + position);
 
             //判断此处有没有锁
-            CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
-            if(checkWhetherLocked.check(patternCounter.getNodes()[i].getField(),position)){
-                System.out.println("getField :" + patternCounter.getNodes()[i].getField() + "position : " + position);
+            String varrr = patternCounter.getNodes()[i].getField();
+            System.out.println("getField :" + varrr + ",position : " + position);
+            System.out.println("true?" + CheckWhetherLocked.check("account/Account.java:24","amount"));
+            if(CheckWhetherLocked.check(position,varrr)){
                 arr[i] = 1000;
             }
         }
         Arrays.sort(arr);
-        System.out.println("first :" + arr[0] + "lastLoc : " + arr[2]);
+        System.out.println("arr[0] :" + arr[0] + "arr[1]" + arr[1] + "arr[2] : " + arr[2]);
 
         //待定，此处只是将前两处加一个锁
         if(arr[0] < 1000 && arr[1] < 1000)
