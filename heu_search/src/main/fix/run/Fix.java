@@ -7,6 +7,7 @@ import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +18,12 @@ public class Fix {
     public static void main(String[] args){
         List<Unicorn.PatternCounter> p = Unicorn.m();
         System.out.println("**********");
-        System.out.println(p.get(1).getPattern().getNodes()[0]);
-        System.out.println(p.get(1).getPattern().getNodes()[1]);
-        System.out.println(p.get(1).getPattern().getNodes().length);
+        if(p.get(1).getPattern().getNodes().length > 2){
+            System.out.println(p.get(1).getPattern().getNodes()[0]);
+            System.out.println(p.get(1).getPattern().getNodes()[1]);
+            System.out.println(p.get(1).getPattern().getNodes()[2]);
+        }
+
         divideByLength(p.get(1));
     }
 
@@ -80,29 +84,61 @@ public class Fix {
     private static void addSyncPatternFourToEight(Pattern patternCounter) {
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
         int[] arr = new int[3];
+
+
+        //根据线程将三个结点分为两个list
+        List<ReadWriteNode> threadA = new ArrayList<ReadWriteNode>();//线程A的结点
+        List<ReadWriteNode> threadB = new ArrayList<ReadWriteNode>();//线程B的结点
+        String threadName = "";
         for(int i = 0;i < 3;i++){
-            String position = patternCounter.getNodes()[i].getPosition();
-            System.out.println(position);
-            String[] positionArg = position.split(":");
-            arr[i] = Integer.parseInt(positionArg[1]);
-
-
-            //判断此处有没有锁
-            String varrr = patternCounter.getNodes()[i].getField();
-            System.out.println("getField :" + varrr + ",position : " + position);
-            System.out.println("true?" + CheckWhetherLocked.check("account/Account.java:24","amount"));
-            if(CheckWhetherLocked.check(position,varrr)){
-                arr[i] = 1000;
+            ReadWriteNode node = patternCounter.getNodes()[i];
+            if(i == 0){//把第一个结点放入A的list
+                threadName = node.getThread();
+                threadA.add(node);
+            }else{
+                if(threadName.equals(node.getThread())){//线程相同，放入同一个list
+                    threadA.add(node);
+                }else{//不同就放入另一个list
+                    threadB.add(node);
+                }
             }
         }
-        Arrays.sort(arr);
-        System.out.println("arr[0] :" + arr[0] + "arr[1]" + arr[1] + "arr[2] : " + arr[2]);
 
-        //待定，此处只是将前两处加一个锁
-        if(arr[0] < 1000 && arr[1] < 1000)
-            examplesIO.addLockToOneVar(arr[0],arr[1] + 1,"obj",dirPath + "\\Account.java");
-        if(arr[2] < 1000)
-            examplesIO.addLockToOneVar(arr[2],arr[2] + 1,"obj",dirPath + "\\Account.java");
+
+        int firstLoc = 0,lastLoc = 0;
+        //对A的list加锁
+        for(int i =0; i < threadA.size(); i++){
+            int poi = Integer.parseInt(threadA.get(i).getPosition().split(":")[1]);
+            if(i == 0){
+                firstLoc = poi;
+                lastLoc = firstLoc;
+            }else{
+                if(poi < firstLoc){
+                    firstLoc = poi;
+                }else{
+                    lastLoc = poi;
+                }
+            }
+        }
+        System.out.println("a" + firstLoc + ",b" + lastLoc);
+        examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+
+        //对B的list加锁
+        for(int i =0; i < threadB.size(); i++){
+            int poi = Integer.parseInt(threadB.get(i).getPosition().split(":")[1]);
+            if(i == 0){
+                firstLoc = poi;
+                lastLoc = firstLoc;
+            }else{
+                if(poi < firstLoc){
+                    firstLoc = poi;
+                }else{
+                    lastLoc = poi;
+                }
+            }
+        }
+        System.out.println("a" + firstLoc + ",b" + lastLoc);
+        examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
