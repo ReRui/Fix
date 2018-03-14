@@ -8,7 +8,6 @@ import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Fix {
@@ -17,11 +16,11 @@ public class Fix {
 
     public static void main(String[] args){
         List<Unicorn.PatternCounter> p = Unicorn.m();
-        System.out.println("**********");
-        if(p.get(1).getPattern().getNodes().length > 2){
+        if(p.get(1).getPattern().getNodes().length == 2){
+            System.out.println("dayu 2");
             System.out.println(p.get(1).getPattern().getNodes()[0]);
             System.out.println(p.get(1).getPattern().getNodes()[1]);
-            System.out.println(p.get(1).getPattern().getNodes()[2]);
+//            System.out.println(p.get(1).getPattern().getNodes()[2]);
         }
 
         divideByLength(p.get(1));
@@ -31,10 +30,10 @@ public class Fix {
     private static void divideByLength(Unicorn.PatternCounter patternCounter) {
         int length = patternCounter.getPattern().getNodes().length;
         if(length == 2){
-//            fixPatternOneToThree(patternCounter.getPattern());
+            fixPatternOneToThree(patternCounter.getPattern());
         }
         else if(length == 3){
-            fixPatternFourToEight(patternCounter);
+//            fixPatternFourToEight(patternCounter);
         }
         else if(length == 4){
             fixPatterNineToSeventeen(patternCounter);
@@ -106,9 +105,14 @@ public class Fix {
 
 
         int firstLoc = 0,lastLoc = 0;
+        boolean threadAHasLock = false, threadBHasLock = false;
         //对A的list加锁
         for(int i =0; i < threadA.size(); i++){
-            int poi = Integer.parseInt(threadA.get(i).getPosition().split(":")[1]);
+            ReadWriteNode node = threadA.get(i);
+            if(CheckWhetherLocked.check(node.getPosition(),node.getField())){//检查是否存在锁
+                threadAHasLock = true;
+            }
+            int poi = Integer.parseInt(node.getPosition().split(":")[1]);
             if(i == 0){
                 firstLoc = poi;
                 lastLoc = firstLoc;
@@ -121,11 +125,21 @@ public class Fix {
             }
         }
         System.out.println("a" + firstLoc + ",b" + lastLoc);
-        examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+        System.out.println(threadAHasLock);
+
+        if(threadAHasLock){
+
+        }else{
+            examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+        }
 
         //对B的list加锁
         for(int i =0; i < threadB.size(); i++){
-            int poi = Integer.parseInt(threadB.get(i).getPosition().split(":")[1]);
+            ReadWriteNode node = threadB.get(i);
+            if(CheckWhetherLocked.check(node.getPosition(),node.getField())){//检查是否存在锁
+                threadBHasLock = true;
+            }
+            int poi = Integer.parseInt(node.getPosition().split(":")[1]);
             if(i == 0){
                 firstLoc = poi;
                 lastLoc = firstLoc;
@@ -138,14 +152,19 @@ public class Fix {
             }
         }
         System.out.println("a" + firstLoc + ",b" + lastLoc);
-        examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+        System.out.println(threadBHasLock);
+        if(threadBHasLock){
+
+        }else{
+            examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+        }
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
-//        addSignal(patternCounter);
+        addSignal(patternCounter);
 
         //为长度为2的pattern添加同步
-        addSyncPatternOneToThree(patternCounter);
+//        addSyncPatternOneToThree(patternCounter);
     }
 
 
@@ -171,7 +190,6 @@ public class Fix {
 
     //添加信号量修复顺序违背
     private static void addSignal(Pattern patternCounter) {
-        System.out.println("-------------");
         //得到pattern中较小的行数
         int flagDefineLocation = Integer.MAX_VALUE;//flag应该在哪行定义
         int flagAssertLocation = Integer.MIN_VALUE;//flag应该在那行判断
