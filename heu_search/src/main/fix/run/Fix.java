@@ -16,11 +16,11 @@ public class Fix {
 
     public static void main(String[] args){
         List<Unicorn.PatternCounter> p = Unicorn.m();
-        if(p.get(1).getPattern().getNodes().length == 2){
+        if(p.get(1).getPattern().getNodes().length > 2){
             System.out.println("dayu 2");
             System.out.println(p.get(1).getPattern().getNodes()[0]);
             System.out.println(p.get(1).getPattern().getNodes()[1]);
-//            System.out.println(p.get(1).getPattern().getNodes()[2]);
+            System.out.println(p.get(1).getPattern().getNodes()[2]);
         }
 
         divideByLength(p.get(1));
@@ -30,10 +30,10 @@ public class Fix {
     private static void divideByLength(Unicorn.PatternCounter patternCounter) {
         int length = patternCounter.getPattern().getNodes().length;
         if(length == 2){
-            fixPatternOneToThree(patternCounter.getPattern());
+//            fixPatternOneToThree(patternCounter.getPattern());
         }
         else if(length == 3){
-//            fixPatternFourToEight(patternCounter);
+            fixPatternFourToEight(patternCounter);
         }
         else if(length == 4){
             fixPatterNineToSeventeen(patternCounter);
@@ -138,6 +138,7 @@ public class Fix {
             ReadWriteNode node = threadB.get(i);
             if(CheckWhetherLocked.check(node.getPosition(),node.getField())){//检查是否存在锁
                 threadBHasLock = true;
+//                System.out.println("锁名称：" + lockName(node));
             }
             int poi = Integer.parseInt(node.getPosition().split(":")[1]);
             if(i == 0){
@@ -158,6 +159,13 @@ public class Fix {
         }else{
             examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
         }
+    }
+
+    //输出锁的名称
+    //此处根据pattern读到锁的那行，然后使用字符串匹配
+    private static String lockName(ReadWriteNode node) {
+        String line = "";
+        return line;
     }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
@@ -206,11 +214,12 @@ public class Fix {
         System.out.println(flagAssertLocation);
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
 
+        //添加信号量的定义
+        examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");//待修订
+
         //添加信号为true的那条语句，那条语句应该在定义的后一行
         examplesIO.addVolatileToTrue(flagDefineLocation + 1,dirPath + "\\Account.java");//待修订
 
-        //添加信号量的定义
-        examplesIO.addVolatileDefine(flagDefineLocation,"volatile bool flag = false;",dirPath + "\\Account.java");//待修订
 
         //添加信号量判断,
         //待定，只执行一句我就加了分号，这样是否可行？

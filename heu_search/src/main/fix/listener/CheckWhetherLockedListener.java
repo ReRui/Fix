@@ -67,7 +67,9 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 //            System.out.println("里面的是" +ei.toString() + "," + fi.getName() + "," + currentThread.getName() + "," + fins.getFileLocation());//输出锁中的所有信息
             for(int i = lockVector.size() - 1; i >= 0; i--){//从后往前找
                 LocKSequence ls = lockVector.get(i);
+//                System.out.println("测试锁名字:" + ls.lockName);
                 if(ls.lockName.equals(ei.toString()) && currentThread.getName().equals(ls.threadName)){
+//                    System.out.println("测试锁位置:" + res);
                     ls.sequence.add(new LockElement(ei.toString(), fi.getName(), currentThread.getName(), fins.getFileLocation()));
                     break;
                 }
