@@ -7,6 +7,7 @@ import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,11 +107,13 @@ public class Fix {
 
         int firstLoc = 0,lastLoc = 0;
         boolean threadAHasLock = false, threadBHasLock = false;
+//        String lockNameA = "";
         //对A的list加锁
         for(int i =0; i < threadA.size(); i++){
             ReadWriteNode node = threadA.get(i);
             if(CheckWhetherLocked.check(node.getPosition(),node.getField())){//检查是否存在锁
                 threadAHasLock = true;
+//                lockNameA = lockName(node);
             }
             int poi = Integer.parseInt(node.getPosition().split(":")[1]);
             if(i == 0){
@@ -129,6 +132,13 @@ public class Fix {
 
         if(threadAHasLock){
 
+            /*for(int i =0; i < threadA.size(); i++){
+                ReadWriteNode node = threadA.get(i);
+                int poi = Integer.parseInt(node.getPosition().split(":")[1]);
+                if(!CheckWhetherLocked.check(node.getPosition(),node.getField())) {//检查是否存在锁
+                    examplesIO.addLockToOneVar(poi,poi + 1,lockNameA,dirPath + "\\Account.java");//没加锁的加上
+                }
+            }*/
         }else{
             examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
         }
@@ -161,12 +171,18 @@ public class Fix {
         }
     }
 
-    //输出锁的名称
+   /* //输出锁的名称
     //此处根据pattern读到锁的那行，然后使用字符串匹配
     private static String lockName(ReadWriteNode node) {
-        String line = "";
-        return line;
-    }
+        int number = Integer.parseInt(node.getPosition().split(":")[1]);
+        String name = "";
+        try {
+            name = YaoShan.shan(number);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }*/
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
         addSignal(patternCounter);
