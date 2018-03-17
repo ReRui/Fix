@@ -168,8 +168,8 @@ public class Fix {
         }else{
             //对每个变量进行判断，知道它需要加何种锁
             String lockName = "";
-            for(int i = 0; i < threadA.size(); i++){
-                ReadWriteNode node = threadA.get(i);
+            for(int i = 0; i < threadB.size(); i++){
+                ReadWriteNode node = threadB.get(i);
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
