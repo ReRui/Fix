@@ -7,7 +7,7 @@ import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,15 +132,14 @@ public class Fix {
 
         if(threadAHasLock){
 
-            /*for(int i =0; i < threadA.size(); i++){
-                ReadWriteNode node = threadA.get(i);
-                int poi = Integer.parseInt(node.getPosition().split(":")[1]);
-                if(!CheckWhetherLocked.check(node.getPosition(),node.getField())) {//检查是否存在锁
-                    examplesIO.addLockToOneVar(poi,poi + 1,lockNameA,dirPath + "\\Account.java");//没加锁的加上
-                }
-            }*/
         }else{
-            examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
+            //对每个变量进行判断，知道它需要加何种锁
+            String lockName = "";
+            for(int i = 0; i < threadA.size(); i++){
+                ReadWriteNode node = threadA.get(i);
+                lockName = acquireLockName(node.getPosition());
+            }
+            examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,lockName,dirPath + "\\Account.java");
         }
 
         //对B的list加锁
@@ -167,8 +166,44 @@ public class Fix {
         if(threadBHasLock){
 
         }else{
+            //对每个变量进行判断，知道它需要加何种锁
+            String lockName = "";
+            for(int i = 0; i < threadA.size(); i++){
+                ReadWriteNode node = threadA.get(i);
+                lockName = acquireLockName(node.getPosition());
+            }
             examplesIO.addLockToOneVar(firstLoc,lastLoc + 1,"obj",dirPath + "\\Account.java");
         }
+    }
+
+    //读到那一行，然后对字符串处理
+    private static String acquireLockName(String position) {
+        BufferedReader br = null;
+        String read = "";//用来读
+        String result = "";//用来处理
+        int line = 0;
+        int poi = Integer.parseInt(position.split(":")[1]);
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dirPath + "\\Account.java")),"UTF-8"));
+            while (((read = br.readLine()) != null)) {
+                line++;
+                if(line == poi){//找到哪一行
+                    String[] res = read.split("\\.");
+                    if(res.length > 1) {
+                        result = res[0];
+                    }
+                    else{
+                        result = "this";
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result.trim();
     }
 
    /* //输出锁的名称
