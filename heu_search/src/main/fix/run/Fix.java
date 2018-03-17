@@ -17,14 +17,14 @@ public class Fix {
 
     public static void main(String[] args){
         List<Unicorn.PatternCounter> p = Unicorn.m();
-        if(p.get(1).getPattern().getNodes().length > 2){
+        //拿到第一个元素
+        System.out.println(p.get(0).getPattern().getNodes()[0]);
+        System.out.println(p.get(0).getPattern().getNodes()[1]);
+        if(p.get(0).getPattern().getNodes().length > 2){
             System.out.println("dayu 2");
-            System.out.println(p.get(1).getPattern().getNodes()[0]);
-            System.out.println(p.get(1).getPattern().getNodes()[1]);
-            System.out.println(p.get(1).getPattern().getNodes()[2]);
+            System.out.println(p.get(0).getPattern().getNodes()[2]);
         }
-
-        divideByLength(p.get(1));
+        divideByLength(p.get(0));
     }
 
     //根据pattern的长度执行不同的fix策略

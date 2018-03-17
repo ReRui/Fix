@@ -1,5 +1,6 @@
 package p_heu.run;
 
+import fix.analyzefile.RecordSequence;
 import fix.entity.ImportPath;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -14,9 +15,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Unicorn {
+    //测试用的main函数
+    public static void main(String[] args) {
+        Unicorn.m();
+    }
+
     //原来是main函数
     public static List<PatternCounter> m() {
         List<PatternCounter> patternCounters = new ArrayList<>();
+        boolean recordSeq = true;
         for (int i = 0; i < 5; ++i) {
             String[] str = new String[]{
                     "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
@@ -32,7 +39,11 @@ public class Unicorn {
 
             jpf.addListener(listener);
             jpf.run();
-//            System.out.println(listener.getSequence() + "------------");
+//            System.out.println(listener.getSequence().getNodes() + "getNodes");
+            if(recordSeq){//只记录第一次
+                RecordSequence.display(listener);
+                recordSeq = false;
+            }
             Sequence seq = listener.getSequence();
             outer:
             for (Pattern pattern : seq.getPatterns()) {
@@ -48,13 +59,13 @@ public class Unicorn {
         Collections.sort(patternCounters, new Comparator<PatternCounter>() {
             @Override
             public int compare(PatternCounter o1, PatternCounter o2) {
-                double r1 = (double)o1.getSuccessCount() / (o1.getSuccessCount() + o1.getFailCount());
-                double r2 = (double)o2.getSuccessCount() / (o2.getSuccessCount() + o2.getFailCount());
+                double r1 = (double) o1.getSuccessCount() / (o1.getSuccessCount() + o1.getFailCount());
+                double r2 = (double) o2.getSuccessCount() / (o2.getSuccessCount() + o2.getFailCount());
                 return Double.compare(r1, r2);
             }
         });
-//        System.out.println(patternCounters);
-        for(PatternCounter p : patternCounters){
+
+        for (PatternCounter p : patternCounters) {
             System.out.println(p);
         }
         return patternCounters;
@@ -82,8 +93,7 @@ public class Unicorn {
             if (result) {
                 successCount = 1;
                 failCount = 0;
-            }
-            else {
+            } else {
                 successCount = 0;
                 failCount = 1;
             }
@@ -92,8 +102,7 @@ public class Unicorn {
         public void addOne(boolean result) {
             if (result) {
                 successCount += 1;
-            }
-            else {
+            } else {
                 failCount += 1;
             }
         }
