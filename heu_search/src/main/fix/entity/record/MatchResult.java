@@ -1,5 +1,7 @@
 package fix.entity.record;
 
+import p_heu.entity.ReadWriteNode;
+
 public class MatchResult {
     boolean flag = false;//表示是否匹配
     int index = -1;//表示是第几个匹配

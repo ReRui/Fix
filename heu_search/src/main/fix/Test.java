@@ -8,12 +8,12 @@ import java.util.List;
 
 public class Test {
 
-    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
-
     public static void main(String[] args) throws IOException {
         List list = new ArrayList();
         list.add(1);
-        System.out.println(list.contains(2));
+        list.add(2);
+        System.out.println(list.indexOf(2));
+        System.out.println(list.size());
     }
 
 }

@@ -64,4 +64,28 @@ public class RecordSequence {
         }
         return matchResult;
     }
+
+    public static boolean isLast(ReadWriteNode readWriteNode) {
+        for(int i = 0;i < nodeSequenceList.size(); i++){
+            NodeSequence nodeS = nodeSequenceList.get(i);
+            if(nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition()) && nodeS.getThread().equals(readWriteNode.getThread())) {
+                int index = nodeS.getIdList().indexOf(readWriteNode.getId());
+                if((index + 1) == nodeS.getIdList().size())
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isFirst(ReadWriteNode readWriteNode) {
+        for(int i = 0;i < nodeSequenceList.size(); i++){
+            NodeSequence nodeS = nodeSequenceList.get(i);
+            if(nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition()) && nodeS.getThread().equals(readWriteNode.getThread())) {
+                int index = nodeS.getIdList().indexOf(readWriteNode.getId());
+                if(index == 0)
+                    return true;
+            }
+        }
+        return false;
+    }
 }

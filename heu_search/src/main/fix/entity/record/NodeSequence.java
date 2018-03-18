@@ -45,4 +45,14 @@ public class NodeSequence {
     public List<Integer> getIdList() {
         return idList;
     }
+
+    public boolean isFirst(){
+
+        return false;
+    }
+
+    public boolean isLast(){
+
+        return false;
+    }
 }
