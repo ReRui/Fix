@@ -1,6 +1,7 @@
 package fix.run;
 
 import fix.analyzefile.CheckWhetherLocked;
+import fix.analyzefile.LockPolicyPopularize;
 import fix.analyzefile.RecordSequence;
 import fix.entity.ImportPath;
 import fix.entity.record.MatchResult;
@@ -20,6 +21,7 @@ public class Fix {
     public static void main(String[] args) {
         List<Unicorn.PatternCounter> p = Unicorn.m();
         //拿到第一个元素
+        System.out.println("定位到的pattern");
         System.out.println(p.get(0).getPattern().getNodes()[0]);
         System.out.println(p.get(0).getPattern().getNodes()[1]);
         if (p.get(0).getPattern().getNodes().length > 2) {
@@ -77,15 +79,12 @@ public class Fix {
         else{
 
         }*/
-
     }
 
     //长度为3添加同步
     private static void addSyncPatternFourToEight(Pattern patternCounter) {
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
         int[] arr = new int[3];
-
-
         //根据线程将三个结点分为两个list
         List<ReadWriteNode> threadA = new ArrayList<ReadWriteNode>();//线程A的结点
         List<ReadWriteNode> threadB = new ArrayList<ReadWriteNode>();//线程B的结点
@@ -140,6 +139,11 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            List<String> relevantVariableList = LockPolicyPopularize.relevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
+            System.out.println(firstLoc + "-" + lastLoc + "的相关变量");
+            for(String s : relevantVariableList){
+                System.out.println(s);
+            }
         }
 
         //对B的list加锁
@@ -173,6 +177,11 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, "obj", dirPath + "\\Account.java");
+            List<String> relevantVariableList = LockPolicyPopularize.relevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
+            System.out.println(firstLoc + "-" + lastLoc + "的相关变量");
+            for(String s : relevantVariableList){
+                System.out.println(s);
+            }
         }
     }
 
@@ -244,8 +253,6 @@ public class Fix {
         }
 
         System.out.println(dirPath + "=============");
-
-
     }
 
     //添加信号量修复顺序违背
