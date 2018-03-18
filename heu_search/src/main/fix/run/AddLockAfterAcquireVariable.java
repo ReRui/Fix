@@ -1,9 +1,7 @@
 package fix.run;
 
-import fix.analyzefile.AcquireVariableInSameLock;
 import fix.entity.ImportPath;
 import fix.entity.MatchVariable;
-import fix.io.ExamplesIO;
 import fix.io.InsertCode;
 import org.eclipse.jdt.core.dom.*;
 
@@ -13,11 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
 public class AddLockAfterAcquireVariable {
     static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
-    static Set<String> variableVector = new HashSet<String>();
+    static Set<String> variableSet = new HashSet<String>();
     static String className = "";//类的名字，以后用来比较用
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
@@ -45,11 +42,11 @@ public class AddLockAfterAcquireVariable {
 
     public static void main(String[] args){
 
-        //获取相关变量
+        /*//获取相关变量
         AcquireVariableInSameLock acquireVariableInSameLock = new AcquireVariableInSameLock();
         Vector<String> v = acquireVariableInSameLock.getOneLockfieldVector();
         for (String s : v)
-            variableVector.add(s);
+            variableSet.add(s);
 
         //单例
         ExamplesIO examplesIO = ExamplesIO.getInstance();
@@ -61,10 +58,16 @@ public class AddLockAfterAcquireVariable {
         for(File f : fileArr){
             String listFile = f.getPath();
             lock(listFile);
-        }
+        }*/
+
     }
 
-    public static void lock(String filePath) {
+//    public static void lock(String filePath) {//原来的删除了
+    public static void lock(Set<String> relevantVariabSet) {
+        //得到关联变量
+        for (String s : relevantVariabSet)
+            variableSet.add(s);
+        String filePath = dirPath + "\\Account.java";
         MatchVariable matchVariable = new MatchVariable();
 
         InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
@@ -99,7 +102,7 @@ public class AddLockAfterAcquireVariable {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
 
                     boolean flag = false;
-                    for(String s : variableVector){
+                    for(String s : variableSet){
                         if(s.equals(node.getIdentifier()))
                             flag = true;
                     }
@@ -119,7 +122,7 @@ public class AddLockAfterAcquireVariable {
                                 matchVariable.searchSame(node.getParent());
                             }
                         }
-                        if(matchVariable.equalTarget(variableVector)){
+                        if(matchVariable.equalTarget(variableSet)){
 //                           System.out.println("匹配成功");
 //                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
 //                           System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));

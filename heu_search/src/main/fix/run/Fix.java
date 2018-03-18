@@ -139,11 +139,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
-            List<String> relevantVariableList = LockPolicyPopularize.relevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
-            System.out.println(firstLoc + "-" + lastLoc + "的相关变量");
-            for(String s : relevantVariableList){
-                System.out.println(s);
-            }
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
         }
 
         //对B的list加锁
@@ -177,11 +173,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, "obj", dirPath + "\\Account.java");
-            List<String> relevantVariableList = LockPolicyPopularize.relevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
-            System.out.println(firstLoc + "-" + lastLoc + "的相关变量");
-            for(String s : relevantVariableList){
-                System.out.println(s);
-            }
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
         }
     }
 
@@ -230,7 +222,7 @@ public class Fix {
     private static void fixPatternOneToThree(Pattern patternCounter) {
         if (RecordSequence.isLast(patternCounter.getNodes()[0]) || RecordSequence.isFirst(patternCounter.getNodes()[1])) {
             addSignal(patternCounter);
-        } else{
+        } else {
             //为长度为2的pattern添加同步
             addSyncPatternOneToThree(patternCounter);
         }
