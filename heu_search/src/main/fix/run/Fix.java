@@ -202,7 +202,14 @@ public class Fix {
                 if (line == poi) {//找到哪一行
                     String[] res = read.split("\\.");
                     if (res.length > 1) {
-                        result = res[0];
+                        String temp = res[0];
+                        int index = 0;
+                        for (int i = temp.length() - 1; i >= 0; i--) {
+                            if (!((temp.charAt(i) >= 'a' && temp.charAt(i) <= 'z') || (temp.charAt(i) >= 'A' && temp.charAt(i) <= 'Z'))) {//从后往前，找到非字母的字符
+                                index = i;
+                            }
+                        }
+                        result = res[0].substring(index);
                     } else {
                         result = "this";
                     }
