@@ -20,6 +20,7 @@ public class Fix {
 
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
 
+
     public static void main(String[] args) {
         List<Unicorn.PatternCounter> p = Unicorn.m();
         //拿到第一个元素
@@ -30,6 +31,10 @@ public class Fix {
             System.out.println("dayu 2");
             System.out.println(p.get(0).getPattern().getNodes()[2]);
         }
+
+        //拿到该pattern对应的sequence
+        RecordSequence.display(p.get(0).getFirstFailAppearPlace());
+
         //先将项目拷贝到exportExamples
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
 
@@ -293,7 +298,7 @@ public class Fix {
         System.out.println(flagAssertLocation);
 
         //添加信号量的定义
-        examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flag = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
+        examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
 
         //添加信号为true的那条语句，那条语句应该在定义的后一行
         examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订

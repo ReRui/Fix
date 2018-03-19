@@ -23,7 +23,7 @@ public class Unicorn {
     //原来是main函数
     public static List<PatternCounter> m() {
         List<PatternCounter> patternCounters = new ArrayList<>();
-        boolean recordSeq = true;
+
         for (int i = 0; i < 5; ++i) {
             String[] str = new String[]{
                     "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
@@ -40,22 +40,23 @@ public class Unicorn {
             jpf.addListener(listener);
             jpf.run();
 //            System.out.println(listener.getSequence().getNodes() + "getNodes");
-            if(recordSeq){//只记录第一次
-                RecordSequence.display(listener);
-                recordSeq = false;
-            }
+
             Sequence seq = listener.getSequence();
             outer:
             for (Pattern pattern : seq.getPatterns()) {
                 for (PatternCounter p : patternCounters) {
                     if (p.getPattern().isSameExecptThread(pattern)) {
+                        if (!seq.getResult() && p.getFirstFailAppearPlace() == null) {
+                            p.setFirstFailAppearPlace(seq);
+                        }
                         p.addOne(seq.getResult());
                         continue outer;
                     }
                 }
-                patternCounters.add(new PatternCounter(pattern, seq.getResult()));
+                patternCounters.add(new PatternCounter(pattern, seq.getResult(), seq.getResult() ? null : seq));
             }
         }
+
         Collections.sort(patternCounters, new Comparator<PatternCounter>() {
             @Override
             public int compare(PatternCounter o1, PatternCounter o2) {
@@ -75,6 +76,15 @@ public class Unicorn {
         private Pattern pattern;
         private int successCount;
         private int failCount;
+        private Sequence firstFailAppearPlace;
+
+        public Sequence getFirstFailAppearPlace() {
+            return firstFailAppearPlace;
+        }
+
+        public void setFirstFailAppearPlace(Sequence firstFailAppearPlace) {
+            this.firstFailAppearPlace = firstFailAppearPlace;
+        }
 
         public Pattern getPattern() {
             return pattern;
@@ -90,6 +100,19 @@ public class Unicorn {
 
         public PatternCounter(Pattern pattern, boolean result) {
             this.pattern = pattern;
+            this.firstFailAppearPlace = null;
+            if (result) {
+                successCount = 1;
+                failCount = 0;
+            } else {
+                successCount = 0;
+                failCount = 1;
+            }
+        }
+
+        public PatternCounter(Pattern pattern, boolean result, Sequence ffap) {
+            this.pattern = pattern;
+            this.firstFailAppearPlace = ffap;
             if (result) {
                 successCount = 1;
                 failCount = 0;

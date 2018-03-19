@@ -23,12 +23,12 @@ public class ExamplesIO {
 
     //添加信号量为true
     public void addVolatileToTrue(int line, String filePath){
-        InsertCode.insert(line,"flag = true;",filePath);
+        InsertCode.insert(line,"flagFix = true;",filePath);
     }
 
     //添加信号量判断
     public void addVolatileIf(int line, String filePath){
-        InsertCode.insert(line,"if(flag){",filePath);
+        InsertCode.insert(line,"if(flagFix){",filePath);
         InsertCode.insert(line + 1,"}",filePath);
     }
 

@@ -4,6 +4,7 @@ import fix.entity.record.MatchResult;
 import fix.entity.record.NodeSequence;
 import p_heu.entity.Node;
 import p_heu.entity.ReadWriteNode;
+import p_heu.entity.sequence.Sequence;
 import p_heu.listener.SequenceProduceListener;
 
 import java.util.ArrayList;
@@ -34,9 +35,9 @@ public class RecordSequence {
         }
     }
 
-    public static void display(SequenceProduceListener listener) {
+    public static void display(Sequence firstFailAppearPlace) {
         System.out.println("nodes信息");
-        List<Node> nodesList = listener.getSequence().getNodes();
+        List<Node> nodesList = firstFailAppearPlace.getNodes();
         for (Node node : nodesList) {
             if (node instanceof ReadWriteNode) {
                 System.out.println(node);
