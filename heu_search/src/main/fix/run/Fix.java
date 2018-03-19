@@ -141,7 +141,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc,lastLoc + 1,dirPath + "\\Account.java")){
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\Account.java")) {
                 //判断之后再加同步
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
             }
@@ -179,7 +179,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc,lastLoc + 1,dirPath + "\\Account.java")){
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\Account.java")) {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
             }
 
@@ -250,9 +250,12 @@ public class Fix {
             //获取要加锁的
             String lockName = acquireLockName(position);
 
-            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]),Integer.parseInt(positionArg[1]) + 1,dirPath + "\\Account.java")){
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\Account.java")) {
                 //加锁
-                examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\Account.java");//待定
+                //检查是否存在锁再加锁
+                if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
+                    examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\Account.java");//待定
+                }
             }
 
 
