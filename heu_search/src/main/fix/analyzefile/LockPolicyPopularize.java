@@ -11,16 +11,23 @@ import java.util.Set;
 //就是关联变量加同步
 public class LockPolicyPopularize {
 
-    public static void fixRelevantVar(int firstLoc, int lastLoc, String threadName, String lockName) {
+    public static void fixRelevantVar(int firstLoc, int lastLoc, String threadName, String className, String lockName) {
         //获取到关联变量
-        Set<String> relevantVariabSet = acquireRekevantVar(firstLoc, lastLoc, threadName);
+        Set<String> relevantVariabSet = acquireRekevantVar(firstLoc, lastLoc, threadName, className);
 
-        String filepath = "";
-        //对相关变量加锁
-        AddLockAfterAcquireVariable.lock(relevantVariabSet, lockName);
+        System.out.println("set中的元素");
+        for(String s: relevantVariabSet){
+            System.out.println(s);
+        }
+        if(relevantVariabSet.size() > 1){
+            //对相关变量加锁
+            //set中大于等于两个变量才有加锁的意义
+            //不然加锁没意义
+            AddLockAfterAcquireVariable.lock(relevantVariabSet, lockName);
+        }
     }
 
-    private static Set<String> acquireRekevantVar(int firstLoc, int lastLoc, String threadName) {
+    private static Set<String> acquireRekevantVar(int firstLoc, int lastLoc, String threadName, String className) {
         //存放关联变量
         Set<String> relevantVariableSet = new HashSet<String>();
         //拿到sequence序列
@@ -34,7 +41,9 @@ public class LockPolicyPopularize {
             String nodeThread = node.getThread();
             //判断行数在不在这之间，是不是同一个线程
             //考虑线程是因为有可能会有其他线程在这里操作
-            if (poi >= firstLoc && poi <= lastLoc && nodeThread.equals(threadName)) {
+            //还有考虑是不是同一个java文件，之前就因为没考虑这个而出错
+            String nowCLassName = node.getPosition().split(":")[0].split("/")[1];
+            if (poi >= firstLoc && poi <= lastLoc && nodeThread.equals(threadName) && nowCLassName.equals(className)) {
 //                System.out.println(node + "只是测试");
                 relevantVariableSet.add(node.getField());
             } else {

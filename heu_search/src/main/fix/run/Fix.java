@@ -5,7 +5,6 @@ import fix.analyzefile.LockPolicyPopularize;
 import fix.analyzefile.RecordSequence;
 import fix.analyzefile.UseASTAnalysisClass;
 import fix.entity.ImportPath;
-import fix.entity.record.MatchResult;
 import fix.io.ExamplesIO;
 import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
@@ -33,6 +32,9 @@ public class Fix {
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
         //对拷贝的项目进行操作
         divideByLength(p.get(0));
+
+        //检测修复完的程序是否正确，不正确继续修复
+//        FixResult.checkFix();
     }
 
     //根据pattern的长度执行不同的fix策略
@@ -105,7 +107,6 @@ public class Fix {
             }
         }
 
-
         int firstLoc = 0, lastLoc = 0;
         boolean threadAHasLock = false, threadBHasLock = false;
 //        String lockNameA = "";
@@ -145,7 +146,7 @@ public class Fix {
                 //判断之后再加同步
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
             }
-//            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), "Account.java", lockName);//待定
         }
 
         //对B的list加锁
@@ -183,7 +184,7 @@ public class Fix {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
             }
 
-//            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), "Account.java", lockName);//待定
         }
     }
 
@@ -257,8 +258,6 @@ public class Fix {
                     examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\Account.java");//待定
                 }
             }
-
-
         }
 
         System.out.println(dirPath + "=============");
@@ -275,7 +274,6 @@ public class Fix {
             String[] positionArg = position.split(":");
             flagDefineLocation = Integer.parseInt(positionArg[1]) < flagDefineLocation ? Integer.parseInt(positionArg[1]) : flagDefineLocation;
             flagAssertLocation = Integer.parseInt(positionArg[1]) > flagAssertLocation ? Integer.parseInt(positionArg[1]) : flagAssertLocation;
-
         }
 
         System.out.println(flagDefineLocation);
@@ -286,7 +284,6 @@ public class Fix {
 
         //添加信号为true的那条语句，那条语句应该在定义的后一行
         examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\Account.java");//待修订
-
 
         //添加信号量判断,
         //待定，只执行一句我就加了分号，这样是否可行？

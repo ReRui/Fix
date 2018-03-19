@@ -9,11 +9,8 @@ import java.util.List;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        List list = new ArrayList();
-        list.add(1);
-        list.add(2);
-        System.out.println(list.indexOf(2));
-        System.out.println(list.size());
+       String s = "account/Account.java:11";
+       System.out.println(s.split(":")[0].split("/")[1]);
     }
 
 }
