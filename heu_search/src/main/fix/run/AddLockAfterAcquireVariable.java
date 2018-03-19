@@ -99,7 +99,6 @@ public class AddLockAfterAcquireVariable {
             public boolean visit(SimpleName node) {
                 if (this.names.contains(node.getIdentifier())) {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
-
                     boolean flag = false;
                     for (String s : variableSet) {
                         if (s.equals(node.getIdentifier()))
@@ -144,8 +143,6 @@ public class AddLockAfterAcquireVariable {
 
                 return true;
             }
-
-
         });
     }
 
@@ -158,7 +155,6 @@ public class AddLockAfterAcquireVariable {
 
         return false;
     }
-
 
     //检测是不是构造函数里的变量
     private static boolean isConstruct(ASTNode parent) {
@@ -175,5 +171,4 @@ public class AddLockAfterAcquireVariable {
         }
         return false;
     }
-
 }

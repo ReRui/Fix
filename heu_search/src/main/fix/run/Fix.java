@@ -3,6 +3,7 @@ package fix.run;
 import fix.analyzefile.CheckWhetherLocked;
 import fix.analyzefile.LockPolicyPopularize;
 import fix.analyzefile.RecordSequence;
+import fix.analyzefile.UseASTAnalysisClass;
 import fix.entity.ImportPath;
 import fix.entity.record.MatchResult;
 import fix.io.ExamplesIO;
@@ -28,6 +29,9 @@ public class Fix {
             System.out.println("dayu 2");
             System.out.println(p.get(0).getPattern().getNodes()[2]);
         }
+        //先将项目拷贝到exportExamples
+        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
+        //对拷贝的项目进行操作
         divideByLength(p.get(0));
     }
 
@@ -48,7 +52,6 @@ public class Fix {
     }
 
     private static void addSyncPatternNineToSeventeen(Pattern patternCounter) {
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
         System.out.println("第四步");
         int[] arrLoc = new int[4];
         for (int i = 0; i < 4; i++) {
@@ -83,7 +86,6 @@ public class Fix {
 
     //长度为3添加同步
     private static void addSyncPatternFourToEight(Pattern patternCounter) {
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
         int[] arr = new int[3];
         //根据线程将三个结点分为两个list
         List<ReadWriteNode> threadA = new ArrayList<ReadWriteNode>();//线程A的结点
@@ -138,7 +140,11 @@ public class Fix {
                 ReadWriteNode node = threadA.get(i);
                 lockName = acquireLockName(node.getPosition());
             }
-            examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
+            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc,lastLoc + 1,dirPath + "\\Account.java")){
+                //判断之后再加同步
+                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            }
 //            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
         }
 
@@ -172,7 +178,11 @@ public class Fix {
                 ReadWriteNode node = threadB.get(i);
                 lockName = acquireLockName(node.getPosition());
             }
-            examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
+            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc,lastLoc + 1,dirPath + "\\Account.java")){
+                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            }
+
 //            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
         }
     }
@@ -232,15 +242,19 @@ public class Fix {
     //对长度为2的pattern添加同步
     private static void addSyncPatternOneToThree(Pattern patternCounter) {
 
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
-
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
             System.out.println(position);
             String[] positionArg = position.split(":");
 
-            //加锁
-            examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, "obj", dirPath + "\\Account.java");//待定
+            //获取要加锁的
+            String lockName = acquireLockName(position);
+
+            if(!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]),Integer.parseInt(positionArg[1]) + 1,dirPath + "\\Account.java")){
+                //加锁
+                examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\Account.java");//待定
+            }
+
 
         }
 
@@ -263,7 +277,6 @@ public class Fix {
 
         System.out.println(flagDefineLocation);
         System.out.println(flagAssertLocation);
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
 
         //添加信号量的定义
         examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flag = false;", dirPath + "\\Account.java");//待修订
