@@ -18,6 +18,8 @@ public class Fix {
     static ExamplesIO examplesIO = ExamplesIO.getInstance();
     static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
 
+    static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
+
     public static void main(String[] args) {
         List<Unicorn.PatternCounter> p = Unicorn.m();
         //拿到第一个元素
@@ -30,7 +32,11 @@ public class Fix {
         }
         //先将项目拷贝到exportExamples
         dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
-        //对拷贝的项目进行操作
+
+        //根据pattern知道需要在哪个类中加锁
+        whichCLassNeedSync = p.get(0).getPattern().getNodes()[0].getPosition().split(":")[0].split("/")[1];
+
+        //对拷贝的项目进行修复
         divideByLength(p.get(0));
 
         //检测修复完的程序是否正确，不正确继续修复
@@ -142,11 +148,11 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\Account.java")) {
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 //判断之后再加同步
-                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
-            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), "Account.java", lockName);//待定
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), whichCLassNeedSync, lockName);//待定
         }
 
         //对B的list加锁
@@ -180,11 +186,11 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\Account.java")) {
-                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
+                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
 
-            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), "Account.java", lockName);//待定
+            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), whichCLassNeedSync, lockName);//待定
         }
     }
 
@@ -196,7 +202,7 @@ public class Fix {
         int line = 0;
         int poi = Integer.parseInt(position.split(":")[1]);
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dirPath + "\\Account.java")), "UTF-8"));
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dirPath + "\\" + whichCLassNeedSync)), "UTF-8"));
             while (((read = br.readLine()) != null)) {
                 line++;
                 if (line == poi) {//找到哪一行
@@ -258,11 +264,11 @@ public class Fix {
             //获取要加锁的
             String lockName = acquireLockName(position);
 
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\Account.java")) {
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 //加锁
                 //检查是否存在锁再加锁
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
-                    examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\Account.java");//待定
+                    examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
                 }
             }
         }
@@ -287,14 +293,14 @@ public class Fix {
         System.out.println(flagAssertLocation);
 
         //添加信号量的定义
-        examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flag = false;", dirPath + "\\Account.java");//待修订
+        examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flag = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
 
         //添加信号为true的那条语句，那条语句应该在定义的后一行
-        examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\Account.java");//待修订
+        examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订
 
         //添加信号量判断,
         //待定，只执行一句我就加了分号，这样是否可行？
-        examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\Account.java");//待修订
+        examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\" + whichCLassNeedSync);//待修订
     }
 
 }
