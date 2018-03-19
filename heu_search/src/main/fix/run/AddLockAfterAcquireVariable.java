@@ -13,9 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AddLockAfterAcquireVariable {
-    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+    static String dirPath = ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName;
     static Set<String> variableSet = new HashSet<String>();
     static String className = "";//类的名字，以后用来比较用
+
     //chanage file content to buffer array
     public static char[] getFileContents(File file) {
         // char array to store the file contents in
@@ -24,23 +25,22 @@ public class AddLockAfterAcquireVariable {
             BufferedReader br = new BufferedReader(new FileReader(file));
             StringBuffer sb = new StringBuffer();
             String line = "";
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 // append the content and the lost new line.
                 sb.append(line + "\n");
             }
             contents = new char[sb.length()];
-            sb.getChars(0, sb.length()-1, contents, 0);
+            sb.getChars(0, sb.length() - 1, contents, 0);
 
-            assert(contents.length > 0);
-        }
-        catch(IOException e) {
+            assert (contents.length > 0);
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
         return contents;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         /*//获取相关变量
         AcquireVariableInSameLock acquireVariableInSameLock = new AcquireVariableInSameLock();
@@ -59,18 +59,17 @@ public class AddLockAfterAcquireVariable {
             String listFile = f.getPath();
             lock(listFile);
         }*/
-
     }
 
-//    public static void lock(String filePath) {//原来的删除了
-    public static void lock(Set<String> relevantVariabSet) {
+    //    public static void lock(String filePath) {//原来的删除了
+    public static void lock(Set<String> relevantVariabSet, String lockName) {
         //得到关联变量
         for (String s : relevantVariabSet)
             variableSet.add(s);
         String filePath = dirPath + "\\Account.java";
         MatchVariable matchVariable = new MatchVariable();
 
-        InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);
+//        InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);//原本是可重入锁的定义，现在可以删
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));
         parser.setKind(ASTParser.K_COMPILATION_UNIT);
@@ -83,7 +82,7 @@ public class AddLockAfterAcquireVariable {
 
             Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
 
-            public boolean visit(TypeDeclaration  node){
+            public boolean visit(TypeDeclaration node) {
                 className = node.getName().toString();
                 return true;
             }
@@ -102,36 +101,36 @@ public class AddLockAfterAcquireVariable {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
 
                     boolean flag = false;
-                    for(String s : variableSet){
-                        if(s.equals(node.getIdentifier()))
+                    for (String s : variableSet) {
+                        if (s.equals(node.getIdentifier()))
                             flag = true;
                     }
-                    if(flag){
+                    if (flag) {
 
-                        if(matchVariable.matchSetIsEmpty()){
+                        if (matchVariable.matchSetIsEmpty()) {
                             matchVariable.addMatchSet(node);
                             matchVariable.setSameFatherNode(node.getParent());
-                        }
-                        else{
+                        } else {
                             //如果有数据则需要往里面添加数据，对于相同的变量，后面的一个变量应该覆盖前面的，在此处使用改变父节点的方法
-                            if(matchVariable.getMatchSet().contains(node)){
+                            if (matchVariable.getMatchSet().contains(node)) {
                                 matchVariable.setSameFatherNode(node.getParent());
-                            }else{
+                            } else {
                                 matchVariable.addMatchSet(node);
 //                                System.out.println("test" + node.getParent());
                                 matchVariable.searchSame(node.getParent());
                             }
                         }
-                        if(matchVariable.equalTarget(variableSet)){
+                        if (matchVariable.equalTarget(variableSet)) {
 //                           System.out.println("匹配成功");
 //                           System.out.println("开始" + cu.getLineNumber(matchVariable.getStartLine()));//下一行
 //                           System.out.println("结束" + cu.getLineNumber(matchVariable.getEndLine() + 1));
 
                             //不能整个类加锁，变量不是在构造函数里
-                            if(!(isMemberVariable(matchVariable)) && !(isConstruct(matchVariable.getSameFatherNode().getParent()))){
+                            if (!(isMemberVariable(matchVariable)) && !(isConstruct(matchVariable.getSameFatherNode().getParent()))) {
                                 //加锁
-                                InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() + " = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();"
-                                        + " synchronized (lock" + matchVariable.getLockNum() +"){ ", filePath);
+                                /*InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "ReentrantLock lock" + matchVariable.getLockNum() + " = new ReentrantLock(true);lock" + matchVariable.getLockNum() + ".lock();"
+                                        + " synchronized (lock" + matchVariable.getLockNum() + "){ ", filePath);*/
+                                InsertCode.insert(cu.getLineNumber(matchVariable.getStartLine()), "synchronized (" + lockName + "){ ", filePath);
                                 InsertCode.insert(cu.getLineNumber(matchVariable.getEndLine() + 1), " }", filePath);
                                 //更新锁
                                 matchVariable.update();
@@ -140,7 +139,7 @@ public class AddLockAfterAcquireVariable {
                             matchVariable.clear();
                         }
                     }
-                    flag= false;
+                    flag = false;
                 }
 
                 return true;
@@ -154,12 +153,11 @@ public class AddLockAfterAcquireVariable {
     private static boolean isMemberVariable(MatchVariable matchVariable) {
 
         //是类的类型
-        if(matchVariable.getSameFatherNode().getParent() instanceof TypeDeclaration)
+        if (matchVariable.getSameFatherNode().getParent() instanceof TypeDeclaration)
             return true;
 
         return false;
     }
-
 
 
     //检测是不是构造函数里的变量
@@ -169,8 +167,8 @@ public class AddLockAfterAcquireVariable {
          * 检查结点的所有父节点，看看有没有一个是构造函数
          * 判断节点类型是函数，节点名字与类名相同，则是构造函数
          */
-        while(!(parent instanceof TypeDeclaration)){
-            if((parent instanceof MethodDeclaration) && (((MethodDeclaration) parent).getName().toString().equals(className))) {
+        while (!(parent instanceof TypeDeclaration)) {
+            if ((parent instanceof MethodDeclaration) && (((MethodDeclaration) parent).getName().toString().equals(className))) {
                 return true;
             }
             parent = parent.getParent();

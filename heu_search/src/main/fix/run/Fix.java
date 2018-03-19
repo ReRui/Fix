@@ -139,7 +139,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
-            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
+//            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
         }
 
         //对B的list加锁
@@ -172,8 +172,8 @@ public class Fix {
                 ReadWriteNode node = threadB.get(i);
                 lockName = acquireLockName(node.getPosition());
             }
-            examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, "obj", dirPath + "\\Account.java");
-            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread());
+            examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\Account.java");
+//            LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), lockName);//待定
         }
     }
 

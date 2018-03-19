@@ -11,13 +11,13 @@ import java.util.Set;
 //就是关联变量加同步
 public class LockPolicyPopularize {
 
-    public static void   fixRelevantVar(int firstLoc, int lastLoc, String threadName) {
+    public static void   fixRelevantVar(int firstLoc, int lastLoc, String threadName, String lockName) {
         //获取到关联变量
         Set<String> relevantVariabSet = acquireRekevantVar(firstLoc, lastLoc, threadName);
 
         String filepath = "";
         //对相关变量加锁
-        AddLockAfterAcquireVariable.lock(relevantVariabSet);
+        AddLockAfterAcquireVariable.lock(relevantVariabSet, lockName);
     }
 
     private static Set<String> acquireRekevantVar(int firstLoc, int lastLoc, String threadName) {
