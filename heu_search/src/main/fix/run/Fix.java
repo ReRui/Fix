@@ -65,18 +65,29 @@ public class Fix {
         }
     }
 
+    //长度为4的添加同步
     private static void fixPatterNineToSeventeen(Pattern patternCounter) {
-        int[] arrLoc = new int[4];
+        //是否可行？
+        //根据线程将三个结点分为两个list
+        List<ReadWriteNode> threadA = new ArrayList<ReadWriteNode>();//线程A的结点
+        List<ReadWriteNode> threadB = new ArrayList<ReadWriteNode>();//线程B的结点
+        String threadName = "";
         for (int i = 0; i < 4; i++) {
-            String position = patternCounter.getNodes()[i].getPosition();
-//            System.out.println(position);
-            String[] positionArg = position.split(":");
-            arrLoc[i] = Integer.parseInt(positionArg[1]);
+            ReadWriteNode node = patternCounter.getNodes()[i];
+            if (i == 0) {//把第一个结点放入A的list
+                threadName = node.getThread();
+                threadA.add(node);
+            } else {
+                if (threadName.equals(node.getThread())) {//线程相同，放入同一个list
+                    threadA.add(node);
+                } else {//不同就放入另一个list
+                    threadB.add(node);
+                }
+            }
         }
 
-        //待定，此处只是排序后将前两个加锁，后两个加锁
-        examplesIO.addLockToOneVar(arrLoc[0], arrLoc[1] + 1, "obj", dirPath + "\\" + whichCLassNeedSync);
-        examplesIO.addLockToOneVar(arrLoc[2], arrLoc[3] + 1, "obj", dirPath + "\\" + whichCLassNeedSync);
+        addSyncFourToEight(threadA);
+        addSyncFourToEight(threadB);
     }
 
     //长度为3添加同步
@@ -100,11 +111,11 @@ public class Fix {
         }
 
         //根据获得的list，进行加锁
-        addSyncByList(threadA);
-        addSyncByList(threadB);
+        addSyncFourToEight(threadA);
+        addSyncFourToEight(threadB);
     }
 
-    private static void addSyncByList(List<ReadWriteNode> rwnList) {
+    private static void addSyncFourToEight(List<ReadWriteNode> rwnList) {
         int firstLoc = 0, lastLoc = 0;
         boolean varHasLock = false;
         String lockName = "";
@@ -175,7 +186,7 @@ public class Fix {
             }
         }
         //关联变量处理
-        LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName,dirPath + "\\" + whichCLassNeedSync);//待定
+        LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
         System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
     }
 
