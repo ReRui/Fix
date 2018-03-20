@@ -28,7 +28,7 @@ public class Fix {
         System.out.println(p.get(0).getPattern().getNodes()[1]);
         if (p.get(0).getPattern().getNodes().length > 2) {
             System.out.println(p.get(0).getPattern().getNodes()[2]);
-            if(p.get(0).getPattern().getNodes().length > 3){
+            if (p.get(0).getPattern().getNodes().length > 3) {
                 System.out.println(p.get(0).getPattern().getNodes()[3]);
             }
         }
@@ -122,6 +122,13 @@ public class Fix {
         int firstLoc = 0, lastLoc = 0;
         boolean threadAHasLock = false, threadBHasLock = false;
 //        String lockNameA = "";
+        //判断A中有几个变量
+        if(threadA.size() > 1){
+            //如果有两个变量，需要分析
+            //判断它们在不在一个函数中
+            //判断它们会不会横跨分支语句
+            UseASTAnalysisClass.assertSameFunction(threadA, dirPath + "\\" + whichCLassNeedSync);
+        }
         //对A的list加锁
         for (int i = 0; i < threadA.size(); i++) {
             ReadWriteNode node = threadA.get(i);
@@ -144,9 +151,7 @@ public class Fix {
         System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
 //        System.out.println(threadAHasLock);
 
-        if (threadAHasLock) {
-
-        } else {
+        if (!threadAHasLock) {
             //对每个变量进行判断，知道它需要加何种锁
             String lockName = "";
             for (int i = 0; i < threadA.size(); i++) {
@@ -154,7 +159,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                 //判断之后再加同步
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
@@ -182,9 +187,7 @@ public class Fix {
         }
         System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
 //        System.out.println(threadBHasLock);
-        if (threadBHasLock) {
-
-        } else {
+        if (!threadBHasLock) {
             //对每个变量进行判断，知道它需要加何种锁
             String lockName = "";
             for (int i = 0; i < threadB.size(); i++) {
@@ -192,7 +195,7 @@ public class Fix {
                 lockName = acquireLockName(node.getPosition());
             }
             //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
             LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), whichCLassNeedSync, lockName);//待定
@@ -298,14 +301,19 @@ public class Fix {
         System.out.println("信号量定位位置:" + flagDefineLocation);
         System.out.println("信号量使用位置:" + flagAssertLocation);
 
-        //添加信号量的定义
-        examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
+        //构造函数不能加信号量
+        if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync) &&
+                !UseASTAnalysisClass.isConstructOrIsMemberVariable(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync)) {
+            //添加信号量的定义
+            examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
 
-        //添加信号为true的那条语句，那条语句应该在定义的后一行
-        examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订
+            //添加信号为true的那条语句，那条语句应该在定义的后一行
+            examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订
 
-        //添加信号量判断,
-        //待定，只执行一句我就加了分号，这样是否可行？
-        examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\" + whichCLassNeedSync);//待修订
+            //添加信号量判断,
+            //待定，只执行一句我就加了分号，这样是否可行？
+            examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\" + whichCLassNeedSync);//待修订
+        }
+
     }
 }

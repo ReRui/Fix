@@ -66,8 +66,6 @@ public class MatchVariable {
         lockNum++;
     }
 
-
-
     //寻找两个ASTnode不同节点相同的父节点
     public void searchSame(ASTNode node){
         if(this.sameFatherNode.equals(node))

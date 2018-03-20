@@ -74,9 +74,7 @@ public class AddLockAfterAcquireVariable {
         parser.setSource(getFileContents(new File(filePath)));
         parser.setKind(ASTParser.K_COMPILATION_UNIT);
 
-
         final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
-
 
         cu.accept(new ASTVisitor() {
 
