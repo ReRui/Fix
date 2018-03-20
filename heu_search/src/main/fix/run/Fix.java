@@ -20,7 +20,6 @@ public class Fix {
 
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
 
-
     public static void main(String[] args) {
         List<Unicorn.PatternCounter> p = Unicorn.m();
         //拿到第一个元素
@@ -307,5 +306,4 @@ public class Fix {
         //待定，只执行一句我就加了分号，这样是否可行？
         examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\" + whichCLassNeedSync);//待修订
     }
-
 }

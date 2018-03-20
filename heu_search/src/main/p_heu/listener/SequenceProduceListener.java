@@ -61,7 +61,21 @@ public class SequenceProduceListener extends ListenerAdapter {
             String eiString = ei == null ? "null" : ei.toString();
             String fiName = fi.getName();
             ReadWriteNode node = new ReadWriteNode(getNodeId(), eiString, fiName, type, currentThread.getName(), fins.getFileLocation());
+
+           /* //做筛检
+            boolean repeatFlag = false;
+            for(int i = currentStateNodes.size() - 1; i >= 0; i--){
+                if(currentStateNodes.get(i) instanceof ReadWriteNode){
+                    ReadWriteNode rwn = (ReadWriteNode) currentStateNodes.get(i);
+                    if(rwn.getElement().equals(node.getElement()) && rwn.getField().equals(node.getField()) && rwn.getType().equals(node.getType()) && rwn.getThread().equals(node.getThread()) && rwn.getPosition().equals(node.getPosition())){
+                        currentStateNodes.remove(i);
+                        System.out.println("删除了");
+                    }
+                }
+            }*/
+
             currentStateNodes.add(node);
+
         }
     }
 

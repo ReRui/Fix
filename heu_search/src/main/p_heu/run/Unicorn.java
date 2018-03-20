@@ -4,6 +4,8 @@ import fix.analyzefile.RecordSequence;
 import fix.entity.ImportPath;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
+import p_heu.entity.Node;
+import p_heu.entity.ReadWriteNode;
 import p_heu.entity.filter.Filter;
 import p_heu.entity.pattern.Pattern;
 import p_heu.entity.sequence.Sequence;
@@ -42,6 +44,12 @@ public class Unicorn {
 //            System.out.println(listener.getSequence().getNodes() + "getNodes");
 
             Sequence seq = listener.getSequence();
+            //sequence中有时候会出现同一个线程对某个地方重复执行两次的情况
+            //我们只记录第二次，放弃第一次
+            //因为实际产生效果的是第二次
+            //jpf中产生这种情况的原因不明
+            reduceSeq(seq);
+
             outer:
             for (Pattern pattern : seq.getPatterns()) {
                 for (PatternCounter p : patternCounters) {
@@ -66,11 +74,31 @@ public class Unicorn {
             }
         });
 
-        for (PatternCounter p : patternCounters) {
+        //输出pattern信息
+        /*for (PatternCounter p : patternCounters) {
             System.out.println(p);
-        }
+        }*/
         return patternCounters;
     }
+
+    private static void reduceSeq(Sequence seq) {
+        List<Node> nodesList = seq.getNodes();
+        for(int i = 0;i < nodesList.size();i++){
+            if(nodesList.get(i) instanceof ReadWriteNode){
+                for(int j = i - 1; j >= 0; j--){
+                    if(nodesList.get(j) instanceof ReadWriteNode){
+                        ReadWriteNode rwi = (ReadWriteNode) nodesList.get(i);
+                        ReadWriteNode rwj = (ReadWriteNode) nodesList.get(j);
+                        if((rwi.getId() != rwj.getId()) && rwi.getElement().equals(rwj.getElement()) && rwi.getField().equals(rwj.getField()) && rwi.getType().equals(rwj.getType()) && rwi.getPosition().equals(rwj.getPosition())){
+                            seq.getNodes().remove(j);
+                            i--;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     public static class PatternCounter {
         private Pattern pattern;
