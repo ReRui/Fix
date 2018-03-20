@@ -122,14 +122,77 @@ public class Fix {
         int firstLoc = 0, lastLoc = 0;
         boolean threadAHasLock = false, threadBHasLock = false;
 //        String lockNameA = "";
+
         //判断A中有几个变量
-        if(threadA.size() > 1){
+        if(threadA.size() > 1){//两个变量
             //如果有两个变量，需要分析
             //判断它们在不在一个函数中
-            //判断它们会不会横跨分支语句
-            UseASTAnalysisClass.assertSameFunction(threadA, dirPath + "\\" + whichCLassNeedSync);
+            boolean flagSame = UseASTAnalysisClass.assertSameFunction(threadA, dirPath + "\\" + whichCLassNeedSync);
+            System.out.println("判断在不在同一个函数" + flagSame);
+            if (flagSame){//在一个函数中
+                String lockName = "";
+                //判断它们有没有加锁，需要加何种锁，加锁位置
+                //对A的list加锁
+                for (int i = 0; i < threadA.size(); i++) {
+                    ReadWriteNode node = threadA.get(i);
+                    if (CheckWhetherLocked.check(node.getPosition(), node.getField())) {//检查是否存在锁
+                        threadAHasLock = true;
+                    }
+                    //应该要加什么锁
+                    //这个步骤实际是用分析字符串来完成的
+                    lockName = acquireLockName(node.getPosition());
+                    int poi = Integer.parseInt(node.getPosition().split(":")[1]);
+                    if (i == 0) {
+                        firstLoc = poi;
+                        lastLoc = firstLoc;
+                    } else {
+                        if (poi < firstLoc) {
+                            firstLoc = poi;
+                        } else {
+                            lastLoc = poi;
+                        }
+                    }
+                }
+                if(!threadAHasLock){
+                    //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
+                    if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
+                        //判断之后再加同步
+                        examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
+                    }
+                }
+            } else {//不在一个函数中
+                for (int i = 0; i < threadA.size(); i++) {
+                    ReadWriteNode node = threadA.get(i);
+                    firstLoc = Integer.parseInt(node.getPosition().split(":")[1]);
+                    lastLoc = firstLoc;
+                    //每个都检查是不是加锁
+                    if(!CheckWhetherLocked.check(node.getPosition(), node.getField())){
+                        //然后检查是不是成员变量或构造函数
+                        if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
+                            //最后得到需要加什么锁
+                            String lockName = acquireLockName(node.getPosition());
+                            //加锁
+                            examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
+                        }
+                    }
+                }
+            }
+        } else {
+            //对于一个变量，检查它是否已经被加锁
+            ReadWriteNode node = threadA.get(0);
+            if(!CheckWhetherLocked.check(node.getPosition(), node.getField())){
+                //没被加锁，获得需要加锁的行数
+                firstLoc = Integer.parseInt(node.getPosition().split(":")[1]);
+                lastLoc = firstLoc;
+                //然后获得需要加何种锁
+                String lockName = acquireLockName(node.getPosition());
+                //然后加锁
+                examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
+            }
         }
-        //对A的list加锁
+        System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
+
+        /*//对A的list加锁
         for (int i = 0; i < threadA.size(); i++) {
             ReadWriteNode node = threadA.get(i);
             if (CheckWhetherLocked.check(node.getPosition(), node.getField())) {//检查是否存在锁
@@ -164,7 +227,7 @@ public class Fix {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
             LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), whichCLassNeedSync, lockName);//待定
-        }
+        }*/
 
         //对B的list加锁
         for (int i = 0; i < threadB.size(); i++) {

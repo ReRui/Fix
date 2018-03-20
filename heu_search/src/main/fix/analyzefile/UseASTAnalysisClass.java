@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,11 @@ public class UseASTAnalysisClass {
     static boolean flagSameFunction = false;//是不是在一个函数中
 
     public static void main(String[] args) {
-        System.out.println(isConstructOrIsMemberVariable(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
+//        System.out.println(isConstructOrIsMemberVariable(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
+        List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
+        nodesList.add(new ReadWriteNode(1, "account.Account@1b7", "amount", "WRITE", "Thread-5", "account/Account.java:28"));
+        nodesList.add(new ReadWriteNode(2, "account.Account@1b7", "amount", "READ", "Thread-5", "account/Account.java:28"));
+        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
     }
 
     //判断是不是成员变量或者构造函数
@@ -40,8 +45,6 @@ public class UseASTAnalysisClass {
     public static boolean assertSameFunction(List<ReadWriteNode> nodesList, String filePath) {
         ReadWriteNode rwn1 = nodesList.get(0);
         ReadWriteNode rwn2 = nodesList.get(1);
-
-        LocationToAddLoc loc = new LocationToAddLoc();
 
         //判断是不是在一个函数中
         useASTAssertSameFun(rwn1, rwn2, filePath);
@@ -105,18 +108,21 @@ public class UseASTAnalysisClass {
 
     //判断两个结点是不是在一个函数中
     private static boolean isSameFunction(ASTNode rw1Node, ASTNode rw2Node) {
-        for (ASTNode iNode = rw1Node.getParent(); iNode != null; iNode = iNode.getParent()) {
-            for (ASTNode jNode = rw2Node.getParent(); jNode != null; jNode = jNode.getParent()) {
-                if (iNode.equals(jNode)) {//找到相同父节点，且父节点是函数声明，则代表它们在一个函数中
-                    if (iNode instanceof MethodDeclaration) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
+        //找到第一个结点在哪个函数中
+        ASTNode iNode = rw1Node.getParent();
+        while (iNode instanceof MethodDeclaration) {
+            iNode = iNode.getParent();
         }
-        return false;
+        //找到第二个结点在哪个函数中
+        ASTNode jNode = rw2Node.getParent();
+        while (jNode instanceof MethodDeclaration) {
+            jNode = jNode.getParent();
+        }
+        if (iNode.equals(jNode)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //chanage file content to buffer array
@@ -211,25 +217,4 @@ public class UseASTAnalysisClass {
         return false;
     }
 
-}
-class LocationToAddLoc{
-    int firstLoc;
-    int lastLoc;
-
-
-    public int getFirstLoc() {
-        return firstLoc;
-    }
-
-    public void setFirstLoc(int firstLoc) {
-        this.firstLoc = firstLoc;
-    }
-
-    public int getLastLoc() {
-        return lastLoc;
-    }
-
-    public void setLastLoc(int lastLoc) {
-        this.lastLoc = lastLoc;
-    }
 }
