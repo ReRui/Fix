@@ -5,7 +5,6 @@ import fix.entity.record.NodeSequence;
 import p_heu.entity.Node;
 import p_heu.entity.ReadWriteNode;
 import p_heu.entity.sequence.Sequence;
-import p_heu.listener.SequenceProduceListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +35,12 @@ public class RecordSequence {
     }
 
     public static void display(Sequence firstFailAppearPlace) {
-
 //        System.out.println("nodes信息");
         List<Node> nodesList = firstFailAppearPlace.getNodes();
         for (Node node : nodesList) {
             if (node instanceof ReadWriteNode) {
 //                System.out.println(node);
-                dealwith((ReadWriteNode) node);
+                divideNodes((ReadWriteNode) node);
             }
         }
 
@@ -51,20 +49,10 @@ public class RecordSequence {
         //比如将读写节点和后面的分类结合
         analyseReadWriteNodeList(nodesList);
 
-        //遍历输出
-        //打印处理好的信息
-        /*System.out.println("遍历输出");
-        for (NodeSequence nodeSequence : nodeSequenceList) {
-            System.out.println(nodeSequence.getElement() + "," + nodeSequence.getField() + "," + nodeSequence.getThread() + "," + nodeSequence.getPosition());
-            for (int i : nodeSequence.getIdList()) {
-                System.out.print(i + " ");
-            }
-            System.out.println("=============");
-        }*/
     }
 
     //将sequence里面的数据，按照线程和行数分类
-    private static void dealwith(ReadWriteNode node) {
+    private static void divideNodes(ReadWriteNode node) {
         NodeSequence nodeSequence = new NodeSequence(node.getElement(), node.getField(), node.getThread(), node.getPosition());
         //先判断list中有没有，没有，则添加，有，直接找到有的那个，在它的arr里面添加
         MatchResult mr = listMatch(nodeSequence);
@@ -88,6 +76,7 @@ public class RecordSequence {
         return matchResult;
     }
 
+    //是不是某个线程对某行某变量最后一次操作
     public static boolean isLast(ReadWriteNode readWriteNode) {
         for (int i = 0; i < nodeSequenceList.size(); i++) {
             NodeSequence nodeS = nodeSequenceList.get(i);
@@ -100,6 +89,7 @@ public class RecordSequence {
         return false;
     }
 
+    //是不是某个线程对某行某变量第一次操作
     public static boolean isFirst(ReadWriteNode readWriteNode) {
         for (int i = 0; i < nodeSequenceList.size(); i++) {
             NodeSequence nodeS = nodeSequenceList.get(i);

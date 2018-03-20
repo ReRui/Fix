@@ -48,17 +48,10 @@ public class UseASTAnalysisClass {
 
         //判断是不是在一个函数中
         useASTAssertSameFun(rwn1, rwn2, filePath);
-       /* if(flagSameFunction){
-            int loc1 = Integer.parseInt(rwn1.getPosition().split(":")[1]);
-            int loc2 = Integer.parseInt(rwn2.getPosition().split(":")[1]);
-            loc.setFirstLoc(Math.min(loc1, loc2));
-            loc.setLastLoc(Math.max(loc1, loc2));
-        } else {
-
-        }*/
         return flagSameFunction;
     }
 
+    //用AST来判别是不是在一个函数中
     private static void useASTAssertSameFun(ReadWriteNode rwn1, ReadWriteNode rwn2, String filePath) {
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));

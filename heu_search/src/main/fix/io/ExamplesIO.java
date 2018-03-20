@@ -32,6 +32,7 @@ public class ExamplesIO {
         InsertCode.insert(line + 1,"}",filePath);
     }
 
+    //将文件拷贝到另一个位置，并且修改path值
     public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath){
         String changeFilePath = "";
         File file = new File(dirPath);

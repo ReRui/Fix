@@ -11,20 +11,15 @@ import java.util.Set;
 //就是关联变量加同步
 public class LockPolicyPopularize {
 
-    public static void fixRelevantVar(int firstLoc, int lastLoc, String threadName, String className, String lockName) {
+    public static void fixRelevantVar(int firstLoc, int lastLoc, String threadName, String className, String lockName, String filePath) {
         //获取到关联变量
         Set<String> relevantVariabSet = acquireRekevantVar(firstLoc, lastLoc, threadName, className);
-
-        /*System.out.println("set中的元素");
-        for(String s: relevantVariabSet){
-            System.out.println(s);
-        }*/
 
         if(relevantVariabSet.size() > 1){
             //对相关变量加锁
             //set中大于等于两个变量才有加锁的意义
             //不然加锁没意义
-            AddLockAfterAcquireVariable.lock(relevantVariabSet, lockName);
+            AddLockAfterAcquireVariable.lock(relevantVariabSet, lockName, filePath);
         }
     }
 

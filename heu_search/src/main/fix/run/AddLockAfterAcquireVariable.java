@@ -62,11 +62,11 @@ public class AddLockAfterAcquireVariable {
     }
 
     //    public static void lock(String filePath) {//原来的删除了
-    public static void lock(Set<String> relevantVariabSet, String lockName) {
+    public static void lock(Set<String> relevantVariabSet, String lockName, String filePath) {
         //得到关联变量
         for (String s : relevantVariabSet)
             variableSet.add(s);
-        String filePath = dirPath + "\\Account.java";
+
         MatchVariable matchVariable = new MatchVariable();
 
 //        InsertCode.insert(3, "import java.util.concurrent.locks.ReentrantLock;" + '\n', filePath);//原本是可重入锁的定义，现在可以删

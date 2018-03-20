@@ -1,6 +1,5 @@
 package p_heu.run;
 
-import fix.analyzefile.RecordSequence;
 import fix.entity.ImportPath;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -19,11 +18,11 @@ import java.util.List;
 public class Unicorn {
     //测试用的main函数
     public static void main(String[] args) {
-        Unicorn.m();
+        Unicorn.getPatternCounterList();
     }
 
     //原来是main函数
-    public static List<PatternCounter> m() {
+    public static List<PatternCounter> getPatternCounterList() {
         List<PatternCounter> patternCounters = new ArrayList<>();
 
         for (int i = 0; i < 5; ++i) {
