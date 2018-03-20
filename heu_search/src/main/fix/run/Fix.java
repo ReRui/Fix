@@ -27,8 +27,10 @@ public class Fix {
         System.out.println(p.get(0).getPattern().getNodes()[0]);
         System.out.println(p.get(0).getPattern().getNodes()[1]);
         if (p.get(0).getPattern().getNodes().length > 2) {
-            System.out.println("dayu 2");
             System.out.println(p.get(0).getPattern().getNodes()[2]);
+            if(p.get(0).getPattern().getNodes().length > 3){
+                System.out.println(p.get(0).getPattern().getNodes()[3]);
+            }
         }
 
         //拿到该pattern对应的sequence
@@ -51,10 +53,13 @@ public class Fix {
     private static void divideByLength(Unicorn.PatternCounter patternCounter) {
         int length = patternCounter.getPattern().getNodes().length;
         if (length == 2) {
+            System.out.println("修复一");
             fixPatternOneToThree(patternCounter.getPattern());
         } else if (length == 3) {
+            System.out.println("修复二");
             fixPatternFourToEight(patternCounter);
         } else if (length == 4) {
+            System.out.println("修复三");
             fixPatterNineToSeventeen(patternCounter);
         }
     }
@@ -64,11 +69,10 @@ public class Fix {
     }
 
     private static void addSyncPatternNineToSeventeen(Pattern patternCounter) {
-        System.out.println("第四步");
         int[] arrLoc = new int[4];
         for (int i = 0; i < 4; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
-            System.out.println(position);
+//            System.out.println(position);
             String[] positionArg = position.split(":");
             arrLoc[i] = Integer.parseInt(positionArg[1]);
         }
@@ -82,8 +86,6 @@ public class Fix {
         CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
         //获取读写节点
         ReadWriteNode[] nodesArr = patternCounter.getPattern().getNodes();
-
-        System.out.println("第三步");
         addSyncPatternFourToEight(patternCounter.getPattern());
 
         /*//如果该变量没有加锁则引入一个新锁,并且添加同步
@@ -139,8 +141,8 @@ public class Fix {
                 }
             }
         }
-        System.out.println("a" + firstLoc + ",b" + lastLoc);
-        System.out.println(threadAHasLock);
+        System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
+//        System.out.println(threadAHasLock);
 
         if (threadAHasLock) {
 
@@ -178,8 +180,8 @@ public class Fix {
                 }
             }
         }
-        System.out.println("a" + firstLoc + ",b" + lastLoc);
-        System.out.println(threadBHasLock);
+        System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
+//        System.out.println(threadBHasLock);
         if (threadBHasLock) {
 
         } else {
@@ -193,12 +195,12 @@ public class Fix {
             if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
-
             LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, threadA.get(0).getThread(), whichCLassNeedSync, lockName);//待定
         }
     }
 
     //读到那一行，然后对字符串处理
+    //获取锁的名称
     private static String acquireLockName(String position) {
         BufferedReader br = null;
         String read = "";//用来读
@@ -230,7 +232,6 @@ public class Fix {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return result.trim();
     }
 
@@ -249,8 +250,10 @@ public class Fix {
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
         if (RecordSequence.isLast(patternCounter.getNodes()[0]) || RecordSequence.isFirst(patternCounter.getNodes()[1])) {
+            System.out.println("添加信号量");
             addSignal(patternCounter);
         } else {
+            System.out.println("添加同步");
             //为长度为2的pattern添加同步
             addSyncPatternOneToThree(patternCounter);
         }
@@ -262,7 +265,7 @@ public class Fix {
 
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
-            System.out.println(position);
+//            System.out.println(position);
             String[] positionArg = position.split(":");
 
             //获取要加锁的
@@ -272,12 +275,11 @@ public class Fix {
                 //加锁
                 //检查是否存在锁再加锁
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
+                    System.out.println("加锁位置" + Integer.parseInt(positionArg[1]));
                     examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
                 }
             }
         }
-
-        System.out.println(dirPath + "=============");
     }
 
     //添加信号量修复顺序违背
@@ -287,14 +289,14 @@ public class Fix {
         int flagAssertLocation = Integer.MIN_VALUE;//flag应该在那行判断
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
-            System.out.println(position);
+//            System.out.println(position);
             String[] positionArg = position.split(":");
             flagDefineLocation = Integer.parseInt(positionArg[1]) < flagDefineLocation ? Integer.parseInt(positionArg[1]) : flagDefineLocation;
             flagAssertLocation = Integer.parseInt(positionArg[1]) > flagAssertLocation ? Integer.parseInt(positionArg[1]) : flagAssertLocation;
         }
 
-        System.out.println(flagDefineLocation);
-        System.out.println(flagAssertLocation);
+        System.out.println("信号量定位位置:" + flagDefineLocation);
+        System.out.println("信号量使用位置:" + flagAssertLocation);
 
         //添加信号量的定义
         examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订

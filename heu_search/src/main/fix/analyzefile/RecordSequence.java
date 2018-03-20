@@ -36,29 +36,31 @@ public class RecordSequence {
     }
 
     public static void display(Sequence firstFailAppearPlace) {
-        System.out.println("nodes信息");
+
+//        System.out.println("nodes信息");
         List<Node> nodesList = firstFailAppearPlace.getNodes();
         for (Node node : nodesList) {
             if (node instanceof ReadWriteNode) {
-                System.out.println(node);
+//                System.out.println(node);
                 dealwith((ReadWriteNode) node);
             }
         }
 
         //得到所有readwritenode信息，这里
-        // 只为了关联变量考虑，其实还可以优化
+        //只为了关联变量考虑，其实还可以优化
         //比如将读写节点和后面的分类结合
         analyseReadWriteNodeList(nodesList);
 
         //遍历输出
-        System.out.println("遍历输出");
+        //打印处理好的信息
+        /*System.out.println("遍历输出");
         for (NodeSequence nodeSequence : nodeSequenceList) {
             System.out.println(nodeSequence.getElement() + "," + nodeSequence.getField() + "," + nodeSequence.getThread() + "," + nodeSequence.getPosition());
             for (int i : nodeSequence.getIdList()) {
                 System.out.print(i + " ");
             }
             System.out.println("=============");
-        }
+        }*/
     }
 
     //将sequence里面的数据，按照线程和行数分类

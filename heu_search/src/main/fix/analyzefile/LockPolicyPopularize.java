@@ -15,10 +15,11 @@ public class LockPolicyPopularize {
         //获取到关联变量
         Set<String> relevantVariabSet = acquireRekevantVar(firstLoc, lastLoc, threadName, className);
 
-        System.out.println("set中的元素");
+        /*System.out.println("set中的元素");
         for(String s: relevantVariabSet){
             System.out.println(s);
-        }
+        }*/
+
         if(relevantVariabSet.size() > 1){
             //对相关变量加锁
             //set中大于等于两个变量才有加锁的意义
