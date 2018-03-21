@@ -10,13 +10,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
 
     static String className = "";//类的名字，以后用来比较用
 
     public static void main(String[] args) {
-        test(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\IntRange.java");
+//        test(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\IntRange.java");
+
+        String s = "amount";
+        Pattern p = Pattern.compile("(\\w+)\\.amount");
+        Matcher m=p.matcher(s);
+        while(m.find()) {
+            System.out.println(m.group(1));
+        }
+
     }
 
     //chanage file content to buffer array

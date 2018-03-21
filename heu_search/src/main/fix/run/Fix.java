@@ -10,6 +10,7 @@ import p_heu.run.Unicorn;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 
 public class Fix {
     static ExamplesIO examplesIO = ExamplesIO.getInstance();
@@ -133,7 +134,7 @@ public class Fix {
                     //应该要加什么锁
                     //这个步骤实际是用分析字符串来完成的
                     //实际上是不对的
-                    lockName = acquireLockName(node.getPosition());
+                    lockName = acquireLockName(node);
                     int poi = Integer.parseInt(node.getPosition().split(":")[1]);
                     if (i == 0) {
                         firstLoc = poi;
@@ -169,7 +170,7 @@ public class Fix {
                         //然后检查是不是成员变量或构造函数
                         if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                             //最后得到需要加什么锁
-                            lockName = acquireLockName(node.getPosition());
+                            lockName = acquireLockName(node);
                             //判断加锁会不会和for循环等交叉
                             UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
                             firstLoc = lockLine.getFirstLoc();
@@ -189,7 +190,7 @@ public class Fix {
                 firstLoc = Integer.parseInt(node.getPosition().split(":")[1]);
                 lastLoc = firstLoc;
                 //然后获得需要加何种锁
-                lockName = acquireLockName(node.getPosition());
+                lockName = acquireLockName(node);
 
                 //判断加锁会不会和for循环等交叉
                 UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
@@ -207,27 +208,22 @@ public class Fix {
 
     //读到那一行，然后对字符串处理
     //获取锁的名称
-    private static String acquireLockName(String position) {
+    private static String acquireLockName(ReadWriteNode node) {
         BufferedReader br = null;
         String read = "";//用来读
         String result = "";//用来处理
         int line = 0;
-        int poi = Integer.parseInt(position.split(":")[1]);
+        int poi = Integer.parseInt(node.getPosition().split(":")[1]);
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(dirPath + "\\" + whichCLassNeedSync)), "UTF-8"));
             while (((read = br.readLine()) != null)) {
                 line++;
                 if (line == poi) {//找到哪一行
-                    String[] res = read.split("\\.");
-                    if (res.length > 1) {
-                        String temp = res[0];
-                        int index = 0;
-                        for (int i = temp.length() - 1; i >= 0; i--) {
-                            if (!((temp.charAt(i) >= 'a' && temp.charAt(i) <= 'z') || (temp.charAt(i) >= 'A' && temp.charAt(i) <= 'Z'))) {//从后往前，找到非字母的字符
-                                index = i;
-                            }
-                        }
-                        result = res[0].substring(index);
+                    String field = node.getField();//得的变量
+                    java.util.regex.Pattern p = java.util.regex.Pattern.compile("(\\w+)\\." + field);
+                    Matcher m = p.matcher(read);
+                    if(m.matches()){
+                        result = m.group(1);
                     } else {
                         result = "this";
                     }
@@ -289,7 +285,7 @@ public class Fix {
             String[] positionArg = position.split(":");
 
             //获取要加锁的锁名
-            String lockName = acquireLockName(position);
+            String lockName = acquireLockName(patternCounter.getNodes()[i]);
 
             //此处就在一行加锁，所以行数一样
             firstLoc = Integer.parseInt(positionArg[1]);
