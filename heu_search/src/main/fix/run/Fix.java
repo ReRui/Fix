@@ -226,9 +226,9 @@ public class Fix {
         return result.trim();
     }
 
-   /* //输出锁的名称
+    //输出锁的名称
     //此处根据pattern读到锁的那行，然后使用字符串匹配
-    private static String lockName(ReadWriteNode node) {
+    private static String existLockName(ReadWriteNode node) {
         int number = Integer.parseInt(node.getPosition().split(":")[1]);
         String name = "";
         try {
@@ -237,7 +237,7 @@ public class Fix {
             e.printStackTrace();
         }
         return name;
-    }*/
+    }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
         if (RecordSequence.isLast(patternCounter.getNodes()[0]) || RecordSequence.isFirst(patternCounter.getNodes()[1])) {
@@ -254,12 +254,24 @@ public class Fix {
     //对长度为2的pattern添加同步
     private static void addSyncPatternOneToThree(Pattern patternCounter) {
 
+        String existLockName = "";//已有锁的锁名
+
+        /*//检查是否有锁
+        for (int i = 0; i < 2; i++) {
+            if (CheckWhetherLocked.check(patternCounter.getNodes()[i].getPosition(), patternCounter.getNodes()[i].getField())) {
+                //如果有锁，记录下这个锁用来修复其他的
+                existLockName = existLockName(patternCounter.getNodes()[i]);
+                System.out.println("当前已有的锁" + existLockName);
+                break;
+            }
+        }*/
+
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
 //            System.out.println(position);
             String[] positionArg = position.split(":");
 
-            //获取要加锁的
+            //获取要加锁的锁名
             String lockName = acquireLockName(position);
 
             if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
@@ -267,7 +279,13 @@ public class Fix {
                 //检查是否存在锁再加锁
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
                     System.out.println("加锁位置" + Integer.parseInt(positionArg[1]));
-                    examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
+                    //判断一下能不能用当前的锁直接进行修复
+                    //这里主要是jpf中得不到具体对象的问题，如果能得到的话，就不用这么麻烦了
+                    /*if (existLockName.equals(lockName)){
+                        examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, existLockName, dirPath + "\\" + whichCLassNeedSync);//待定
+                    } else {*/
+                        examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
+//                    }
                 }
             }
         }
