@@ -12,13 +12,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="20" column="85" lean-forward="false" selection-start-line="20" selection-start-column="85" selection-end-line="20" selection-end-column="85" />
+            <state relative-caret-position="243">
+              <caret line="241" column="29" lean-forward="true" selection-start-line="241" selection-start-column="29" selection-end-line="241" selection-end-column="29" />
               <folding>
-                <marker date="1521621823384" expanded="true" signature="12715:13163" ph="{...}" />
+                <marker date="1521632197075" expanded="true" signature="12790:13238" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -27,23 +27,23 @@
       <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="-269">
+              <caret line="17" column="44" lean-forward="true" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getFileContents#0;class#Test#0" expanded="false" />
-                <element signature="e#1638#2093#0" expanded="true" />
-                <element signature="e#2092#2093#0" expanded="true" />
+                <element signature="e#1636#2091#0" expanded="true" />
+                <element signature="e#2090#2091#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImportPath.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImportPath.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="322">
-              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -62,31 +62,27 @@
       <file leaf-file-name="UseASTAnalysisClass.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="73" column="103" lean-forward="false" selection-start-line="73" selection-start-column="103" selection-end-line="73" selection-end-column="103" />
+            <state relative-caret-position="1840">
+              <caret line="133" column="17" lean-forward="true" selection-start-line="133" selection-start-column="17" selection-end-line="133" selection-end-column="17" />
               <folding>
                 <element signature="e#1094#1109#0" expanded="true" />
                 <element signature="method#isConstructOrIsMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
-                <element signature="e#2475#3171#0" expanded="true" />
-                <element signature="e#3170#3171#0" expanded="true" />
-                <element signature="method#assertSameFunction#0;class#UseASTAnalysisClass#0" expanded="false" />
-                <element signature="method#useASTAssertSameFun#0;class#UseASTAnalysisClass#0" expanded="false" />
-                <element signature="method#visit#1;class#3903:5490" expanded="false" />
-                <element signature="method#visit#2;class#3903:5490" expanded="false" />
-                <element signature="method#isSameFunction#0;class#UseASTAnalysisClass#0" expanded="false" />
+                <element signature="method#useASTChangeLine#0;class#UseASTAnalysisClass#0" expanded="false" />
+                <element signature="e#2502#3193#0" expanded="true" />
+                <element signature="e#3192#3193#0" expanded="true" />
                 <element signature="method#getFileContents#0;class#UseASTAnalysisClass#0" expanded="false" />
                 <element signature="method#useASTAnalysisConAndMem#0;class#UseASTAnalysisClass#0" expanded="false" />
                 <element signature="method#isMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
                 <element signature="method#isConstruct#0;class#UseASTAnalysisClass#0" expanded="false" />
                 <element signature="class#LockLine#0;class#UseASTAnalysisClass#0" expanded="false" />
-                <element signature="e#9470#9471#0" expanded="true" />
-                <element signature="e#9509#9510#0" expanded="true" />
-                <element signature="e#9558#9559#0" expanded="true" />
-                <element signature="e#9606#9607#0" expanded="true" />
-                <element signature="e#9641#9642#0" expanded="true" />
-                <element signature="e#9679#9680#0" expanded="true" />
-                <element signature="e#9726#9727#0" expanded="true" />
-                <element signature="e#9772#9773#0" expanded="true" />
+                <element signature="e#9499#9500#0" expanded="true" />
+                <element signature="e#9538#9539#0" expanded="true" />
+                <element signature="e#9587#9588#0" expanded="true" />
+                <element signature="e#9635#9636#0" expanded="true" />
+                <element signature="e#9670#9671#0" expanded="true" />
+                <element signature="e#9708#9709#0" expanded="true" />
+                <element signature="e#9755#9756#0" expanded="true" />
+                <element signature="e#9801#9802#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,7 +119,6 @@
       <find>set中的元素</find>
       <find>account</find>
       <find>定位到</find>
-      <find>定位</find>
       <find>定位到的pattern</find>
       <find>System.out.println</find>
       <find>isSameFunction</find>
@@ -135,6 +130,7 @@
       <find>Account</find>
       <find>Yao</find>
       <find>if</find>
+      <find>定位</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -192,10 +188,10 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockAfterAcquireVariable.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/listener/CheckWhetherLockedListener.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/Test.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java" />
       </list>
     </option>
   </component>
@@ -491,8 +487,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Fix" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="2" class="java.lang.String" itemvalue="Application.UseASTAnalysisClass" />
+        <item index="1" class="java.lang.String" itemvalue="Application.UseASTAnalysisClass" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Test" />
         <item index="3" class="java.lang.String" itemvalue="Application.Unicorn" />
         <item index="4" class="java.lang.String" itemvalue="Application.YaoShan" />
       </list>
@@ -573,7 +569,7 @@
       <workItem from="1521509070826" duration="16136000" />
       <workItem from="1521526196718" duration="8745000" />
       <workItem from="1521548819117" duration="720000" />
-      <workItem from="1521600580621" duration="16651000" />
+      <workItem from="1521600580621" duration="22702000" />
     </task>
     <servers />
   </component>
@@ -610,7 +606,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310416000" />
+    <option name="totallyTimeSpent" value="316467000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -633,7 +629,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3269731" sideWeight="0.5017065" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6079792" sideWeight="0.49616042" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6079792" sideWeight="0.49616042" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29488292" sideWeight="0.49829352" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -644,7 +640,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6443941" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6435386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -667,14 +663,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6443941" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6435386" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32870772" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3269731" sideWeight="0.4978678" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6079792" sideWeight="0.49616042" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6079792" sideWeight="0.49616042" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29488292" sideWeight="0.49829352" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21331058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1017,55 +1013,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getFileContents#0;class#Test#0" expanded="false" />
-            <element signature="e#1638#2093#0" expanded="true" />
-            <element signature="e#2092#2093#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="101" column="24" lean-forward="false" selection-start-line="101" selection-start-column="24" selection-end-line="101" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="73" column="103" lean-forward="false" selection-start-line="73" selection-start-column="103" selection-end-line="73" selection-end-column="103" />
-          <folding>
-            <element signature="e#1094#1109#0" expanded="true" />
-            <element signature="method#isConstructOrIsMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="e#2475#3171#0" expanded="true" />
-            <element signature="e#3170#3171#0" expanded="true" />
-            <element signature="method#assertSameFunction#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#useASTAssertSameFun#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#visit#1;class#3903:5490" expanded="false" />
-            <element signature="method#visit#2;class#3903:5490" expanded="false" />
-            <element signature="method#isSameFunction#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#getFileContents#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#useASTAnalysisConAndMem#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#isMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="method#isConstruct#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="class#LockLine#0;class#UseASTAnalysisClass#0" expanded="false" />
-            <element signature="e#9470#9471#0" expanded="true" />
-            <element signature="e#9509#9510#0" expanded="true" />
-            <element signature="e#9558#9559#0" expanded="true" />
-            <element signature="e#9606#9607#0" expanded="true" />
-            <element signature="e#9641#9642#0" expanded="true" />
-            <element signature="e#9679#9680#0" expanded="true" />
-            <element signature="e#9726#9727#0" expanded="true" />
-            <element signature="e#9772#9773#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1077,21 +1029,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="20" column="85" lean-forward="false" selection-start-line="20" selection-start-column="85" selection-end-line="20" selection-end-column="85" />
+        <state relative-caret-position="322">
+          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="17" column="44" lean-forward="true" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
           <folding>
-            <marker date="1521621823384" expanded="true" signature="12715:13163" ph="{...}" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#getFileContents#0;class#Test#0" expanded="false" />
+            <element signature="e#1636#2091#0" expanded="true" />
+            <element signature="e#2090#2091#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java">
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="1840">
+          <caret line="133" column="17" lean-forward="true" selection-start-line="133" selection-start-column="17" selection-end-line="133" selection-end-column="17" />
+          <folding>
+            <element signature="e#1094#1109#0" expanded="true" />
+            <element signature="method#isConstructOrIsMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="method#useASTChangeLine#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="e#2502#3193#0" expanded="true" />
+            <element signature="e#3192#3193#0" expanded="true" />
+            <element signature="method#getFileContents#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="method#useASTAnalysisConAndMem#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="method#isMemberVariable#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="method#isConstruct#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="class#LockLine#0;class#UseASTAnalysisClass#0" expanded="false" />
+            <element signature="e#9499#9500#0" expanded="true" />
+            <element signature="e#9538#9539#0" expanded="true" />
+            <element signature="e#9587#9588#0" expanded="true" />
+            <element signature="e#9635#9636#0" expanded="true" />
+            <element signature="e#9670#9671#0" expanded="true" />
+            <element signature="e#9708#9709#0" expanded="true" />
+            <element signature="e#9755#9756#0" expanded="true" />
+            <element signature="e#9801#9802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="241" column="29" lean-forward="true" selection-start-line="241" selection-start-column="29" selection-end-line="241" selection-end-column="29" />
+          <folding>
+            <marker date="1521632197075" expanded="true" signature="12790:13238" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

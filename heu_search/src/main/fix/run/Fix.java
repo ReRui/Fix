@@ -202,7 +202,7 @@ public class Fix {
         }
         //关联变量处理
         LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
-        System.out.println("加锁起止位置" + firstLoc + "->" + lastLoc);
+        System.out.println("对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc);
     }
 
     //读到那一行，然后对字符串处理
@@ -238,6 +238,7 @@ public class Fix {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("锁的名字" + result.trim());
         return result.trim();
     }
 
@@ -337,12 +338,13 @@ public class Fix {
             //添加信号量的定义
             examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
 
-            //添加信号为true的那条语句，那条语句应该在定义的后一行
-            examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订
 
             //添加信号量判断,
             //待定，只执行一句我就加了分号，这样是否可行？
             examplesIO.addVolatileIf(flagAssertLocation, dirPath + "\\" + whichCLassNeedSync);//待修订
+
+            //添加信号为true的那条语句，那条语句应该在定义的后一行
+            examplesIO.addVolatileToTrue(flagDefineLocation + 1, dirPath + "\\" + whichCLassNeedSync);//待修订
         }
 
     }

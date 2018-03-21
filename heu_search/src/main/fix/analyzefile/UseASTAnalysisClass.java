@@ -32,15 +32,15 @@ public class UseASTAnalysisClass {
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariable(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
         List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
-        nodesList.add(new ReadWriteNode(1, "account.Account@1b7", "amount", "WRITE", "Thread-5", "account/Account.java:28"));
-        nodesList.add(new ReadWriteNode(2, "account.Account@1b7", "amount", "READ", "Thread-5", "account/Account.java:28"));
-        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
+        nodesList.add(new ReadWriteNode(1, "hashcodetest.IntRange@166", "hashCode", "WRITE", "Thread-4", "hashcodetest/IntRange.java:356"));
+        nodesList.add(new ReadWriteNode(2, "hashcodetest.IntRange@166", "hashCode", "WRITE", "Thread-4", "hashcodetest/IntRange.java:357"));
+        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\IntRange.java"));
     }
 
     //判断变量是不是在if(),while(),for()的判断中
     //注意是判断中，就是圆括号中
     //如果是的话，要稍微修改一下加锁的函数
-    public static LockLine changeLockLine(int firstLoc, int lastLoc, String filePath){
+    public static LockLine changeLockLine(int firstLoc, int lastLoc, String filePath) {
         lockLine.setFirstLoc(firstLoc);
         lockLine.setLastLoc(lastLoc);
         useASTChangeLine(firstLoc, lastLoc, filePath);
@@ -68,7 +68,7 @@ public class UseASTAnalysisClass {
             public boolean visit(InfixExpression node) {
                 int start = cu.getLineNumber(node.getStartPosition());
                 int end = cu.getLineNumber(node.getStartPosition() + node.getLength());
-                if(firstLoc >= start && (lastLoc - 1) <= end) {//加锁区域在圆括号的里面
+                if (firstLoc >= start && lastLoc <= end) {//加锁区域在圆括号的里面
                     ASTNode parent = node.getParent();
                     lockLine.setFirstLoc(cu.getLineNumber(parent.getStartPosition()));
                     lockLine.setLastLoc(cu.getLineNumber(parent.getStartPosition() + parent.getLength()));//此处lastloc不要加1，因为加锁的时候已经是+1了
@@ -141,12 +141,12 @@ public class UseASTAnalysisClass {
     private static boolean isSameFunction(ASTNode rw1Node, ASTNode rw2Node) {
         //找到第一个结点在哪个函数中
         ASTNode iNode = rw1Node.getParent();
-        while (iNode instanceof MethodDeclaration) {
+        while (!(iNode instanceof MethodDeclaration)) {
             iNode = iNode.getParent();
         }
         //找到第二个结点在哪个函数中
         ASTNode jNode = rw2Node.getParent();
-        while (jNode instanceof MethodDeclaration) {
+        while (!(jNode instanceof MethodDeclaration)) {
             jNode = jNode.getParent();
         }
         if (iNode.equals(jNode)) {
@@ -249,7 +249,7 @@ public class UseASTAnalysisClass {
     }
 
     //表示加锁行数
-    public static class LockLine{
+    public static class LockLine {
         int firstLoc;
         int lastLoc;
 

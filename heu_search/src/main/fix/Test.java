@@ -16,7 +16,7 @@ public class Test {
     static String className = "";//类的名字，以后用来比较用
 
     public static void main(String[] args) {
-        test(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\AlarmClock.java");
+        test(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\IntRange.java");
     }
 
     //chanage file content to buffer array
