@@ -9,7 +9,8 @@ public  class ImportPath {
     //要加载的examples工程根路径
     public static String examplesRootPath = "D:\\FixExamples";
     //具体到某个项目的名称
-    public static String projectName = "account";
+//    public static String projectName = "account";
+    public static String projectName = "hashcodetest";
     //这个项目的主类名称
-    public static String mainClassName = "Main";
+    public static String mainClassName = "HashCodeTest";
 }

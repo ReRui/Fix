@@ -25,7 +25,7 @@ public class Unicorn {
     public static List<PatternCounter> getPatternCounterList() {
         List<PatternCounter> patternCounters = new ArrayList<>();
 
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 50; ++i) {
             String[] str = new String[]{
                     "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
                     "+search.class=p_heu.search.SingleExecutionSearch",

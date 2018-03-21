@@ -27,6 +27,8 @@ public class UseASTAnalysisClass {
 
     static boolean flagSameFunction = false;//是不是在一个函数中
 
+    static LockLine lockLine = new LockLine();//用来记录加锁的起始和终止行数
+
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariable(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
         List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
@@ -35,11 +37,47 @@ public class UseASTAnalysisClass {
         System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
     }
 
+    //判断变量是不是在if(),while(),for()的判断中
+    //注意是判断中，就是圆括号中
+    //如果是的话，要稍微修改一下加锁的函数
+    public static LockLine changeLockLine(int firstLoc, int lastLoc, String filePath){
+        lockLine.setFirstLoc(firstLoc);
+        lockLine.setLastLoc(lastLoc);
+        useASTChangeLine(firstLoc, lastLoc, filePath);
+        return lockLine;
+    }
+
     //判断是不是成员变量或者构造函数
     public static boolean isConstructOrIsMemberVariable(int firstLoc, int lastLoc, String filePath) {
         useASTAnalysisConAndMem(firstLoc, lastLoc, filePath);
         return flagConstruct || flagMember;
     }
+
+    //利用AST来改变加锁位置
+    public static void useASTChangeLine(int firstLoc, int lastLoc, String filePath) {
+
+        ASTParser parser = ASTParser.newParser(AST.JLS3);
+        parser.setSource(getFileContents(new File(filePath)));
+        parser.setKind(ASTParser.K_COMPILATION_UNIT);
+
+        final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+
+        cu.accept(new ASTVisitor() {
+
+            @Override
+            public boolean visit(InfixExpression node) {
+                int start = cu.getLineNumber(node.getStartPosition());
+                int end = cu.getLineNumber(node.getStartPosition() + node.getLength());
+                if(firstLoc >= start && (lastLoc - 1) <= end) {//加锁区域在圆括号的里面
+                    ASTNode parent = node.getParent();
+                    lockLine.setFirstLoc(cu.getLineNumber(parent.getStartPosition()));
+                    lockLine.setLastLoc(cu.getLineNumber(parent.getStartPosition() + parent.getLength()));//此处lastloc不要加1，因为加锁的时候已经是+1了
+                }
+                return super.visit(node);
+            }
+        });
+    }
+
 
     //是不是在一个函数中
     public static boolean assertSameFunction(List<ReadWriteNode> nodesList, String filePath) {
@@ -210,4 +248,25 @@ public class UseASTAnalysisClass {
         return false;
     }
 
+    //表示加锁行数
+    public static class LockLine{
+        int firstLoc;
+        int lastLoc;
+
+        public int getFirstLoc() {
+            return firstLoc;
+        }
+
+        public void setFirstLoc(int firstLoc) {
+            this.firstLoc = firstLoc;
+        }
+
+        public int getLastLoc() {
+            return lastLoc;
+        }
+
+        public void setLastLoc(int lastLoc) {
+            this.lastLoc = lastLoc;
+        }
+    }
 }

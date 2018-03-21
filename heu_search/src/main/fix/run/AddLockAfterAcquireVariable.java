@@ -103,7 +103,6 @@ public class AddLockAfterAcquireVariable {
                             flag = true;
                     }
                     if (flag) {
-
                         if (matchVariable.matchSetIsEmpty()) {
                             matchVariable.addMatchSet(node);
                             matchVariable.setSameFatherNode(node.getParent());
@@ -138,7 +137,6 @@ public class AddLockAfterAcquireVariable {
                     }
                     flag = false;
                 }
-
                 return true;
             }
         });

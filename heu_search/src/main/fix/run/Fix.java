@@ -1,9 +1,6 @@
 package fix.run;
 
-import fix.analyzefile.CheckWhetherLocked;
-import fix.analyzefile.LockPolicyPopularize;
-import fix.analyzefile.RecordSequence;
-import fix.analyzefile.UseASTAnalysisClass;
+import fix.analyzefile.*;
 import fix.entity.ImportPath;
 import fix.io.ExamplesIO;
 import p_heu.entity.ReadWriteNode;
@@ -135,6 +132,7 @@ public class Fix {
                     }
                     //应该要加什么锁
                     //这个步骤实际是用分析字符串来完成的
+                    //实际上是不对的
                     lockName = acquireLockName(node.getPosition());
                     int poi = Integer.parseInt(node.getPosition().split(":")[1]);
                     if (i == 0) {
@@ -151,7 +149,13 @@ public class Fix {
                 if (!varHasLock) {
                     //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
                     if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
-                        //判断之后再加同步
+
+                        //判断加锁会不会和for循环等交叉
+                        UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
+                        firstLoc = lockLine.getFirstLoc();
+                        lastLoc = lockLine.getLastLoc();
+
+                        //加锁
                         examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
                     }
                 }
@@ -166,6 +170,11 @@ public class Fix {
                         if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                             //最后得到需要加什么锁
                             lockName = acquireLockName(node.getPosition());
+                            //判断加锁会不会和for循环等交叉
+                            UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
+                            firstLoc = lockLine.getFirstLoc();
+                            lastLoc = lockLine.getLastLoc();
+
                             //加锁
                             examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
                         }
@@ -181,6 +190,12 @@ public class Fix {
                 lastLoc = firstLoc;
                 //然后获得需要加何种锁
                 lockName = acquireLockName(node.getPosition());
+
+                //判断加锁会不会和for循环等交叉
+                UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
+                firstLoc = lockLine.getFirstLoc();
+                lastLoc = lockLine.getLastLoc();
+
                 //然后加锁
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
@@ -228,7 +243,7 @@ public class Fix {
 
     //输出锁的名称
     //此处根据pattern读到锁的那行，然后使用字符串匹配
-    private static String existLockName(ReadWriteNode node) {
+  /*  private static String existLockName(ReadWriteNode node) {
         int number = Integer.parseInt(node.getPosition().split(":")[1]);
         String name = "";
         try {
@@ -237,7 +252,7 @@ public class Fix {
             e.printStackTrace();
         }
         return name;
-    }
+    }*/
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
         if (RecordSequence.isLast(patternCounter.getNodes()[0]) || RecordSequence.isFirst(patternCounter.getNodes()[1])) {
@@ -266,6 +281,7 @@ public class Fix {
             }
         }*/
 
+        int firstLoc = 0, lastLoc = 0;
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
 //            System.out.println(position);
@@ -273,6 +289,10 @@ public class Fix {
 
             //获取要加锁的锁名
             String lockName = acquireLockName(position);
+
+            //此处就在一行加锁，所以行数一样
+            firstLoc = Integer.parseInt(positionArg[1]);
+            lastLoc = firstLoc;
 
             if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 //加锁
@@ -284,7 +304,11 @@ public class Fix {
                     /*if (existLockName.equals(lockName)){
                         examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, existLockName, dirPath + "\\" + whichCLassNeedSync);//待定
                     } else {*/
-                        examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
+                    //判断加锁会不会和for循环等交叉
+                    UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
+                    firstLoc = lockLine.getFirstLoc();
+                    lastLoc = lockLine.getLastLoc();
+                    examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
 //                    }
                 }
             }
