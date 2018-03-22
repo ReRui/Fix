@@ -152,7 +152,7 @@ public class Fix {
                 }
                 if (!varHasLock) {
                     //判断加锁区域在不在构造函数，或者加锁变量是不是成员变量
-                    if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
+                    if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
 
                         //判断加锁会不会和for循环等交叉
                         UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
@@ -171,7 +171,7 @@ public class Fix {
                     //每个都检查是不是加锁
                     if (!CheckWhetherLocked.check(node.getPosition(), node.getField())) {
                         //然后检查是不是成员变量或构造函数
-                        if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
+                        if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                             //最后得到需要加什么锁
                             lockName = acquireLockName(node);
                             //判断加锁会不会和for循环等交叉
@@ -316,7 +316,7 @@ public class Fix {
             firstLoc = Integer.parseInt(positionArg[1]);
             lastLoc = firstLoc;
 
-            if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 //加锁
                 //检查是否存在锁再加锁
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
@@ -354,8 +354,8 @@ public class Fix {
         System.out.println("信号量使用位置:" + flagAssertLocation);
 
         //构造函数不能加信号量
-        if (!UseASTAnalysisClass.isConstructOrIsMemberVariable(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync) &&
-                !UseASTAnalysisClass.isConstructOrIsMemberVariable(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync)) {
+        if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync) &&
+                !UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync)) {
             //添加信号量的定义
             examplesIO.addVolatileDefine(flagDefineLocation, "volatile bool flagFix = false;", dirPath + "\\" + whichCLassNeedSync);//待修订
 
