@@ -10,9 +10,9 @@ public class ImportPath {
     public static String examplesRootPath = "D:\\FixExamples";
     //具体到某个项目的名称
 //    public static String projectName = "account";
-    public static String projectName = "hashcodetest";
+    public static String projectName = "linkedlist";
     //这个项目的主类名称
-    public static String mainClassName = "HashCodeTest";
+    public static String mainClassName = "BugTester";
     //临时文件的目录，不用太在意，反正用完就删
     public static String tempFile = "C:\\Users\\lhr\\Desktop\\temp.java";
 }

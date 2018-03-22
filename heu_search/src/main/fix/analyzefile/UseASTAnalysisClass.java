@@ -32,9 +32,9 @@ public class UseASTAnalysisClass {
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariable(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
         List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
-        nodesList.add(new ReadWriteNode(1, "hashcodetest.IntRange@166", "hashCode", "WRITE", "Thread-4", "hashcodetest/IntRange.java:356"));
-        nodesList.add(new ReadWriteNode(2, "hashcodetest.IntRange@166", "hashCode", "WRITE", "Thread-4", "hashcodetest/IntRange.java:357"));
-        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\IntRange.java"));
+        nodesList.add(new ReadWriteNode(1, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:52"));
+        nodesList.add(new ReadWriteNode(2, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:53"));
+        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\MyLinkedList.java"));
     }
 
     //判断变量是不是在if(),while(),for()的判断中
@@ -99,7 +99,7 @@ public class UseASTAnalysisClass {
 
         cu.accept(new ASTVisitor() {
 
-            Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
+           // Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
 
             public boolean visit(TypeDeclaration node) {
                 className = node.getName().toString();
@@ -110,15 +110,18 @@ public class UseASTAnalysisClass {
             public boolean visit(VariableDeclarationFragment node) {
                 //判断是不是成员变量
                 SimpleName name = node.getName();
-                this.names.add(name.getIdentifier());
+               // this.names.add(name.getIdentifier());
 
                 return true; // do not continue to avoid usage info
             }
 
             //变量
             public boolean visit(SimpleName node) {
-                if (this.names.contains(node.getIdentifier())) {
-//                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));/
+               // if (this.names.contains(node.getIdentifier())) {
+//                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
+                   /* System.out.println(rwn1.getField() + "," + Integer.parseInt(rwn1.getPosition().split(":")[1]));
+                    System.out.println(rwn2.getField() + "," + Integer.parseInt(rwn2.getPosition().split(":")[1]));
+                    System.out.println("==============");*/
                     if (node.toString().equals(rwn1.getField()) && cu.getLineNumber(node.getStartPosition()) == Integer.parseInt(rwn1.getPosition().split(":")[1])) {
                         rw1Match = true;
                         rw1Node = node;
@@ -131,7 +134,7 @@ public class UseASTAnalysisClass {
                     if (rw1Match && rw2Match) {//两个读写点都找到的时候
                         flagSameFunction = isSameFunction(rw1Node, rw2Node);
                     }
-                }
+              //  }
                 return true;
             }
         });
@@ -205,20 +208,20 @@ public class UseASTAnalysisClass {
                 }
                 SimpleName name = node.getName();
 //                System.out.println(isMemberVariable(node) + "test");
-                this.names.add(name.getIdentifier());
+//                this.names.add(name.getIdentifier());
 
                 return true; // do not continue to avoid usage info
             }
 
             //变量
             public boolean visit(SimpleName node) {
-                if (this.names.contains(node.getIdentifier())) {
+//                if (this.names.contains(node.getIdentifier())) {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
                     //判断是不是构造函数
                     if (cu.getLineNumber(node.getStartPosition()) >= firstLoc && cu.getLineNumber(node.getStartPosition()) <= lastLoc) {
                         flagConstruct = isConstruct(node);
                     }
-                }
+//                }
                 return true;
             }
         });

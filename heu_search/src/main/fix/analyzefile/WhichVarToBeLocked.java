@@ -82,7 +82,7 @@ public class WhichVarToBeLocked {
             //变量
             public boolean visit(SimpleName node) {
 //                System.out.println("SimpleName:" + node.getIdentifier() + "," + cu.getLineNumber(node.getStartPosition()));
-                if (this.names.contains(node.getIdentifier())) {
+//                if (this.names.contains(node.getIdentifier())) {
                     if(node.toString().equals(var) && cu.getLineNumber(node.getStartPosition()) == location){
 //                        System.out.println("SimpleName:" + node.getIdentifier() + "," + cu.getLineNumber(node.getStartPosition()));
                         lockName = node.getIdentifier();
@@ -97,7 +97,7 @@ public class WhichVarToBeLocked {
                     String pattern = "^.+\\.amount$";
                     boolean isMatch = Pattern.matches(pattern, content);
                     System.out.println(isMatch);*/
-                }
+//                }
 
                 return true;
             }
