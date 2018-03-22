@@ -107,12 +107,15 @@ public class LockAdjust {
         }
     }
 
+    //删除原有锁
     private void deleteOldSync(int oneFirstLoc, int oneLastLoc, int twoFirstLoc, int twoLastLoc, String filePath) {
         String tempFile = "C:\\Users\\lhr\\Desktop\\i.java";
         FileToTempFile(oneFirstLoc, oneLastLoc, twoFirstLoc, twoLastLoc, filePath, tempFile);//将源文件修改后写入临时文件
         TempFileToFile(filePath, tempFile);//从临时文件写入
+        deleteTempFile(tempFile);//删除临时文件
     }
 
+    //原文件修改后写入临时文件
     private void FileToTempFile(int oneFirstLoc, int oneLastLoc, int twoFirstLoc, int twoLastLoc, String filePath, String tempFile) {
         BufferedReader br = null;
         BufferedWriter bw = null;
@@ -165,6 +168,7 @@ public class LockAdjust {
         }
     }
 
+    //从临时文件将修改后的内容再写入原文件
     private void TempFileToFile(String filePath, String tempFile) {
         BufferedReader br = null;
         BufferedWriter bw = null;
@@ -189,6 +193,11 @@ public class LockAdjust {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void deleteTempFile(String tempFile) {
+        File file = new File(tempFile);
+        file.delete();
     }
 
     //判断是不是交叉
