@@ -6,6 +6,15 @@ import java.io.*;
 
 //在添加两个同步的时候，万一两个同步交叉，要合并
 public class LockAdjust {
+    //单例
+    private static LockAdjust instance = new LockAdjust();
+    private LockAdjust() {
+
+    }
+    public static LockAdjust getInstance() {
+        return instance;
+    }
+
     String oneLockName = "";//第一次加的锁
     int oneFirstLoc = 0;//第一次加锁位置
     int oneLastLoc = 0;//第一次加锁位置

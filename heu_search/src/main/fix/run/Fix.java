@@ -17,6 +17,7 @@ public class Fix {
     static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
 
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
+    static LockAdjust lockAdjust = LockAdjust.getInstance();//当锁交叉时，用来合并锁
 
     public static void main(String[] args) {
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
@@ -110,7 +111,9 @@ public class Fix {
 
         //根据获得的list，进行加锁
         addSyncFourToEight(threadA);
+        lockAdjust.setOneLockFinish(true);
         addSyncFourToEight(threadB);
+        lockAdjust.adjust(dirPath + "\\" + whichCLassNeedSync);
     }
 
     private static void addSyncFourToEight(List<ReadWriteNode> rwnList) {
@@ -201,6 +204,19 @@ public class Fix {
                 examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);
             }
         }
+
+        //记录加锁位置
+        //便于以后调整
+        if (lockAdjust.isOneLockFinish()) {
+            lockAdjust.setOneLockName(lockName);
+            lockAdjust.setOneFirstLoc(firstLoc);
+            lockAdjust.setOneLastLoc(lastLoc + 1);
+        } else {
+            lockAdjust.setTwoLockName(lockName);
+            lockAdjust.setTwoFirstLoc(firstLoc);
+            lockAdjust.setTwoLastLoc(lastLoc + 1);
+        }
+
         //关联变量处理
         LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
         System.out.println("对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc);
