@@ -1,5 +1,7 @@
 package fix.analyzefile;
 
+import fix.entity.ImportPath;
+
 import java.io.*;
 
 //在添加两个同步的时候，万一两个同步交叉，要合并
@@ -14,8 +16,8 @@ public class LockAdjust {
 
     boolean oneLockFinish = false;//第一次加锁是否完成
 
-    int finaFirstLoc = 0;//合并后的位置
-    int finaLastLoc = 0;//合并后的位置
+    int finalFirstLoc = 0;//合并后的位置
+    int finalLastLoc = 0;//合并后的位置
 
     public String getOneLockName() {
         return oneLockName;
@@ -73,20 +75,20 @@ public class LockAdjust {
         this.oneLockFinish = oneLockFinish;
     }
 
-    public int getFinaFirstLoc() {
-        return finaFirstLoc;
+    public int getFinalFirstLoc() {
+        return finalFirstLoc;
     }
 
-    public void setFinaFirstLoc(int finaFirstLoc) {
-        this.finaFirstLoc = finaFirstLoc;
+    public void setFinalFirstLoc(int finalFirstLoc) {
+        this.finalFirstLoc = finalFirstLoc;
     }
 
-    public int getFinaLastLoc() {
-        return finaLastLoc;
+    public int getFinalLastLoc() {
+        return finalLastLoc;
     }
 
-    public void setFinaLastLoc(int finaLastLoc) {
-        this.finaLastLoc = finaLastLoc;
+    public void setFinalLastLoc(int finalLastLoc) {
+        this.finalLastLoc = finalLastLoc;
     }
 
     public static void main(String[] args) {
@@ -95,28 +97,32 @@ public class LockAdjust {
         la.setOneLastLoc(358);
         la.setTwoFirstLoc(357);
         la.setTwoLastLoc(358);
+        la.setOneLockName("this");
+        la.setTwoLockName("this");
         la.adjust("C:\\Users\\lhr\\Desktop\\a.java");
     }
-    public  void adjust(String filePath) {
+
+    public void adjust(String filePath) {
         if (oneLockName.equals(twoLockName)) { //两次加锁相同
             if (cross()) {
-                finaFirstLoc = Math.min(oneFirstLoc, twoFirstLoc);
-                finaLastLoc = Math.max(oneLastLoc, twoLastLoc);
-                deleteOldSync(oneFirstLoc, oneLastLoc, twoFirstLoc, twoLastLoc, filePath);
+                finalFirstLoc = Math.min(oneFirstLoc, twoFirstLoc);
+                finalLastLoc = Math.max(oneLastLoc, twoLastLoc);
+                deleteOldSync(filePath);//删除原有锁
+//                addNewSync();
             }
         }
     }
 
     //删除原有锁
-    private void deleteOldSync(int oneFirstLoc, int oneLastLoc, int twoFirstLoc, int twoLastLoc, String filePath) {
-        String tempFile = "C:\\Users\\lhr\\Desktop\\i.java";
-        FileToTempFile(oneFirstLoc, oneLastLoc, twoFirstLoc, twoLastLoc, filePath, tempFile);//将源文件修改后写入临时文件
+    private void deleteOldSync(String filePath) {
+        String tempFile = ImportPath.tempFile;//临时文件的目录，不用太在意，反正用完就删
+        FileToTempFile(filePath, tempFile);//将源文件修改后写入临时文件
         TempFileToFile(filePath, tempFile);//从临时文件写入
         deleteTempFile(tempFile);//删除临时文件
     }
 
     //原文件修改后写入临时文件
-    private void FileToTempFile(int oneFirstLoc, int oneLastLoc, int twoFirstLoc, int twoLastLoc, String filePath, String tempFile) {
+    private void FileToTempFile(String filePath, String tempFile) {
         BufferedReader br = null;
         BufferedWriter bw = null;
         int line = 0;
@@ -150,6 +156,18 @@ public class LockAdjust {
                     read = read.substring(index);
                 }
 
+                //添加合并后的锁
+                //位置一定要在删除锁后面
+                if (line == finalFirstLoc) {
+                    StringBuilder sb = new StringBuilder(read);
+                    sb.insert(0,"synchronized (" + oneLockName + "){ ");
+                    read = sb.toString();
+                }
+                if(line == finalLastLoc) {
+                    StringBuilder sb = new StringBuilder(read);
+                    sb.insert(0,"}");
+                    read = sb.toString();
+                }
                 bw.write(read);
                 bw.write('\n');
                 bw.flush();
@@ -195,6 +213,7 @@ public class LockAdjust {
         }
     }
 
+    //删除临时文件
     private void deleteTempFile(String tempFile) {
         File file = new File(tempFile);
         file.delete();
