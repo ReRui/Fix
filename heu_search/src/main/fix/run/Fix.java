@@ -111,9 +111,9 @@ public class Fix {
 
         //根据获得的list，进行加锁
         addSyncFourToEight(threadA);
-        lockAdjust.setOneLockFinish(true);
+        lockAdjust.setOneLockFinish(true);//表示第一次执行完
         addSyncFourToEight(threadB);
-        lockAdjust.adjust(dirPath + "\\" + whichCLassNeedSync);
+        lockAdjust.adjust(dirPath + "\\" + whichCLassNeedSync);//合并锁
     }
 
     private static void addSyncFourToEight(List<ReadWriteNode> rwnList) {
@@ -238,7 +238,7 @@ public class Fix {
                     String field = node.getField();//得的变量
                     java.util.regex.Pattern p = java.util.regex.Pattern.compile("(\\w+)\\." + field);
                     Matcher m = p.matcher(read);
-                    if(m.matches()){
+                    if (m.matches()) {
                         result = m.group(1);
                     } else {
                         result = "this";
@@ -268,13 +268,22 @@ public class Fix {
     }*/
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
-        if (RecordSequence.isLast(patternCounter.getNodes()[0]) || RecordSequence.isFirst(patternCounter.getNodes()[1])) {
-            System.out.println("添加信号量");
-            addSignal(patternCounter);
-        } else {
+        ReadWriteNode readNode = null;
+        ReadWriteNode writeNode = null;
+        for (int i = 0; i < 2; i++) {
+            if (patternCounter.getNodes()[i].getType().equals("READ")) {
+                readNode = patternCounter.getNodes()[i];
+            } else if (patternCounter.getNodes()[i].getType().equals("WRITE")) {
+                writeNode = patternCounter.getNodes()[i];
+            }
+        }
+        if (readNode != null && writeNode != null && ( !RecordSequence.isLast(readNode) || !RecordSequence.isFirst(writeNode))) {
             System.out.println("添加同步");
             //为长度为2的pattern添加同步
             addSyncPatternOneToThree(patternCounter);
+        } else {
+            System.out.println("添加信号量");
+            addSignal(patternCounter);
         }
     }
 
