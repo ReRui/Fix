@@ -53,7 +53,7 @@ public class RecordSequence {
 
     //将sequence里面的数据，按照线程和行数分类
     private static void divideNodes(ReadWriteNode node) {
-        NodeSequence nodeSequence = new NodeSequence(node.getElement(), node.getField(), node.getThread(), node.getPosition());
+        NodeSequence nodeSequence = new NodeSequence(node.getElement(), node.getField(), node.getPosition());
         //先判断list中有没有，没有，则添加，有，直接找到有的那个，在它的arr里面添加
         MatchResult mr = listMatch(nodeSequence);
         if (mr.isFlag()) {
@@ -68,7 +68,7 @@ public class RecordSequence {
         MatchResult matchResult = new MatchResult();
         for (int i = 0; i < nodeSequenceList.size(); i++) {
             NodeSequence nodeS = nodeSequenceList.get(i);
-            if (nodeS.getElement().equals(ns.getElement()) && nodeS.getField().equals(ns.getField()) && nodeS.getPosition().equals(ns.getPosition()) && nodeS.getThread().equals(ns.getThread())) {
+            if (nodeS.getElement().equals(ns.getElement()) && nodeS.getField().equals(ns.getField()) && nodeS.getPosition().equals(ns.getPosition())) {
                 matchResult.setFlag(true);
                 matchResult.setIndex(i);
             }
@@ -76,11 +76,11 @@ public class RecordSequence {
         return matchResult;
     }
 
-    //是不是某个线程对某行某变量最后一次操作
+    //是不是最后一次操作
     public static boolean isLast(ReadWriteNode readWriteNode) {
         for (int i = 0; i < nodeSequenceList.size(); i++) {
             NodeSequence nodeS = nodeSequenceList.get(i);
-            if (nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition()) && nodeS.getThread().equals(readWriteNode.getThread())) {
+            if (nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition())) {
                 int index = nodeS.getIdList().indexOf(readWriteNode.getId());
                 if ((index + 1) == nodeS.getIdList().size())
                     return true;
@@ -89,11 +89,11 @@ public class RecordSequence {
         return false;
     }
 
-    //是不是某个线程对某行某变量第一次操作
+    //是不是第一次操作
     public static boolean isFirst(ReadWriteNode readWriteNode) {
         for (int i = 0; i < nodeSequenceList.size(); i++) {
             NodeSequence nodeS = nodeSequenceList.get(i);
-            if (nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition()) && nodeS.getThread().equals(readWriteNode.getThread())) {
+            if (nodeS.getElement().equals(readWriteNode.getElement()) && nodeS.getField().equals(readWriteNode.getField()) && nodeS.getPosition().equals(readWriteNode.getPosition())) {
                 int index = nodeS.getIdList().indexOf(readWriteNode.getId());
                 if (index == 0)
                     return true;

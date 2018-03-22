@@ -104,16 +104,17 @@ public class LockAdjust {
 
     public static void main(String[] args) {
         LockAdjust la = new LockAdjust();
-        la.setOneFirstLoc(356);
-        la.setOneLastLoc(357);
-        la.setTwoFirstLoc(357);
-        la.setTwoLastLoc(358);
+        la.setOneFirstLoc(12);
+        la.setOneLastLoc(13);
+        la.setTwoFirstLoc(12);
+        la.setTwoLastLoc(13);
         la.setOneLockName("this");
         la.setTwoLockName("this");
         la.adjust("C:\\Users\\lhr\\Desktop\\a.java");
     }
 
     public void adjust(String filePath) {
+        System.out.println(cross()+"=====================");
         if (oneLockName.equals(twoLockName)) { //两次加锁相同
             if (cross()) {//如果交叉需要合并
                 if (lastEqualFirst()) {//判断某次加锁终止行是不是和另一次加锁起始行相等

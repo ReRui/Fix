@@ -8,7 +8,6 @@ import java.util.List;
 public class NodeSequence {
     private String element;
     private String field;
-    private String thread;
     private String position;
 
     //记录原本ReadWriteNode的id
@@ -23,18 +22,13 @@ public class NodeSequence {
         return field;
     }
 
-    public String getThread() {
-        return thread;
-    }
-
     public String getPosition() {
         return position;
     }
 
-    public NodeSequence(String element, String field, String thread, String position) {
+    public NodeSequence(String element, String field, String position) {
         this.element = element;
         this.field = field;
-        this.thread = thread;
         this.position = position;
     }
 
@@ -46,13 +40,4 @@ public class NodeSequence {
         return idList;
     }
 
-    public boolean isFirst(){
-
-        return false;
-    }
-
-    public boolean isLast(){
-
-        return false;
-    }
 }

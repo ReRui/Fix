@@ -11,7 +11,17 @@ public class Test {
     static String className = "";//类的名字，以后用来比较用
 
     public static void main(String[] args) {
-        useASTAssertSameFun(ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\SetCheck.java");
+//        useASTAssertSameFun(ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\SetCheck.java");
+        t();
+    }
+
+    private static int t() {
+        int a = 1;
+        Object o = new Object();
+        synchronized (o) {
+            return a;
+        }
+
     }
 
     //chanage file content to buffer array

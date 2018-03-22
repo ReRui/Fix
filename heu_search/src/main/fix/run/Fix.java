@@ -207,7 +207,7 @@ public class Fix {
 
         //记录加锁位置
         //便于以后调整
-        if (lockAdjust.isOneLockFinish()) {
+        if (!lockAdjust.isOneLockFinish()) {
             lockAdjust.setOneLockName(lockName);
             lockAdjust.setOneFirstLoc(firstLoc);
             lockAdjust.setOneLastLoc(lastLoc + 1);
@@ -277,7 +277,11 @@ public class Fix {
                 writeNode = patternCounter.getNodes()[i];
             }
         }
-        if (readNode != null && writeNode != null && ( !RecordSequence.isLast(readNode) || !RecordSequence.isFirst(writeNode))) {
+        /*System.out.println("read" + readNode);
+        System.out.println("write" + writeNode);
+        System.out.println(!RecordSequence.isLast(readNode));
+        System.out.println(!RecordSequence.isFirst(writeNode));*/
+        if (readNode != null && writeNode != null && (!RecordSequence.isLast(readNode) || !RecordSequence.isFirst(writeNode))) {
             System.out.println("添加同步");
             //为长度为2的pattern添加同步
             addSyncPatternOneToThree(patternCounter);
@@ -326,12 +330,24 @@ public class Fix {
                     /*if (existLockName.equals(lockName)){
                         examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, existLockName, dirPath + "\\" + whichCLassNeedSync);//待定
                     } else {*/
+
                     //判断加锁会不会和for循环等交叉
                     UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
                     firstLoc = lockLine.getFirstLoc();
                     lastLoc = lockLine.getLastLoc();
+                    if (!lockAdjust.isOneLockFinish()) {
+                        lockAdjust.setOneLockName(lockName);
+                        lockAdjust.setOneFirstLoc(firstLoc);
+                        lockAdjust.setOneLastLoc(lastLoc + 1);
+                        lockAdjust.setOneLockFinish(true);
+                    } else {
+                        lockAdjust.setTwoLockName(lockName);
+                        lockAdjust.setTwoFirstLoc(firstLoc);
+                        lockAdjust.setTwoLastLoc(lastLoc + 1);
+                    }
                     examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
 //                    }
+                    lockAdjust.adjust(dirPath + "\\" + whichCLassNeedSync);
                 }
             }
         }
