@@ -8,9 +8,11 @@ import java.io.*;
 public class LockAdjust {
     //单例
     private static LockAdjust instance = new LockAdjust();
+
     private LockAdjust() {
 
     }
+
     public static LockAdjust getInstance() {
         return instance;
     }
@@ -103,7 +105,7 @@ public class LockAdjust {
     public static void main(String[] args) {
         LockAdjust la = new LockAdjust();
         la.setOneFirstLoc(356);
-        la.setOneLastLoc(358);
+        la.setOneLastLoc(357);
         la.setTwoFirstLoc(357);
         la.setTwoLastLoc(358);
         la.setOneLockName("this");
@@ -113,25 +115,33 @@ public class LockAdjust {
 
     public void adjust(String filePath) {
         if (oneLockName.equals(twoLockName)) { //两次加锁相同
-            if (cross()) {
-                finalFirstLoc = Math.min(oneFirstLoc, twoFirstLoc);
-                finalLastLoc = Math.max(oneLastLoc, twoLastLoc);
-                deleteOldSync(filePath);//删除原有锁
-//                addNewSync();
+            if (cross()) {//如果交叉需要合并
+                if (lastEqualFirst()) {//判断某次加锁终止行是不是和另一次加锁起始行相等
+                    adjustOldSync(filePath, 1);//修改原有的锁
+
+                } else {
+                    finalFirstLoc = Math.min(oneFirstLoc, twoFirstLoc);
+                    finalLastLoc = Math.max(oneLastLoc, twoLastLoc);
+                    //删除原有锁，然后添加新的合并锁
+                    adjustOldSync(filePath, 0);//0表示合并锁，1表示移动锁
+                }
             }
         }
     }
 
     //删除原有锁
-    private void deleteOldSync(String filePath) {
+    //第二个参数表示执行哪个操作
+    //0表示合并锁
+    //1表示移动锁
+    private void adjustOldSync(String filePath, int type) {
         String tempFile = ImportPath.tempFile;//临时文件的目录，不用太在意，反正用完就删
-        FileToTempFile(filePath, tempFile);//将源文件修改后写入临时文件
+        FileToTempFile(filePath, tempFile, type);//将源文件修改后写入临时文件
         TempFileToFile(filePath, tempFile);//从临时文件写入
         deleteTempFile(tempFile);//删除临时文件
     }
 
     //原文件修改后写入临时文件
-    private void FileToTempFile(String filePath, String tempFile) {
+    private void FileToTempFile(String filePath, String tempFile, int type) {
         BufferedReader br = null;
         BufferedWriter bw = null;
         int line = 0;
@@ -141,42 +151,60 @@ public class LockAdjust {
             String read = "";
             while (((read = br.readLine()) != null)) {
                 line++;
-                //删除第一个锁
-                if (line == oneFirstLoc) {
-                    int index = read.indexOf('{');
-                    index++;
-                    read = read.substring(index);
-                }
-                if (line == oneLastLoc) {
-                    int index = read.indexOf('}');
-                    index++;
-                    read = read.substring(index);
+                //执行合并锁操作
+                if (type == 0) {
+                    //删除第一个锁
+                    if (line == oneFirstLoc) {
+                        int index = read.indexOf('{');
+                        index++;
+                        read = read.substring(index);
+                    }
+                    if (line == oneLastLoc) {
+                        int index = read.indexOf('}');
+                        index++;
+                        read = read.substring(index);
+                    }
+
+                    //删除第二个锁
+                    if (line == twoFirstLoc) {
+                        int index = read.indexOf('{');
+                        index++;
+                        read = read.substring(index);
+                    }
+                    if (line == twoLastLoc) {
+                        int index = read.indexOf('}');
+                        index++;
+                        read = read.substring(index);
+                    }
+
+                    //添加合并后的锁
+                    //位置一定要在删除锁后面
+                    if (line == finalFirstLoc) {
+                        StringBuilder sb = new StringBuilder(read);
+                        sb.insert(0, "synchronized (" + oneLockName + "){ ");
+                        read = sb.toString();
+                    }
+                    if (line == finalLastLoc) {
+                        StringBuilder sb = new StringBuilder(read);
+                        sb.insert(0, "}");
+                        read = sb.toString();
+                    }
+                } else if (type == 1) {//执行移动锁操作
+                    int equalLineNumber = 0;//相等行号
+                    if (oneLastLoc == twoFirstLoc) {//1和2靠着
+                        equalLineNumber = twoFirstLoc;
+                    } else if (twoLastLoc == oneFirstLoc) {//2和1靠着
+                        equalLineNumber = oneFirstLoc;
+                    }
+                    if (line == equalLineNumber) {
+                        int index = read.indexOf('}');//找到上个加锁的右括号
+                        read = read.substring(0, index) + read.substring(index + 1);//删除右括号
+                        StringBuilder sb = new StringBuilder(read);
+                        sb.insert(0, '}');//在行首添加一个右括号
+                        read = sb.toString();
+                    }
                 }
 
-                //删除第二个锁
-                if (line == twoFirstLoc) {
-                    int index = read.indexOf('{');
-                    index++;
-                    read = read.substring(index);
-                }
-                if (line == twoLastLoc) {
-                    int index = read.indexOf('}');
-                    index++;
-                    read = read.substring(index);
-                }
-
-                //添加合并后的锁
-                //位置一定要在删除锁后面
-                if (line == finalFirstLoc) {
-                    StringBuilder sb = new StringBuilder(read);
-                    sb.insert(0,"synchronized (" + oneLockName + "){ ");
-                    read = sb.toString();
-                }
-                if(line == finalLastLoc) {
-                    StringBuilder sb = new StringBuilder(read);
-                    sb.insert(0,"}");
-                    read = sb.toString();
-                }
                 bw.write(read);
                 bw.write('\n');
                 bw.flush();
@@ -239,4 +267,16 @@ public class LockAdjust {
         }
         return true;
     }
+
+    //判断加锁终止行是不是和另一次加锁起始行相等
+    private boolean lastEqualFirst() {
+        if (oneLastLoc == twoFirstLoc) {
+            return true;
+        }
+        if (twoLastLoc == oneFirstLoc) {
+            return true;
+        }
+        return false;
+    }
 }
+
