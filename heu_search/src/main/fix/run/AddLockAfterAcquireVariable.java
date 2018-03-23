@@ -88,14 +88,14 @@ public class AddLockAfterAcquireVariable {
             //定义变量
             public boolean visit(VariableDeclarationFragment node) {
                 SimpleName name = node.getName();
-//                this.names.add(name.getIdentifier());
+                this.names.add(name.getIdentifier());
 
                 return true; // do not continue to avoid usage info
             }
 
             //变量
             public boolean visit(SimpleName node) {
-//                if (this.names.contains(node.getIdentifier())) {
+                if (this.names.contains(node.getIdentifier())) {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
                     boolean flag = false;
                     for (String s : variableSet) {
@@ -136,7 +136,7 @@ public class AddLockAfterAcquireVariable {
                         }
                     }
                     flag = false;
-//                }
+                }
                 return true;
             }
         });

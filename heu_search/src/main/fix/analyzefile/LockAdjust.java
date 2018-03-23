@@ -114,12 +114,10 @@ public class LockAdjust {
     }
 
     public void adjust(String filePath) {
-        System.out.println(cross()+"=====================");
         if (oneLockName.equals(twoLockName)) { //两次加锁相同
             if (cross()) {//如果交叉需要合并
                 if (lastEqualFirst()) {//判断某次加锁终止行是不是和另一次加锁起始行相等
                     adjustOldSync(filePath, 1);//修改原有的锁
-
                 } else {
                     finalFirstLoc = Math.min(oneFirstLoc, twoFirstLoc);
                     finalLastLoc = Math.max(oneLastLoc, twoLastLoc);

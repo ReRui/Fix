@@ -40,7 +40,7 @@ public class Unicorn {
 
             jpf.addListener(listener);
             jpf.run();
-//            System.out.println(listener.getSequence().getNodes() + "getNodes");
+
 
             Sequence seq = listener.getSequence();
             //sequence中有时候会出现同一个线程对某个地方重复执行两次的情况
@@ -48,6 +48,8 @@ public class Unicorn {
             //因为实际产生效果的是第二次
             //jpf中产生这种情况的原因不明
             reduceSeq(seq);
+
+            System.out.println(listener.getSequence().getNodes() + "getNodes");
 
             outer:
             for (Pattern pattern : seq.getPatterns()) {

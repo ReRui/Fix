@@ -236,7 +236,7 @@ public class Fix {
                 line++;
                 if (line == poi) {//找到哪一行
                     String field = node.getField();//得的变量
-                    java.util.regex.Pattern p = java.util.regex.Pattern.compile("(\\w+)\\." + field);
+                    java.util.regex.Pattern p = java.util.regex.Pattern.compile("^\\s+(\\w+)\\." + field + ".*$");
                     Matcher m = p.matcher(read);
                     if (m.matches()) {
                         result = m.group(1);

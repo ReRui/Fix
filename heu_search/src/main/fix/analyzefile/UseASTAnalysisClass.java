@@ -18,7 +18,6 @@ public class UseASTAnalysisClass {
     static String className = "";//类的名字，以后用来比较用
     static boolean flagMember = false;//是不是成员变量
     static boolean flagConstruct = false;//是不是构造函数
-    static boolean flagReturn = false;//是不是return语句
 
     static boolean rw1Match = false;//第一个读写点有没有匹配
     static boolean rw2Match = false;//第二个读写点有没有匹配
@@ -51,7 +50,7 @@ public class UseASTAnalysisClass {
     //判断是不是成员变量或者构造函数
     public static boolean isConstructOrIsMemberVariableOrReturn(int firstLoc, int lastLoc, String filePath) {
         useASTAnalysisConAndMem(firstLoc, lastLoc, filePath);
-        return flagConstruct || flagMember || flagReturn;
+        return flagConstruct || flagMember;
     }
 
     //利用AST来改变加锁位置
@@ -212,15 +211,6 @@ public class UseASTAnalysisClass {
 //                this.names.add(name.getIdentifier());
 
                 return true; // do not continue to avoid usage info
-            }
-
-            @Override
-            public boolean visit(ReturnStatement node) {
-                //加锁那行是return语句
-                if(cu.getLineNumber(node.getStartPosition()) == firstLoc) {
-                   flagReturn = true;
-                }
-                return super.visit(node);
             }
 
             //变量
