@@ -30,7 +30,7 @@ public class Unicorn {
 
         for (int i = 0; i < 50; ++i) {
             String[] str = new String[]{
-                    "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
+                    "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\Patch",
                     "+search.class=p_heu.search.SingleExecutionSearch",
                     ImportPath.projectName + "." + ImportPath.mainClassName
             };

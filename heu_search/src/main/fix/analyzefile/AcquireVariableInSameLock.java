@@ -14,7 +14,7 @@ public class AcquireVariableInSameLock {
 
     public Vector<String> getOneLockfieldVector() {
         String[] str = new String[]{
-                "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
+                "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\Patch",
                 "+search.class=fix.search.SingleExecutionSearch",
                 ImportPath.projectName + "." + ImportPath.mainClassName
         };

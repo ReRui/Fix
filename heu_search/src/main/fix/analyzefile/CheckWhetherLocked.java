@@ -12,7 +12,7 @@ public class CheckWhetherLocked {
 
     public static boolean check(String variableLoc,String variableName){
         String[] str = new String[]{
-                "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\FixExamples",
+                "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\Patch",
                 "+search.class=fix.search.SingleExecutionSearch",
                 ImportPath.projectName + "." + ImportPath.mainClassName
         };

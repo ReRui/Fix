@@ -38,6 +38,7 @@ public class ExamplesIO {
     }
 
     //将文件拷贝到另一个位置，并且修改path值
+    //将源程序拷贝到另一个工程目录下
     public String copyFromOneDirToAnotherAndChangeFilePath(String dir, String targetDir, String dirPath) {
         String changeFilePath = "";
         File file = new File(dirPath);
