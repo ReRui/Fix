@@ -18,7 +18,7 @@ public class Verify {
         boolean flag = true;
         List<Unicorn.PatternCounter> patternCounters = new ArrayList<>();
 
-        for (int i = 0; i < 2; ++i) {
+        for (int i = 0; i < 50; ++i) {
             String[] str = new String[]{
                     "+classpath=" + ImportPath.verifyPath + "\\out\\production\\Patch",
                     "+search.class=p_heu.search.SingleExecutionSearch",

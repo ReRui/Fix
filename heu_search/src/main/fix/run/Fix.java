@@ -14,12 +14,14 @@ import java.util.regex.Matcher;
 
 public class Fix {
     static ExamplesIO examplesIO = ExamplesIO.getInstance();
-    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
+    static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;//第一次修复的文件路径
+    static String iterateDirPath = ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName;//迭代修复的文件路径
 
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
     static LockAdjust lockAdjust = LockAdjust.getInstance();//当锁交叉时，用来合并锁
 
     public static void main(String[] args) {
+        int type = 1;//0表示第一次修复，1表示迭代修复
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
         //拿到第一个元素
         System.out.println("定位到的pattern");
@@ -36,8 +38,12 @@ public class Fix {
         //第一次在失败运行中出现的sequence
         RecordSequence.display(patternCounter.getFirstFailAppearPlace());
 
-        //先将项目拷贝到exportExamples
-        dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
+        if (type == 0) {
+            //先将项目拷贝到exportExamples
+            dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
+        } else if (type == 1) {
+            dirPath = iterateDirPath;
+        }
 
         //根据pattern知道需要在哪个类中加锁
         whichCLassNeedSync = patternCounter.getPattern().getNodes()[0].getPosition().split(":")[0].split("/")[1];

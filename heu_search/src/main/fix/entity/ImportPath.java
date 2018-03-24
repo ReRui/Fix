@@ -10,7 +10,7 @@ public class ImportPath {
     public static String examplesRootPath = "D:\\Patch";
     //具体到某个项目的名称
 //    public static String projectName = "account";
-    public static String projectName = "account";
+    public static String projectName = "wrongLock";
     //这个项目的主类名称
     public static String mainClassName = "Main";
     //临时文件的目录，不用太在意，反正用完就删
