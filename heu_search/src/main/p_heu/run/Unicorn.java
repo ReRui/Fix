@@ -18,7 +18,10 @@ import java.util.List;
 public class Unicorn {
     //测试用的main函数
     public static void main(String[] args) {
-        Unicorn.getPatternCounterList();
+        List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
+        for (PatternCounter p : patternCounters) {
+            System.out.println(p);
+        }
     }
 
     //原来是main函数
