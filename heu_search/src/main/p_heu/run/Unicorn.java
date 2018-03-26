@@ -22,6 +22,8 @@ public class Unicorn {
         for (PatternCounter p : patternCounters) {
             System.out.println(p);
         }
+        //获取sequence信息
+//        System.out.println(patternCounters.get(0).getFirstFailAppearPlace() + "sequence");
     }
 
     //原来是main函数
@@ -50,9 +52,7 @@ public class Unicorn {
             //我们只记录第二次，放弃第一次
             //因为实际产生效果的是第二次
             //jpf中产生这种情况的原因不明
-            reduceSeq(seq);
-
-            System.out.println(listener.getSequence().getNodes() + "getNodes");
+            seq = reduceSeq(seq);
 
             outer:
             for (Pattern pattern : seq.getPatterns()) {
@@ -85,7 +85,7 @@ public class Unicorn {
         return patternCounters;
     }
 
-    private static void reduceSeq(Sequence seq) {
+    private static Sequence reduceSeq(Sequence seq) {
         List<Node> nodesList = seq.getNodes();
         for(int i = 0;i < nodesList.size();i++){
             if(nodesList.get(i) instanceof ReadWriteNode){
@@ -101,6 +101,7 @@ public class Unicorn {
                 }
             }
         }
+        return seq;
     }
 
 

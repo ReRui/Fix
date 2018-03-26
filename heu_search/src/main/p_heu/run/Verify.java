@@ -18,9 +18,14 @@ public class Verify {
         boolean flag = true;
         List<Unicorn.PatternCounter> patternCounters = new ArrayList<>();
 
-        for (int i = 0; i <= 20; ++i) {
+        //先将生成补丁后的程序编译成class文件
+        //因为jpf文件要对class文件处理
+        //源路径，目标路径
+        GenerateClass.compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, ImportPath.verifyPath + "\\verifyFiles");
+
+        for (int i = 0; i <= 50; ++i) {
             String[] str = new String[]{
-                    "+classpath=" + ImportPath.verifyPath + "\\out\\production\\Patch",
+                    "+classpath=" + ImportPath.verifyPath + "\\verifyFiles",
                     "+search.class=p_heu.search.SingleExecutionSearch",
                     ImportPath.projectName + "." + ImportPath.mainClassName
             };

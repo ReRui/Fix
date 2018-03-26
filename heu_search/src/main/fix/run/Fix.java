@@ -22,7 +22,7 @@ public class Fix {
 
     public static void main(String[] args) {
 
-        int type = 1;//0表示第一次修复，1表示迭代修复
+        int type = 0;//0表示第一次修复，1表示迭代修复
 
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
         //拿到第一个元素
