@@ -1,6 +1,7 @@
 package p_heu.run;
 
 import fix.entity.ImportPath;
+import fix.entity.type.UnicornType;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
 import p_heu.entity.Node;
@@ -16,6 +17,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Unicorn {
+
+    //修复所依赖的pattern
+    static List<PatternCounter> patternCountersList = new ArrayList<>();
+
+    //验证修复结果
+    static boolean verifyFlag = true;
+
     //测试用的main函数
     public static void main(String[] args) {
         List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
@@ -26,13 +34,37 @@ public class Unicorn {
 //        System.out.println(patternCounters.get(0).getFirstFailAppearPlace() + "sequence");
     }
 
-    //原来是main函数
+    //获取pattern
     public static List<PatternCounter> getPatternCounterList() {
-        List<PatternCounter> patternCounters = new ArrayList<>();
+        useUnicorn(UnicornType.getPattern);
+        return patternCountersList;
+    }
+
+    //获取验证结果
+    public static boolean verifyFixSuccessful() {
+        useUnicorn(UnicornType.verify);
+        return verifyFlag;
+    }
+
+    private static void useUnicorn(int type) {
+
+        String classpath = "";
+        if (type == UnicornType.getPattern) {
+            classpath = ImportPath.examplesRootPath + "\\out\\production\\Patch";
+        } else if (type == UnicornType.verify) {
+            classpath = ImportPath.verifyPath + "\\generateClass";
+        }
+
+        if (type == UnicornType.verify) {
+            //先将生成补丁后的程序编译成class文件
+            //因为jpf文件要对class文件处理
+            //源路径，目标路径
+            GenerateClass.compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, classpath);
+        }
 
         for (int i = 0; i < 50; ++i) {
             String[] str = new String[]{
-                    "+classpath=" + ImportPath.examplesRootPath + "\\out\\production\\Patch",
+                    "+classpath=" + classpath,
                     "+search.class=p_heu.search.SingleExecutionSearch",
                     ImportPath.projectName + "." + ImportPath.mainClassName
             };
@@ -54,9 +86,15 @@ public class Unicorn {
             //jpf中产生这种情况的原因不明
             seq = reduceSeq(seq);
 
+            if (type == UnicornType.verify) {
+                if (!seq.getResult()) {
+                    verifyFlag = false;
+                }
+            }
+
             outer:
             for (Pattern pattern : seq.getPatterns()) {
-                for (PatternCounter p : patternCounters) {
+                for (PatternCounter p : patternCountersList) {
                     if (p.getPattern().isSameExecptThread(pattern)) {
                         if (!seq.getResult() && p.getFirstFailAppearPlace() == null) {
                             p.setFirstFailAppearPlace(seq);
@@ -65,11 +103,11 @@ public class Unicorn {
                         continue outer;
                     }
                 }
-                patternCounters.add(new PatternCounter(pattern, seq.getResult(), seq.getResult() ? null : seq));
+                patternCountersList.add(new PatternCounter(pattern, seq.getResult(), seq.getResult() ? null : seq));
             }
         }
 
-        Collections.sort(patternCounters, new Comparator<PatternCounter>() {
+        Collections.sort(patternCountersList, new Comparator<PatternCounter>() {
             @Override
             public int compare(PatternCounter o1, PatternCounter o2) {
                 double r1 = (double) o1.getSuccessCount() / (o1.getSuccessCount() + o1.getFailCount());
@@ -77,23 +115,18 @@ public class Unicorn {
                 return Double.compare(r1, r2);
             }
         });
-
-        //输出pattern信息
-        /*for (PatternCounter p : patternCounters) {
-            System.out.println(p);
-        }*/
-        return patternCounters;
     }
+
 
     private static Sequence reduceSeq(Sequence seq) {
         List<Node> nodesList = seq.getNodes();
-        for(int i = 0;i < nodesList.size();i++){
-            if(nodesList.get(i) instanceof ReadWriteNode){
-                for(int j = i - 1; j >= 0; j--){
-                    if(nodesList.get(j) instanceof ReadWriteNode){
+        for (int i = 0; i < nodesList.size(); i++) {
+            if (nodesList.get(i) instanceof ReadWriteNode) {
+                for (int j = i - 1; j >= 0; j--) {
+                    if (nodesList.get(j) instanceof ReadWriteNode) {
                         ReadWriteNode rwi = (ReadWriteNode) nodesList.get(i);
                         ReadWriteNode rwj = (ReadWriteNode) nodesList.get(j);
-                        if((rwi.getId() != rwj.getId()) && rwi.getElement().equals(rwj.getElement()) && rwi.getField().equals(rwj.getField()) && rwi.getType().equals(rwj.getType()) && rwi.getPosition().equals(rwj.getPosition())){
+                        if ((rwi.getId() != rwj.getId()) && rwi.getElement().equals(rwj.getElement()) && rwi.getField().equals(rwj.getField()) && rwi.getType().equals(rwj.getType()) && rwi.getPosition().equals(rwj.getPosition())) {
                             seq.getNodes().remove(j);
                             i--;
                         }
