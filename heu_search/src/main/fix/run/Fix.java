@@ -22,7 +22,9 @@ public class Fix {
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
     static LockAdjust lockAdjust = LockAdjust.getInstance();//当锁交叉时，用来合并锁
 
-    static String fixMethods = "";
+    static String fixMethods = "";//记录修复方法，写入文件中
+
+    static String sourceClassPath = "";//源代码的生成类，记录下来，以后用jpf分析class
 
     public static void main(String[] args) {
 //        fix(FixType.firstFix);
@@ -30,17 +32,14 @@ public class Fix {
     }
 
     private static void fix(int type) {
-        String sourceClassPath = "";
-        String verifyClasspath = "";//要验证的class路径
+        String verifyClasspath = ImportPath.verifyPath + "\\generateClass";//要验证的class路径
         if (type == FixType.firstFix) {
             //先将项目拷贝到exportExamples
             dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
             sourceClassPath = ImportPath.examplesRootPath + "\\out\\production\\Patch";
-            verifyClasspath = ImportPath.verifyPath + "\\generateClass";
         } else if (type == FixType.iterateFix) {
             dirPath = iterateDirPath;
             sourceClassPath = ImportPath.verifyPath + "\\generateClass";
-            verifyClasspath = ImportPath.verifyPath + "\\generateClass";
         }
 
         //拿到第一个元素
@@ -156,7 +155,7 @@ public class Fix {
                 //对A的list加锁
                 for (int i = 0; i < rwnList.size(); i++) {
                     ReadWriteNode node = rwnList.get(i);
-                    if (CheckWhetherLocked.check(node.getPosition(), node.getField())) {//检查是否存在锁
+                    if (CheckWhetherLocked.check(node.getPosition(), node.getField(), sourceClassPath)) {//检查是否存在锁
                         varHasLock = true;
                     }
                     //应该要加什么锁
@@ -194,7 +193,7 @@ public class Fix {
                     firstLoc = Integer.parseInt(node.getPosition().split(":")[1]);
                     lastLoc = firstLoc;
                     //每个都检查是不是加锁
-                    if (!CheckWhetherLocked.check(node.getPosition(), node.getField())) {
+                    if (!CheckWhetherLocked.check(node.getPosition(), node.getField(), sourceClassPath)) {
                         //然后检查是不是成员变量或构造函数
                         if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync)) {
                             //最后得到需要加什么锁
@@ -213,7 +212,7 @@ public class Fix {
         } else {
             //对于一个变量，检查它是否已经被加锁
             ReadWriteNode node = rwnList.get(0);
-            if (!CheckWhetherLocked.check(node.getPosition(), node.getField())) {
+            if (!CheckWhetherLocked.check(node.getPosition(), node.getField(), sourceClassPath)) {
                 //没被加锁，获得需要加锁的行数
                 firstLoc = Integer.parseInt(node.getPosition().split(":")[1]);
                 lastLoc = firstLoc;
@@ -352,7 +351,7 @@ public class Fix {
             if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, dirPath + "\\" + whichCLassNeedSync)) {
                 //加锁
                 //检查是否存在锁再加锁
-                if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
+                if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField(), sourceClassPath)) {
                     fixMethods += "加锁位置" + Integer.parseInt(positionArg[1]) + '\n';
                     //判断一下能不能用当前的锁直接进行修复
                     //这里主要是jpf中得不到具体对象的问题，如果能得到的话，就不用这么麻烦了

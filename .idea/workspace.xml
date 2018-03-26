@@ -12,15 +12,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="583">
+              <caret line="41" column="71" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1522054691349" expanded="true" signature="14898:15884" ph="{...}" />
+                <marker date="1522069858588" expanded="true" signature="14905:15891" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckWhetherLocked.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddLockWhenNoLock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="25" column="74" lean-forward="false" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -35,14 +55,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Unicorn.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Unicorn.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="67" column="118" lean-forward="false" selection-start-line="67" selection-start-column="109" selection-end-line="67" selection-end-column="118" />
+            <state relative-caret-position="184">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <element signature="e#5476#5477#0" expanded="true" />
-                <element signature="e#5527#5528#0" expanded="true" />
+                <element signature="e#5576#5577#0" expanded="true" />
+                <element signature="e#5627#5628#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,7 +141,6 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/lock/LocKSequence.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/lock/LockElement.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/io/AddLock.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/listener/TestListener.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/pattern/Pattern.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/entity/SearchState.java" />
@@ -150,7 +169,6 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/verify/Test.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/io/ExamplesIO.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/AcquireVariableInSameLock.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/IterateFix.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Comp.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/type/FixType.java" />
@@ -159,9 +177,11 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/Test.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Verify.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/GenerateClass.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java" />
       </list>
     </option>
   </component>
@@ -221,14 +241,14 @@
               <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
+              <item name="fix" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="p_heu" type="462c0819:PsiDirectoryNode" />
-              <item name="run" type="462c0819:PsiDirectoryNode" />
+              <item name="fix" type="462c0819:PsiDirectoryNode" />
+              <item name="analyzefile" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -281,7 +301,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Fix">
+  <component name="RunManager" selected="Application.Unicorn">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -466,11 +486,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Fix" />
-        <item index="1" class="java.lang.String" itemvalue="Application.GenerateClass" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Verify" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Unicorn" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Unicorn" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Fix" />
+        <item index="2" class="java.lang.String" itemvalue="Application.GenerateClass" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="4" class="java.lang.String" itemvalue="Application.Verify" />
       </list>
     </recent_temporary>
   </component>
@@ -555,7 +575,7 @@
       <workItem from="1521808574450" duration="674000" />
       <workItem from="1521865667168" duration="17879000" />
       <workItem from="1521984783459" duration="4384000" />
-      <workItem from="1522027364398" duration="14304000" />
+      <workItem from="1522027364398" duration="16080000" />
     </task>
     <servers />
   </component>
@@ -592,7 +612,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="396938000" />
+    <option name="totallyTimeSpent" value="398714000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -616,7 +636,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3269731" sideWeight="0.5017065" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.59930617" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.59930617" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49002603" sideWeight="0.49829352" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -657,9 +677,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.59930617" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.59930617" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49002603" sideWeight="0.49829352" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21331058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21331058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -836,14 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="14" column="87" lean-forward="false" selection-start-line="14" selection-start-column="87" selection-end-line="14" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/LockAdjust.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2448">
@@ -900,13 +912,6 @@
         <state relative-caret-position="-1500">
           <caret line="64" column="23" lean-forward="false" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1016,17 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="67" column="118" lean-forward="false" selection-start-line="67" selection-start-column="109" selection-end-line="67" selection-end-column="118" />
-          <folding>
-            <element signature="e#5476#5477#0" expanded="true" />
-            <element signature="e#5527#5528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/GenerateClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -1035,13 +1029,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/AddLockWhenNoLock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="25" column="74" lean-forward="false" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="583">
+          <caret line="41" column="71" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1522054691349" expanded="true" signature="14898:15884" ph="{...}" />
+            <marker date="1522069858588" expanded="true" signature="14905:15891" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/p_heu/run/Unicorn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#5576#5577#0" expanded="true" />
+            <element signature="e#5627#5628#0" expanded="true" />
           </folding>
         </state>
       </provider>

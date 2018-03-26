@@ -15,7 +15,7 @@ public class AddLockWhenNoLock {
     static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
     static String vatName = "amount";
     static int varLine = 28;
-    public static void main(String[] args){
+    public static void main(String[] args){/*
         CheckWhetherLocked checkWhetherLocked = new CheckWhetherLocked();
         //variableLoc   包名/java文件:行数    必须类似   account/Account.java:32
         String variableLoc = packageName + "/" + className + ".java:" + String.valueOf(varLine);
@@ -33,6 +33,6 @@ public class AddLockWhenNoLock {
             dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples","exportExamples",dirPath);
             examplesIO.addLockToOneVar(varLine,endLine + 1,lockName,dirPath + "\\" + className + ".java");
         }
-
+*/
     }
 }
