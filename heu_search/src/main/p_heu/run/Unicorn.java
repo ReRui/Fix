@@ -2,6 +2,7 @@ package p_heu.run;
 
 import fix.entity.ImportPath;
 import fix.entity.type.UnicornType;
+import fix.io.InsertCode;
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
 import p_heu.entity.Node;
@@ -43,10 +44,15 @@ public class Unicorn {
     //获取验证结果
     public static boolean verifyFixSuccessful() {
         useUnicorn(UnicornType.verify);
+        //将拿到的pattern写入文件中
+        InsertCode.writeToFile(patternCountersList.toString(), ImportPath.examplesRootPath + "\\logFile\\验证得到的pattern.txt");
         return verifyFlag;
     }
 
     private static void useUnicorn(int type) {
+
+        //将原来的清空
+        patternCountersList.clear();
 
         String classpath = "";
         if (type == UnicornType.getPattern) {

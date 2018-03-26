@@ -32,14 +32,14 @@ public class Fix {
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
 
         //将拿到的pattern写入文件中
-        InsertCode.writeToFile(patternCounter.toString(), ImportPath.examplesRootPath + "\\logFile\\pattern.txt");
+        InsertCode.writeToFile(patternCounter.toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的pattern.txt");
 
         //拿到该pattern对应的sequence
         //第一次在失败运行中出现的sequence
         RecordSequence.display(patternCounter.getFirstFailAppearPlace());
 
         //将sequence写入文件中
-        InsertCode.writeToFile(patternCounter.getFirstFailAppearPlace().toString(), ImportPath.examplesRootPath + "\\logFile\\sequence.txt");
+        InsertCode.writeToFile(patternCounter.getFirstFailAppearPlace().toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的sequence.txt");
 
         if (type == FixType.firstFix) {
             //先将项目拷贝到exportExamples
@@ -54,15 +54,18 @@ public class Fix {
         //对拷贝的项目进行修复
         divideByLength(patternCounter);
 
-        //将修复方法写入文件中
-        InsertCode.writeToFile(fixMethods, ImportPath.examplesRootPath + "\\logFile\\fixMethods.txt");
-
         //检测修复完的程序是否正确
+        fixMethods += "结果: ";
         if (Unicorn.verifyFixSuccessful()) {
-            System.out.println("修复成功");
+            fixMethods += "修复成功";
         } else {
-            System.out.println("修复失败");
+            fixMethods += "修复失败";
         }
+
+        //将修复方法写入文件中
+        InsertCode.writeToFile(fixMethods, ImportPath.examplesRootPath + "\\logFile\\修复方法及结果.txt");
+
+
     }
 
     //根据pattern的长度执行不同的fix策略
