@@ -71,9 +71,6 @@ public class Verify {
                 return Double.compare(r1, r2);
             }
         });
-        for(Unicorn.PatternCounter p : patternCounters) {
-            System.out.println(p);
-        }
 
         if(!flag) {
             System.out.println("修复失败");

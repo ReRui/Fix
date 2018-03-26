@@ -23,6 +23,8 @@ public class Fix {
     static String whichCLassNeedSync = "";//需要添加同步的类，此处需不需考虑在不同类之间加锁的情况？
     static LockAdjust lockAdjust = LockAdjust.getInstance();//当锁交叉时，用来合并锁
 
+    static String fixMethods = "";
+
     public static void main(String[] args) {
 
         int type = FixType.firstFix;//表示不同的修复类型
@@ -33,16 +35,6 @@ public class Fix {
        //将拿到的pattern写入文件中
         InsertCode.writeToFile(patternCounter.toString(),ImportPath.examplesRootPath + "\\logFile\\pattern.txt");
 
-        /*System.out.println("定位到的pattern");
-        System.out.println(patternCounter.getPattern().getNodes()[0]);
-        System.out.println(patternCounter.getPattern().getNodes()[1]);
-        if (patternCounter.getPattern().getNodes().length > 2) {
-            System.out.println(patternCounter.getPattern().getNodes()[2]);
-            if (patternCounter.getPattern().getNodes().length > 3) {
-                System.out.println(patternCounter.getPattern().getNodes()[3]);
-            }
-        }
-*/
         //拿到该pattern对应的sequence
         //第一次在失败运行中出现的sequence
         RecordSequence.display(patternCounter.getFirstFailAppearPlace());
@@ -63,6 +55,9 @@ public class Fix {
         //对拷贝的项目进行修复
         divideByLength(patternCounter);
 
+        //将修复方法写入文件中
+        InsertCode.writeToFile(fixMethods,ImportPath.examplesRootPath + "\\logFile\\fixMethods.txt");
+
         //检测修复完的程序是否正确
         Verify.m();
     }
@@ -71,13 +66,13 @@ public class Fix {
     private static void divideByLength(Unicorn.PatternCounter patternCounter) {
         int length = patternCounter.getPattern().getNodes().length;
         if (length == 2) {
-            System.out.println("修复一");
+            fixMethods += "修复一\n";
             fixPatternOneToThree(patternCounter.getPattern());
         } else if (length == 3) {
-            System.out.println("修复二");
+            fixMethods += "修复二\n";
             fixPatternFourToEight(patternCounter.getPattern());
         } else if (length == 4) {
-            System.out.println("修复三");
+            fixMethods += "修复三\n";
             fixPatterNineToSeventeen(patternCounter.getPattern());
         }
     }
@@ -237,7 +232,7 @@ public class Fix {
 
         //关联变量处理
         LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
-        System.out.println("对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc);
+        fixMethods += "对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc + '\n';
     }
 
     //读到那一行，然后对字符串处理
@@ -268,7 +263,7 @@ public class Fix {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("锁的名字" + result.trim());
+        fixMethods += "锁的名字" + result.trim() + '\n';
         return result.trim();
     }
 
@@ -300,11 +295,12 @@ public class Fix {
         System.out.println(!RecordSequence.isLast(readNode));
         System.out.println(!RecordSequence.isFirst(writeNode));*/
         if (readNode != null && writeNode != null && (!RecordSequence.isLast(readNode) || !RecordSequence.isFirst(writeNode))) {
-            System.out.println("添加同步");
+            fixMethods += "添加同步\n";
             //为长度为2的pattern添加同步
             addSyncPatternOneToThree(patternCounter);
         } else {
-            System.out.println("添加信号量");
+            //为长度为2的pattern添加同步
+            fixMethods += "添加信号量\n";
             addSignal(patternCounter);
         }
     }
@@ -342,7 +338,7 @@ public class Fix {
                 //加锁
                 //检查是否存在锁再加锁
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField())) {
-                    System.out.println("加锁位置" + Integer.parseInt(positionArg[1]));
+                    fixMethods += "加锁位置" + Integer.parseInt(positionArg[1]) + '\n';
                     //判断一下能不能用当前的锁直接进行修复
                     //这里主要是jpf中得不到具体对象的问题，如果能得到的话，就不用这么麻烦了
                     /*if (existLockName.equals(lockName)){
@@ -384,8 +380,8 @@ public class Fix {
             flagAssertLocation = Integer.parseInt(positionArg[1]) > flagAssertLocation ? Integer.parseInt(positionArg[1]) : flagAssertLocation;
         }
 
-        System.out.println("信号量定位位置:" + flagDefineLocation);
-        System.out.println("信号量使用位置:" + flagAssertLocation);
+        fixMethods += "信号量定义位置:" + flagDefineLocation + '\n';
+        fixMethods += "信号量使用位置:" + flagAssertLocation + '\n';
 
         //构造函数不能加信号量
         if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(flagAssertLocation, flagAssertLocation, dirPath + "\\" + whichCLassNeedSync) &&
