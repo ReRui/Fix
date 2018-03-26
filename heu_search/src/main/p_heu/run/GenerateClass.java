@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateClass {
-    /*public static void main(String[] args) {
-        String desk = "D:\\Patch\\verifyFiles";
-        compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, desk);
-    }*/
+    public static void main(String[] args) {
+        compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, ImportPath.verifyPath + "\\generateClass");
+    }
 
     public static void compileJava(String dirPath, String desk) {
         //遍历该目录下的所有java文件

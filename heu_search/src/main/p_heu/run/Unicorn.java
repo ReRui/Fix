@@ -27,39 +27,39 @@ public class Unicorn {
 
     //测试用的main函数
     public static void main(String[] args) {
-        List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
+        /*List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
         for (PatternCounter p : patternCounters) {
             System.out.println(p);
-        }
+        }*/
+
         //获取sequence信息
 //        System.out.println(patternCounters.get(0).getFirstFailAppearPlace() + "sequence");
     }
 
     //获取pattern
-    public static List<PatternCounter> getPatternCounterList() {
-        useUnicorn(UnicornType.getPattern);
+    public static List<PatternCounter> getPatternCounterList(String classpath) {
+        useUnicorn(UnicornType.getPattern, classpath);
         return patternCountersList;
     }
 
     //获取验证结果
-    public static boolean verifyFixSuccessful() {
-        useUnicorn(UnicornType.verify);
+    public static boolean verifyFixSuccessful(String classpath) {
+        useUnicorn(UnicornType.verify, classpath);
         //将拿到的pattern写入文件中
         InsertCode.writeToFile(patternCountersList.toString(), ImportPath.examplesRootPath + "\\logFile\\验证得到的pattern.txt");
         return verifyFlag;
     }
 
-    private static void useUnicorn(int type) {
+    private static void useUnicorn(int type, String classpath) {
 
         //将原来的清空
         patternCountersList.clear();
 
-        String classpath = "";
-        if (type == UnicornType.getPattern) {
+        /*if (type == UnicornType.getPattern) {
             classpath = ImportPath.examplesRootPath + "\\out\\production\\Patch";
         } else if (type == UnicornType.verify) {
             classpath = ImportPath.verifyPath + "\\generateClass";
-        }
+        }*/
 
         if (type == UnicornType.verify) {
             //先将生成补丁后的程序编译成class文件

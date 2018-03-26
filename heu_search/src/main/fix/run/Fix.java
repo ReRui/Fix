@@ -25,11 +25,26 @@ public class Fix {
     static String fixMethods = "";
 
     public static void main(String[] args) {
+//        fix(FixType.firstFix);
+        fix(FixType.iterateFix);
+    }
 
-        int type = FixType.firstFix;//表示不同的修复类型
+    private static void fix(int type) {
+        String sourceClassPath = "";
+        String verifyClasspath = "";//要验证的class路径
+        if (type == FixType.firstFix) {
+            //先将项目拷贝到exportExamples
+            dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
+            sourceClassPath = ImportPath.examplesRootPath + "\\out\\production\\Patch";
+            verifyClasspath = ImportPath.verifyPath + "\\generateClass";
+        } else if (type == FixType.iterateFix) {
+            dirPath = iterateDirPath;
+            sourceClassPath = ImportPath.verifyPath + "\\generateClass";
+            verifyClasspath = ImportPath.verifyPath + "\\generateClass";
+        }
 
         //拿到第一个元素
-        Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
+        Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList(sourceClassPath).get(0);
 
         //将拿到的pattern写入文件中
         InsertCode.writeToFile(patternCounter.toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的pattern.txt");
@@ -41,13 +56,6 @@ public class Fix {
         //将sequence写入文件中
         InsertCode.writeToFile(patternCounter.getFirstFailAppearPlace().toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的sequence.txt");
 
-        if (type == FixType.firstFix) {
-            //先将项目拷贝到exportExamples
-            dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
-        } else if (type == FixType.iterateFix) {
-            dirPath = iterateDirPath;
-        }
-
         //根据pattern知道需要在哪个类中加锁
         whichCLassNeedSync = patternCounter.getPattern().getNodes()[0].getPosition().split(":")[0].split("/")[1];
 
@@ -56,7 +64,7 @@ public class Fix {
 
         //检测修复完的程序是否正确
         fixMethods += "结果: ";
-        if (Unicorn.verifyFixSuccessful()) {
+        if (Unicorn.verifyFixSuccessful(verifyClasspath)) {
             fixMethods += "修复成功";
         } else {
             fixMethods += "修复失败";
@@ -64,8 +72,6 @@ public class Fix {
 
         //将修复方法写入文件中
         InsertCode.writeToFile(fixMethods, ImportPath.examplesRootPath + "\\logFile\\修复方法及结果.txt");
-
-
     }
 
     //根据pattern的长度执行不同的fix策略
@@ -238,7 +244,10 @@ public class Fix {
 
         //关联变量处理
         LockPolicyPopularize.fixRelevantVar(firstLoc, lastLoc, rwnList.get(0).getThread(), whichCLassNeedSync, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
-        fixMethods += "对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc + '\n';
+        //表示能加锁
+        if(firstLoc > 0 && lastLoc > 0) {
+            fixMethods += "对" + rwnList.get(0) + "加锁起止位置" + firstLoc + "->" + lastLoc + '\n';
+        }
     }
 
     //读到那一行，然后对字符串处理
