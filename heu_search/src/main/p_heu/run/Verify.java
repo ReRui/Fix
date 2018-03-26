@@ -14,18 +14,18 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Verify {
-    public static void main(String[] args) {
+    public static void m() {
         boolean flag = true;
         List<Unicorn.PatternCounter> patternCounters = new ArrayList<>();
 
         //先将生成补丁后的程序编译成class文件
         //因为jpf文件要对class文件处理
         //源路径，目标路径
-        GenerateClass.compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, ImportPath.verifyPath + "\\verifyFiles");
+        GenerateClass.compileJava(ImportPath.verifyPath + "\\exportExamples\\" + ImportPath.projectName, ImportPath.verifyPath + "\\generateClass");
 
-        for (int i = 0; i <= 50; ++i) {
+        for (int i = 0; i <= 5; ++i) {
             String[] str = new String[]{
-                    "+classpath=" + ImportPath.verifyPath + "\\verifyFiles",
+                    "+classpath=" + ImportPath.verifyPath + "\\generateClass",
                     "+search.class=p_heu.search.SingleExecutionSearch",
                     ImportPath.projectName + "." + ImportPath.mainClassName
             };

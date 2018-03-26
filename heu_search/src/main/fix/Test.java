@@ -2,6 +2,7 @@ package fix;
 
 import fix.analyzefile.LockPolicyPopularize;
 import fix.entity.ImportPath;
+import fix.io.InsertCode;
 import fix.run.Fix;
 import org.eclipse.jdt.core.dom.*;
 import p_heu.entity.ReadWriteNode;
@@ -18,16 +19,17 @@ public class Test {
 
     public static void main(String[] args) {
 
+        InsertCode.writeToFile("test",ImportPath.examplesRootPath + "\\logFile\\pattern.txt");
 //        useASTAssertSameFun(ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\WrongLock.java");
 //        t();
-        String s = "itr = itr._next;";
+       /* String s = "itr = itr._next;";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile("^.*\\s+(\\w+)\\." + "_next" + ".*$");
         Matcher m = p.matcher(s);
         if (m.matches()) {
             System.out.println(m.group(1));
         } else {
             System.out.println("wu");
-        }
+        }*/
        /* ReadWriteNode readWriteNode = new ReadWriteNode(1, "wrongLock.Data@15f", "value", "WRITE", "Thread-2", "wrongLock/WrongLock.java:28");
         System.out.println(acquireLockName(readWriteNode));*/
 

@@ -2,10 +2,13 @@ package fix.run;
 
 import fix.analyzefile.*;
 import fix.entity.ImportPath;
+import fix.entity.type.FixType;
 import fix.io.ExamplesIO;
+import fix.io.InsertCode;
 import p_heu.entity.ReadWriteNode;
 import p_heu.entity.pattern.Pattern;
 import p_heu.run.Unicorn;
+import p_heu.run.Verify;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,11 +25,15 @@ public class Fix {
 
     public static void main(String[] args) {
 
-        int type = 0;//0表示第一次修复，1表示迭代修复
+        int type = FixType.firstFix;//表示不同的修复类型
 
-        Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
         //拿到第一个元素
-        System.out.println("定位到的pattern");
+        Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList().get(0);
+
+       //将拿到的pattern写入文件中
+        InsertCode.writeToFile(patternCounter.toString(),ImportPath.examplesRootPath + "\\logFile\\pattern.txt");
+
+        /*System.out.println("定位到的pattern");
         System.out.println(patternCounter.getPattern().getNodes()[0]);
         System.out.println(patternCounter.getPattern().getNodes()[1]);
         if (patternCounter.getPattern().getNodes().length > 2) {
@@ -35,15 +42,18 @@ public class Fix {
                 System.out.println(patternCounter.getPattern().getNodes()[3]);
             }
         }
-
+*/
         //拿到该pattern对应的sequence
         //第一次在失败运行中出现的sequence
         RecordSequence.display(patternCounter.getFirstFailAppearPlace());
 
-        if (type == 0) {
+        //将sequence写入文件中
+        InsertCode.writeToFile(patternCounter.getFirstFailAppearPlace().toString(),ImportPath.examplesRootPath + "\\logFile\\sequence.txt");
+
+        if (type == FixType.firstFix) {
             //先将项目拷贝到exportExamples
             dirPath = examplesIO.copyFromOneDirToAnotherAndChangeFilePath("examples", "exportExamples", dirPath);
-        } else if (type == 1) {
+        } else if (type == FixType.iterateFix) {
             dirPath = iterateDirPath;
         }
 
@@ -53,8 +63,8 @@ public class Fix {
         //对拷贝的项目进行修复
         divideByLength(patternCounter);
 
-        //检测修复完的程序是否正确，不正确继续修复
-//        FixResult.checkFix();
+        //检测修复完的程序是否正确
+        Verify.m();
     }
 
     //根据pattern的长度执行不同的fix策略

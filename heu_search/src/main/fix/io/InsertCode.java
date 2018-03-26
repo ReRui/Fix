@@ -61,7 +61,7 @@ public class InsertCode {
         writeToFile(readBeforeLine + code  + readAfterLine, filepath);
     }
 
-    private static void writeToFile(String s, String fileName) {
+    public static void writeToFile(String s, String fileName) {
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(new File(fileName)));
