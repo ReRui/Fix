@@ -1,6 +1,7 @@
-package fix.run;
+package fix.analyzefile;
 
 import fix.entity.ImportPath;
+import p_heu.entity.ReadWriteNode;
 
 import java.io.File;
 import java.io.FileReader;
@@ -8,11 +9,20 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 
 //这个类没想放哪，反正迟早要删
-public class YaoShan {
+public class AcquireSyncName {
 
     static String dirPath = ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName;
 
-    public static String shan(int number) throws IOException {
+    public static void main(String[] args) {
+        ReadWriteNode readWriteNode = new ReadWriteNode(2, "Account@1a7", "amount", "WRITE", "Thread-4", "account/Account.java:35");
+        try {
+            System.out.println(acquireSync(UseASTAnalysisClass.useASTCFindLockLine(readWriteNode, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String acquireSync(int number) throws IOException {
         long timeStart = System.currentTimeMillis();
         File file = new File(dirPath + "//account.java");//文件路径
         FileReader fileReader = new FileReader(file);

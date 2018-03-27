@@ -287,7 +287,7 @@ public class Fix {
         int number = Integer.parseInt(node.getPosition().split(":")[1]);
         String name = "";
         try {
-            name = YaoShan.shan(number);
+            name = AcquireSyncName.acquireSync(number);
         } catch (IOException e) {
             e.printStackTrace();
         }

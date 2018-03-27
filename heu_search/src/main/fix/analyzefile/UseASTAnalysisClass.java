@@ -29,13 +29,17 @@ public class UseASTAnalysisClass {
 
     static LockLine lockLine = new LockLine();//用来记录加锁的起始和终止行数
 
+    static int syncLine = 0;//用来记录sync块所在的行数，最后根据它获取锁的名称
+
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariableOrReturn(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
         /*List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
         nodesList.add(new ReadWriteNode(1, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:52"));
         nodesList.add(new ReadWriteNode(2, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:53"));
         System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\MyLinkedList.java"));*/
-        useASTCFindLockLine(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java");
+        ReadWriteNode readWriteNode = new ReadWriteNode(2, "Account@1a7", "amount", "WRITE", "Thread-4", "account/Account.java:35");
+
+        useASTCFindLockLine(readWriteNode, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java");
     }
 
     //判断变量是不是在if(),while(),for()的判断中
@@ -55,7 +59,7 @@ public class UseASTAnalysisClass {
     }
 
     //利用AST来寻找加锁的行数
-    public static void useASTCFindLockLine(String filePath) {
+    public static int useASTCFindLockLine(ReadWriteNode readWriteNode, String filePath) {
 
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));
@@ -65,13 +69,25 @@ public class UseASTAnalysisClass {
 
         cu.accept(new ASTVisitor() {
             @Override
-            public boolean visit(SynchronizedStatement node) {
-                System.out.println(node);
-                System.out.println(cu.getLineNumber(node.getStartPosition()));
-                System.out.println(cu.getLineNumber(node.getStartPosition() + node.getLength()));
+            public boolean visit(SimpleName node) {
+
+
+                if (readWriteNode.getField().equals(node.toString()) && Integer.parseInt(readWriteNode.getPosition().split(":")[1]) == cu.getLineNumber(node.getStartPosition())) {
+
+                    ASTNode iNode = node.getParent();
+                    while (!(iNode instanceof SynchronizedStatement)) {
+                        iNode = iNode.getParent();
+                        if(iNode == null) {
+                            break;
+                        }
+                    }
+                    System.out.println(cu.getLineNumber(iNode.getStartPosition()));
+                    syncLine = cu.getLineNumber(iNode.getStartPosition());
+                }
                 return super.visit(node);
             }
         });
+        return syncLine;
     }
 
     //利用AST来改变加锁位置
@@ -120,7 +136,7 @@ public class UseASTAnalysisClass {
 
         cu.accept(new ASTVisitor() {
 
-           // Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
+            // Set<String> names = new HashSet<String>();//存放实际使用的变量，不这样做会有System等变量干扰
 
             public boolean visit(TypeDeclaration node) {
                 className = node.getName().toString();
@@ -131,31 +147,31 @@ public class UseASTAnalysisClass {
             public boolean visit(VariableDeclarationFragment node) {
                 //判断是不是成员变量
                 SimpleName name = node.getName();
-               // this.names.add(name.getIdentifier());
+                // this.names.add(name.getIdentifier());
 
                 return true; // do not continue to avoid usage info
             }
 
             //变量
             public boolean visit(SimpleName node) {
-               // if (this.names.contains(node.getIdentifier())) {
+                // if (this.names.contains(node.getIdentifier())) {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
                    /* System.out.println(rwn1.getField() + "," + Integer.parseInt(rwn1.getPosition().split(":")[1]));
                     System.out.println(rwn2.getField() + "," + Integer.parseInt(rwn2.getPosition().split(":")[1]));
                     System.out.println("==============");*/
-                    if (node.toString().equals(rwn1.getField()) && cu.getLineNumber(node.getStartPosition()) == Integer.parseInt(rwn1.getPosition().split(":")[1])) {
-                        rw1Match = true;
-                        rw1Node = node;
-                    }
-                    if (node.toString().equals(rwn2.getField()) && cu.getLineNumber(node.getStartPosition()) == Integer.parseInt(rwn2.getPosition().split(":")[1])) {
-                        rw2Match = true;
-                        rw2Node = node;
-                    }
+                if (node.toString().equals(rwn1.getField()) && cu.getLineNumber(node.getStartPosition()) == Integer.parseInt(rwn1.getPosition().split(":")[1])) {
+                    rw1Match = true;
+                    rw1Node = node;
+                }
+                if (node.toString().equals(rwn2.getField()) && cu.getLineNumber(node.getStartPosition()) == Integer.parseInt(rwn2.getPosition().split(":")[1])) {
+                    rw2Match = true;
+                    rw2Node = node;
+                }
 
-                    if (rw1Match && rw2Match) {//两个读写点都找到的时候
-                        flagSameFunction = isSameFunction(rw1Node, rw2Node);
-                    }
-              //  }
+                if (rw1Match && rw2Match) {//两个读写点都找到的时候
+                    flagSameFunction = isSameFunction(rw1Node, rw2Node);
+                }
+                //  }
                 return true;
             }
         });
@@ -238,10 +254,10 @@ public class UseASTAnalysisClass {
             public boolean visit(SimpleName node) {
 //                if (this.names.contains(node.getIdentifier())) {
 //                    System.out.println("Usage of '" + node + "' at line " +	cu.getLineNumber(node.getStartPosition()));
-                    //判断是不是构造函数
-                    if (cu.getLineNumber(node.getStartPosition()) >= firstLoc && cu.getLineNumber(node.getStartPosition()) <= lastLoc) {
-                        flagConstruct = isConstruct(node);
-                    }
+                //判断是不是构造函数
+                if (cu.getLineNumber(node.getStartPosition()) >= firstLoc && cu.getLineNumber(node.getStartPosition()) <= lastLoc) {
+                    flagConstruct = isConstruct(node);
+                }
 //                }
                 return true;
             }
