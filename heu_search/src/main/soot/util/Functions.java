@@ -39,7 +39,7 @@ public class Functions {
         //options.set_whole_program(true);
 
         //options.set_soot_classpath(Scene.v().defaultClassPath() + ";" + path);
-
+        options.set_soot_classpath(Scene.v().getSootClassPath()+ ";" + path);
         // process all classes found in dir
         options.set_process_dir(Collections.singletonList(path));
 

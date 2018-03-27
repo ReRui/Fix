@@ -134,14 +134,10 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../lib/sootLib" />
+          <root url="jar://$MODULE_DIR$/../lib/soot-2.5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../lib/sootLib" />
-        </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/../lib/sootLib" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/../lib/sootLib" recursive="false" type="SOURCES" />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

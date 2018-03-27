@@ -12,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Fix.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="150" column="37" lean-forward="false" selection-start-line="150" selection-start-column="31" selection-end-line="150" selection-end-column="37" />
+            <state relative-caret-position="390">
+              <caret line="178" column="31" lean-forward="false" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="31" />
               <folding>
                 <marker date="1522131195375" expanded="true" signature="14782:15768" ph="{...}" />
               </folding>
@@ -27,8 +27,8 @@
       <file leaf-file-name="UseASTAnalysisClass.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="77" column="39" lean-forward="false" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="39" />
+            <state relative-caret-position="46">
+              <caret line="37" column="27" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="27" />
               <folding>
                 <element signature="e#2624#3012#0" expanded="true" />
                 <element signature="e#3011#3012#0" expanded="true" />
@@ -39,6 +39,28 @@
                 <element signature="class#LockLine#0;class#UseASTAnalysisClass#0" expanded="false" />
                 <marker date="1522135475405" expanded="false" signature="1104:1119" ph="&lt;~&gt;" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Functions.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/util/Functions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="703">
+              <caret line="41" column="61" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,7 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Us</find>
       <find>set中的元素</find>
       <find>account</find>
       <find>定位到</find>
@@ -106,6 +127,7 @@
       <find>20</find>
       <find>32</find>
       <find>UseAST</find>
+      <find>set_soot_classpath</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -116,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/CheckWhetherLocked.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/AcquireVariable.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/lock/LocKSequence.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/lock/LockElement.java" />
@@ -161,12 +182,13 @@
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/soot/TestCFG.java" />
         <option value="$PROJECT_DIR$/heu_search/src/examples/account/Main.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/soot/Main.java" />
-        <option value="$PROJECT_DIR$/heu_search/src/main/soot/Main.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/entity/ImportPath.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/listener/CheckWhetherLockedListener.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/CheckWhetherLocked.java" />
         <option value="$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/soot/util/Functions.java" />
+        <option value="$PROJECT_DIR$/heu_search/src/main/soot/Main.java" />
       </list>
     </option>
   </component>
@@ -214,15 +236,17 @@
             <path>
               <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="fix" type="462c0819:PsiDirectoryNode" />
-              <item name="analyzefile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Fix" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="soot" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -237,11 +261,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/heu_search/lib/sootLib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/heu_search/lib/soot-2.5.0.jar!/" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -277,7 +301,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.UseASTAnalysisClass">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -311,6 +335,25 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="fix.run.Fix" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="heu_search" />
+      <envs />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="soot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="soot.Main" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -434,18 +477,20 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Test" />
       <item index="1" class="java.lang.String" itemvalue="Application.Fix" />
       <item index="2" class="java.lang.String" itemvalue="Application.CheckWhetherLocked" />
       <item index="3" class="java.lang.String" itemvalue="Application.UseASTAnalysisClass" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Main" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.UseASTAnalysisClass" />
-        <item index="1" class="java.lang.String" itemvalue="Application.CheckWhetherLocked" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Fix" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.UseASTAnalysisClass" />
+        <item index="2" class="java.lang.String" itemvalue="Application.CheckWhetherLocked" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Fix" />
+        <item index="4" class="java.lang.String" itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -531,7 +576,7 @@
       <workItem from="1521865667168" duration="17879000" />
       <workItem from="1521984783459" duration="4384000" />
       <workItem from="1522027364398" duration="17449000" />
-      <workItem from="1522123736791" duration="10699000" />
+      <workItem from="1522123736791" duration="13804000" />
     </task>
     <servers />
   </component>
@@ -568,7 +613,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="410782000" />
+    <option name="totallyTimeSpent" value="413887000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -581,7 +626,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1318" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32784042" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -633,7 +677,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6452732" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6452732" sideWeight="0.49616042" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49002603" sideWeight="0.49829352" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21331058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957503" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -660,20 +704,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/lock/LocKSequence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/entity/MatchVariable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/heu_search/lib/org.eclipse.jdt.core_3.5.2.v_981_R35x.jar!/org/eclipse/jdt/core/dom/ASTVisitor.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-828">
@@ -915,14 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/util/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/TestCFG.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -932,14 +954,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/util/PetriNet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1005,10 +1019,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="178" column="31" lean-forward="false" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="31" />
+          <folding>
+            <marker date="1522131195375" expanded="true" signature="14782:15768" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/analyzefile/UseASTAnalysisClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="77" column="39" lean-forward="false" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="39" />
+        <state relative-caret-position="46">
+          <caret line="37" column="27" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="27" />
           <folding>
             <element signature="e#2624#3012#0" expanded="true" />
             <element signature="e#3011#3012#0" expanded="true" />
@@ -1022,13 +1046,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heu_search/src/main/fix/run/Fix.java">
+    <entry file="file://$PROJECT_DIR$/jpf-core/src/main/gov/nasa/jpf/util/event/EventConstructor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="150" column="37" lean-forward="false" selection-start-line="150" selection-start-column="31" selection-end-line="150" selection-end-column="37" />
+        <state relative-caret-position="322">
+          <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
           <folding>
-            <marker date="1522131195375" expanded="true" signature="14782:15768" ph="{...}" />
+            <element signature="e#1160#1161#0" expanded="false" />
+            <element signature="e#1198#1199#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/heu_search/lib/soot-2.5.0.jar!/soot/options/Options.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="841" column="0" lean-forward="true" selection-start-line="841" selection-start-column="0" selection-end-line="842" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/heu_search/src/main/soot/util/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="41" column="61" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,6 +1140,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

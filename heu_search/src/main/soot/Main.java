@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class Main {
 
     public static void main(String[] args) {
-        String path = "D:\\test\\src";
+        String path = "D:\\FixExamples\\examples";
         Functions.initSoot(path);
 
         SootClass appclass = Scene.v().loadClassAndSupport("examples.account.Account");
