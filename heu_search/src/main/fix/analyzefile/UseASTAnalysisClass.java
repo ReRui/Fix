@@ -31,10 +31,11 @@ public class UseASTAnalysisClass {
 
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariableOrReturn(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
-        List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
+        /*List<ReadWriteNode> nodesList = new ArrayList<ReadWriteNode>();
         nodesList.add(new ReadWriteNode(1, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:52"));
         nodesList.add(new ReadWriteNode(2, "linkedlist.MyListNode@18d", "_next", "WRITE", "Thread-4", "linkedlist/MyLinkedList.java:53"));
-        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\MyLinkedList.java"));
+        System.out.println(assertSameFunction(nodesList, ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\MyLinkedList.java"));*/
+        useASTCFindLockLine(ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java");
     }
 
     //判断变量是不是在if(),while(),for()的判断中
@@ -51,6 +52,26 @@ public class UseASTAnalysisClass {
     public static boolean isConstructOrIsMemberVariableOrReturn(int firstLoc, int lastLoc, String filePath) {
         useASTAnalysisConAndMem(firstLoc, lastLoc, filePath);
         return flagConstruct || flagMember;
+    }
+
+    //利用AST来寻找加锁的行数
+    public static void useASTCFindLockLine(String filePath) {
+
+        ASTParser parser = ASTParser.newParser(AST.JLS3);
+        parser.setSource(getFileContents(new File(filePath)));
+        parser.setKind(ASTParser.K_COMPILATION_UNIT);
+
+        final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+
+        cu.accept(new ASTVisitor() {
+            @Override
+            public boolean visit(SynchronizedStatement node) {
+                System.out.println(node);
+                System.out.println(cu.getLineNumber(node.getStartPosition()));
+                System.out.println(cu.getLineNumber(node.getStartPosition() + node.getLength()));
+                return super.visit(node);
+            }
+        });
     }
 
     //利用AST来改变加锁位置

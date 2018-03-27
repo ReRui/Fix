@@ -27,8 +27,8 @@ public class Fix {
     static String sourceClassPath = "";//源代码的生成类，记录下来，以后用jpf分析class
 
     public static void main(String[] args) {
-//        fix(FixType.firstFix);
-        fix(FixType.iterateFix);
+        fix(FixType.firstFix);
+//        fix(FixType.iterateFix);
     }
 
     private static void fix(int type) {
@@ -283,7 +283,7 @@ public class Fix {
 
     //输出锁的名称
     //此处根据pattern读到锁的那行，然后使用字符串匹配
-  /*  private static String existLockName(ReadWriteNode node) {
+    private static String existLockName(ReadWriteNode node) {
         int number = Integer.parseInt(node.getPosition().split(":")[1]);
         String name = "";
         try {
@@ -292,7 +292,7 @@ public class Fix {
             e.printStackTrace();
         }
         return name;
-    }*/
+    }
 
     private static void fixPatternOneToThree(Pattern patternCounter) {
         ReadWriteNode readNode = null;
@@ -325,15 +325,15 @@ public class Fix {
 
         String existLockName = "";//已有锁的锁名
 
-        /*//检查是否有锁
+        //检查是否有锁
         for (int i = 0; i < 2; i++) {
-            if (CheckWhetherLocked.check(patternCounter.getNodes()[i].getPosition(), patternCounter.getNodes()[i].getField())) {
+            if (CheckWhetherLocked.check(patternCounter.getNodes()[i].getPosition(), patternCounter.getNodes()[i].getField(), sourceClassPath)) {
                 //如果有锁，记录下这个锁用来修复其他的
                 existLockName = existLockName(patternCounter.getNodes()[i]);
                 System.out.println("当前已有的锁" + existLockName);
                 break;
             }
-        }*/
+        }
 
         int firstLoc = 0, lastLoc = 0;
         for (int i = 0; i < 2; i++) {

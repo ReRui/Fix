@@ -20,6 +20,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
     //此时正在保护共享变量的锁名
     private String protectLockName;
 
+
     public String getProtectLockName() {
         return protectLockName;
     }
@@ -39,7 +40,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectLocked(VM vm, ThreadInfo currentThread, ElementInfo lockedObject) {
-//        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
+        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
         LocKSequence locKSequence = new LocKSequence(lockedObject.toString(), currentThread.getName());
 //        System.out.println("输出加锁:" + lockedObject.);
         lockVector.add(locKSequence);
@@ -74,6 +75,10 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
                     break;
                 }
             }
+        } else {
+//            if (executedInstruction.toString().equals("monitorenter")) {//代表是加锁，但是比如Account程序中，对变量加锁和对函数加锁有明显不同
+//                System.out.println(executedInstruction.toString() + '\t' + executedInstruction.getFileLocation() + '\t' + currentThread.getName());
+//            }
         }
     }
 
@@ -92,6 +97,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 //                        System.out.println("*************" + le.toString());
                         checkFlag = true;
                         protectLockName = ls.lockName;
+
                         break;
 //                        System.out.println("1有");
                     }
