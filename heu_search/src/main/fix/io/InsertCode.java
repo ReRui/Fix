@@ -1,5 +1,7 @@
 package fix.io;
 
+import fix.entity.ImportPath;
+
 import java.io.*;
 import java.util.Vector;
 
@@ -59,6 +61,13 @@ public class InsertCode {
         //重写入*/
 
         writeToFile(readBeforeLine + code  + readAfterLine, filepath);
+    }
+
+    public static void writeLogFile(String s, String txtName) {
+        String dirPath = ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\logFile";
+        File dir = new File(dirPath);
+        dir.mkdirs();
+        writeToFile(s, dirPath + "\\" + txtName + ".txt");
     }
 
     public static void writeToFile(String s, String fileName) {

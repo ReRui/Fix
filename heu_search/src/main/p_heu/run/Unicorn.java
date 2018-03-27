@@ -27,7 +27,8 @@ public class Unicorn {
 
     //测试用的main函数
     public static void main(String[] args) {
-        System.out.println(Unicorn.verifyFixSuccessful(ImportPath.verifyPath + "\\generateClass"));
+//        System.out.println(Unicorn.verifyFixSuccessful(ImportPath.verifyPath + "\\generateClass"));
+//        System.out.println(Unicorn.getPatternCounterList());
         /*List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
         for (PatternCounter p : patternCounters) {
             System.out.println(p);

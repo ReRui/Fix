@@ -19,7 +19,8 @@ public class Test {
 
     public static void main(String[] args) {
 
-        InsertCode.writeToFile("test",ImportPath.examplesRootPath + "\\logFile\\pattern.txt");
+
+        InsertCode.writeLogFile("test","pattern");
 //        useASTAssertSameFun(ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\WrongLock.java");
 //        t();
        /* String s = "itr = itr._next;";

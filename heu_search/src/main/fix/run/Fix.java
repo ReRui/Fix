@@ -46,14 +46,14 @@ public class Fix {
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList(sourceClassPath).get(0);
 
         //将拿到的pattern写入文件中
-        InsertCode.writeToFile(patternCounter.toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的pattern.txt");
+        InsertCode.writeLogFile(patternCounter.toString(), "修复得到的pattern");
 
         //拿到该pattern对应的sequence
         //第一次在失败运行中出现的sequence
         RecordSequence.display(patternCounter.getFirstFailAppearPlace());
 
         //将sequence写入文件中
-        InsertCode.writeToFile(patternCounter.getFirstFailAppearPlace().toString(), ImportPath.examplesRootPath + "\\logFile\\修复得到的sequence.txt");
+        InsertCode.writeLogFile(patternCounter.getFirstFailAppearPlace().toString(), "修复得到的sequence");
 
         //根据pattern知道需要在哪个类中加锁
         whichCLassNeedSync = patternCounter.getPattern().getNodes()[0].getPosition().split(":")[0].split("/")[1];
@@ -70,7 +70,7 @@ public class Fix {
         }
 
         //将修复方法写入文件中
-        InsertCode.writeToFile(fixMethods, ImportPath.examplesRootPath + "\\logFile\\修复方法及结果.txt");
+        InsertCode.writeLogFile(fixMethods, "修复方法及结果");
     }
 
     //根据pattern的长度执行不同的fix策略
