@@ -40,7 +40,7 @@ public class CheckWhetherLockedListener extends PropertyListenerAdapter {
 
     @Override
     public void objectLocked(VM vm, ThreadInfo currentThread, ElementInfo lockedObject) {
-        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
+//        System.out.println("输出加锁:" + lockedObject.toString() + "\t" + currentThread.getName() + "\t");
         LocKSequence locKSequence = new LocKSequence(lockedObject.toString(), currentThread.getName());
 //        System.out.println("输出加锁:" + lockedObject.);
         lockVector.add(locKSequence);

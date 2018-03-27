@@ -1,6 +1,7 @@
 package fix.analyzefile;
 
 import fix.entity.ImportPath;
+import fix.entity.lock.ExistLock;
 import org.eclipse.jdt.core.dom.*;
 import p_heu.entity.ReadWriteNode;
 
@@ -29,7 +30,7 @@ public class UseASTAnalysisClass {
 
     static LockLine lockLine = new LockLine();//用来记录加锁的起始和终止行数
 
-    static int syncLine = 0;//用来记录sync块所在的行数，最后根据它获取锁的名称
+    static ExistLock existLock = new ExistLock();//用来记录已有的sync块所在的行数，最后根据它获取锁的名称
 
     public static void main(String[] args) {
 //        System.out.println(isConstructOrIsMemberVariableOrReturn(11, 12, ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\Account.java"));
@@ -46,6 +47,7 @@ public class UseASTAnalysisClass {
     //注意是判断中，就是圆括号中
     //如果是的话，要稍微修改一下加锁的函数
     public static LockLine changeLockLine(int firstLoc, int lastLoc, String filePath) {
+        System.out.println(firstLoc + "===========");
         lockLine.setFirstLoc(firstLoc);
         lockLine.setLastLoc(lastLoc);
         useASTChangeLine(firstLoc, lastLoc, filePath);
@@ -59,7 +61,7 @@ public class UseASTAnalysisClass {
     }
 
     //利用AST来寻找加锁的行数
-    public static int useASTCFindLockLine(ReadWriteNode readWriteNode, String filePath) {
+    public static ExistLock useASTCFindLockLine(ReadWriteNode readWriteNode, String filePath) {
 
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource(getFileContents(new File(filePath)));
@@ -81,13 +83,12 @@ public class UseASTAnalysisClass {
                             break;
                         }
                     }
-                    System.out.println(cu.getLineNumber(iNode.getStartPosition()));
-                    syncLine = cu.getLineNumber(iNode.getStartPosition());
+                    existLock = new ExistLock("",cu.getLineNumber(iNode.getStartPosition()),cu.getLineNumber(iNode.getStartPosition() + iNode.getLength()));
                 }
                 return super.visit(node);
             }
         });
-        return syncLine;
+        return existLock;
     }
 
     //利用AST来改变加锁位置

@@ -8,9 +8,12 @@ import org.eclipse.jdt.core.dom.*;
 import p_heu.entity.ReadWriteNode;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
 
@@ -19,8 +22,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-
-        InsertCode.writeLogFile("test","pattern");
+//        InsertCode.writeLogFile("test","pattern");
 //        useASTAssertSameFun(ImportPath.examplesRootPath + "\\examples\\" + ImportPath.projectName + "\\WrongLock.java");
 //        t();
        /* String s = "itr = itr._next;";
@@ -31,9 +33,13 @@ public class Test {
         } else {
             System.out.println("wu");
         }*/
-       /* ReadWriteNode readWriteNode = new ReadWriteNode(1, "wrongLock.Data@15f", "value", "WRITE", "Thread-2", "wrongLock/WrongLock.java:28");
-        System.out.println(acquireLockName(readWriteNode));*/
+        ReadWriteNode readWriteNode = new ReadWriteNode(1, "account.Account@1a7", "amount", "WRITE", "Thread-2", "account/Account.java:35");
+//        System.out.println(readWriteNode.getPosition().split("/")[1].split(":")[0]);
+        Set<String> l = new HashSet<String>();
 
+        for (Object o : l) {
+            System.out.println(o);
+        }
     }
     public static String acquireLockName(ReadWriteNode node) {
         BufferedReader br = null;
