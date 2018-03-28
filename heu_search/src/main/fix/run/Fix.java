@@ -27,8 +27,17 @@ public class Fix {
 
     static String sourceClassPath = "";//源代码的生成类，记录下来，以后用jpf分析class
 
+    //用来计时
+    static long startTime = 0;
+    static long endUnicornTime = 0;
+    static long endFixFirstTime = 0;
+    static long endVerifyTime = 0;
+
     public static void main(String[] args) {
+        startTime = System.currentTimeMillis();
         fix(FixType.firstFix);
+        endFixFirstTime = System.currentTimeMillis();
+        System.out.println("第一次修复需要的时间:" + (endFixFirstTime - startTime));
 //        fix(FixType.iterateFix);
     }
 
@@ -46,6 +55,8 @@ public class Fix {
         //拿到第一个元素
         Unicorn.PatternCounter patternCounter = Unicorn.getPatternCounterList(sourceClassPath).get(0);
 
+        endUnicornTime = System.currentTimeMillis();
+        System.out.println("得到pattern的时间:" + (endUnicornTime - startTime));
         //将拿到的pattern写入文件中
         InsertCode.writeLogFile(patternCounter.toString(), "修复得到的pattern");
 
@@ -336,17 +347,34 @@ public class Fix {
     //对长度为2的pattern添加同步
     private static void addSyncPatternOneToThree(Pattern patternCounter) {
 
-        /*List<String> existLockName = new ArrayList<String>();//已有锁的锁名
-
-        //检查是否有锁
-        for (int i = 0; i < 2; i++) {
-            if (CheckWhetherLocked.check(patternCounter.getNodes()[i].getPosition(), patternCounter.getNodes()[i].getField(), sourceClassPath)) {
-                //如果有锁，记录下这个锁用来修复其他的
-                existLockName.add(existLockName(patternCounter.getNodes()[i]));
-            }
-        }*/
-
         int firstLoc = 0, lastLoc = 0;
+        //判断在不在一个 函数中
+        List<ReadWriteNode> rwnList = new ArrayList<ReadWriteNode>();
+        for (int i = 0; i < patternCounter.getNodes().length; i++) {
+            rwnList.add(patternCounter.getNodes()[i]);
+        }
+        boolean flagSame = UseASTAnalysisClass.assertSameFunction(rwnList, dirPath + "\\" + whichCLassNeedSync);
+        System.out.println("在不在一个函数中" + flagSame);
+        if (flagSame) {//在一个函数中
+            int oneLoc = Integer.parseInt(patternCounter.getNodes()[0].getPosition().split(":")[1]);
+            int twoLoc = Integer.parseInt(patternCounter.getNodes()[1].getPosition().split(":")[1]);
+            firstLoc = Math.min(oneLoc, twoLoc);
+            lastLoc = Math.max(oneLoc, twoLoc);
+            String lockName = acquireLockName(patternCounter.getNodes()[0]);
+            if (!UseASTAnalysisClass.isConstructOrIsMemberVariableOrReturn(firstLoc, lastLoc + 1, dirPath + "\\" + whichCLassNeedSync)) {
+                //加锁
+                //检查是否存在锁再加锁
+                if (!CheckWhetherLocked.check(patternCounter.getNodes()[0].getPosition(), patternCounter.getNodes()[0].getField(), sourceClassPath)) {
+                    //判断加锁会不会和for循环等交叉
+                    UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);
+                    firstLoc = lockLine.getFirstLoc();
+                    lastLoc = lockLine.getLastLoc();
+                    fixMethods += "加锁位置" + firstLoc + "->" + (lastLoc + 1) + '\n';
+                    examplesIO.addLockToOneVar(firstLoc, lastLoc + 1, lockName, dirPath + "\\" + whichCLassNeedSync);//待定
+                }
+            }
+            return;
+        }
         for (int i = 0; i < 2; i++) {
             String position = patternCounter.getNodes()[i].getPosition();
 //            System.out.println(position);
@@ -367,10 +395,6 @@ public class Fix {
                 if (!CheckWhetherLocked.check(position, patternCounter.getNodes()[i].getField(), sourceClassPath)) {
                     fixMethods += "加锁位置" + Integer.parseInt(positionArg[1]) + '\n';
                     //判断一下能不能用当前的锁直接进行修复
-                    //这里主要是jpf中得不到具体对象的问题，如果能得到的话，就不用这么麻烦了
-                    /*if (existLockName.equals(lockName)){
-                        examplesIO.addLockToOneVar(Integer.parseInt(positionArg[1]), Integer.parseInt(positionArg[1]) + 1, existLockName, dirPath + "\\" + whichCLassNeedSync);//待定
-                    } else {*/
 
                     //判断加锁会不会和for循环等交叉
                     UseASTAnalysisClass.LockLine lockLine = UseASTAnalysisClass.changeLockLine(firstLoc, lastLoc, dirPath + "\\" + whichCLassNeedSync);

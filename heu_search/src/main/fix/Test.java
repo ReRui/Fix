@@ -1,19 +1,13 @@
 package fix;
 
-import fix.analyzefile.LockPolicyPopularize;
 import fix.entity.ImportPath;
-import fix.io.InsertCode;
-import fix.run.Fix;
 import org.eclipse.jdt.core.dom.*;
 import p_heu.entity.ReadWriteNode;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Test {
 
@@ -35,10 +29,12 @@ public class Test {
         }*/
 //        ReadWriteNode readWriteNode = new ReadWriteNode(1, "account.Account@1a7", "amount", "WRITE", "Thread-2", "account/Account.java:35");
 //        System.out.println(readWriteNode.getPosition().split("/")[1].split(":")[0]);
-        String s = "account.Account@1b7r";
-        if (s.contains("@")) {
-            System.out.println(123);
+        long startTime = System.currentTimeMillis();
+        for(int i = 0;i < 100000; i++) {
+            System.out.println("test");
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime + "ms");
     }
     public static String acquireLockName(ReadWriteNode node) {
         BufferedReader br = null;
