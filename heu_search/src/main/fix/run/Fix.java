@@ -289,6 +289,11 @@ public class Fix {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //如果是类的static变量，，直接加this锁？？
+        if (!node.getElement().contains("@")) {
+            result = "this";
+        }
+
         fixMethods += "锁的名字" + result.trim() + '\n';
         return result.trim();
     }

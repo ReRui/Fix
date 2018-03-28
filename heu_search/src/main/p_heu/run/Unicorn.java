@@ -27,7 +27,7 @@ public class Unicorn {
 
     //测试用的main函数
     public static void main(String[] args) {
-//        System.out.println(Unicorn.verifyFixSuccessful(ImportPath.verifyPath + "\\generateClass"));
+        System.out.println(Unicorn.getPatternCounterList(ImportPath.examplesRootPath + "\\out\\production\\Patch").get(0));
 //        System.out.println(Unicorn.getPatternCounterList());
         /*List<PatternCounter> patternCounters = Unicorn.getPatternCounterList();
         for (PatternCounter p : patternCounters) {
@@ -48,7 +48,7 @@ public class Unicorn {
     public static boolean verifyFixSuccessful(String classpath) {
         useUnicorn(UnicornType.verify, classpath);
         //将拿到的pattern写入文件中
-        InsertCode.writeToFile(patternCountersList.toString(), ImportPath.examplesRootPath + "\\logFile\\验证得到的pattern.txt");
+        InsertCode.writeToFile(patternCountersList.toString(), ImportPath.examplesRootPath + "\\logFile\\" + ImportPath.projectName + "\\验证得到的pattern.txt");
         return verifyFlag;
     }
 
@@ -134,7 +134,7 @@ public class Unicorn {
                     if (nodesList.get(j) instanceof ReadWriteNode) {
                         ReadWriteNode rwi = (ReadWriteNode) nodesList.get(i);
                         ReadWriteNode rwj = (ReadWriteNode) nodesList.get(j);
-                        if ((rwi.getId() != rwj.getId()) && rwi.getElement().equals(rwj.getElement()) && rwi.getField().equals(rwj.getField()) && rwi.getType().equals(rwj.getType()) && rwi.getPosition().equals(rwj.getPosition())) {
+                        if ((rwi.getId() != rwj.getId()) && rwi.getElement().equals(rwj.getElement()) && rwi.getField().equals(rwj.getField()) && rwi.getType().equals(rwj.getType()) && rwi.getThread().equals(rwj.getThread()) && rwi.getPosition().equals(rwj.getPosition())) {
                             seq.getNodes().remove(j);
                             i--;
                         }

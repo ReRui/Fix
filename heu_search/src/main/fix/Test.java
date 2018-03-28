@@ -33,12 +33,11 @@ public class Test {
         } else {
             System.out.println("wu");
         }*/
-        ReadWriteNode readWriteNode = new ReadWriteNode(1, "account.Account@1a7", "amount", "WRITE", "Thread-2", "account/Account.java:35");
+//        ReadWriteNode readWriteNode = new ReadWriteNode(1, "account.Account@1a7", "amount", "WRITE", "Thread-2", "account/Account.java:35");
 //        System.out.println(readWriteNode.getPosition().split("/")[1].split(":")[0]);
-        Set<String> l = new HashSet<String>();
-
-        for (Object o : l) {
-            System.out.println(o);
+        String s = "account.Account@1b7r";
+        if (s.contains("@")) {
+            System.out.println(123);
         }
     }
     public static String acquireLockName(ReadWriteNode node) {

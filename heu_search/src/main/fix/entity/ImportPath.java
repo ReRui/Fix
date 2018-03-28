@@ -8,7 +8,7 @@ public class ImportPath {
     public static String parametersName = "amount";
     //要加载的examples工程根路径
     public static String examplesRootPath = "D:\\Patch";
-    //具体到某个项目的名称
+    //具体到某个项目的包名称
 //    public static String projectName = "account";
     public static String projectName = "account";
     //这个项目的主类名称

@@ -64,9 +64,11 @@ public class InsertCode {
     }
 
     public static void writeLogFile(String s, String txtName) {
-        String dirPath = ImportPath.examplesRootPath + "\\exportExamples\\" + ImportPath.projectName + "\\logFile";
+        String dirPath = ImportPath.examplesRootPath + "\\logFile\\" + ImportPath.projectName;
         File dir = new File(dirPath);
-        dir.mkdirs();
+        if(!dir.exists()) {
+            dir.mkdirs();
+        }
         writeToFile(s, dirPath + "\\" + txtName + ".txt");
     }
 
