@@ -31,14 +31,14 @@ public class Fix {
     static long startTime = 0;
     static long endUnicornTime = 0;
     static long endFixFirstTime = 0;
-    static long endVerifyTime = 0;
 
     public static void main(String[] args) {
         startTime = System.currentTimeMillis();
-        fix(FixType.firstFix);
+//        fix(FixType.firstFix);
+        fix(FixType.iterateFix);
         endFixFirstTime = System.currentTimeMillis();
-        System.out.println("第一次修复需要的时间:" + (endFixFirstTime - startTime));
-//        fix(FixType.iterateFix);
+        System.out.println("修复需要的时间:" + (endFixFirstTime - startTime));
+
     }
 
     private static void fix(int type) {
